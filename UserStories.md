@@ -34,4 +34,4 @@
 
 18.  As a player, I want to freely move on the map of the minigame I am currently playing.
 
-•    As a user, I want to be able to customize my controls using a settings menu.
+19.  As a user, I want to be able to customize my controls using a settings menu.
