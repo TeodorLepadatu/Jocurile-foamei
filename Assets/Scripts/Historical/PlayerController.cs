@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public int gold = 0;
 
+    public GameObject projectilePrefab;
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -39,6 +40,10 @@ public class PlayerController : MonoBehaviour
         if (movement.magnitude > 1)
         {
             movement = movement.normalized;
+        }
+        if (Input.GetKeyDown(KeyCode.Q)) // You can change this to another key
+        {
+            Launch();
         }
 
     }
@@ -86,4 +91,17 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Player exited NPC hitbox: " + npc.gameObject.name);
         }
     }
+
+    void Launch()
+    {
+        Vector2 lookDirection = movement.normalized;
+        if (lookDirection == Vector2.zero)
+            lookDirection = Vector2.up; // Default direction if player is idle
+
+        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
+
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        projectile.Launch(lookDirection, 10f); // Choose a force value that works well
+    }
+
 }

@@ -139,6 +139,8 @@ MonoBehaviour:
   speed: 2.5
   followRange: 10
   damageInterval: 1
+  maxHealth: 3
+  healthBar: {fileID: 0}
 --- !u!50 &75793362
 Rigidbody2D:
   serializedVersion: 5
@@ -86061,6 +86063,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 2830134091370768577, guid: 0793ed6288f394143a9fa834406b7c49, type: 3}
     - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
       propertyPath: MoveAction.m_Name
       value: Move

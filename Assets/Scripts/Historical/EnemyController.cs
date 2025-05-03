@@ -1,27 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
-    // Public variables
-    public float speed = 2.5f; // Speed of the enemy
-    public float followRange = 10.0f; // Distance within which the enemy starts following the player
-    public float damageInterval = 1.0f; // Time in seconds between damage ticks
+    public float speed = 2.5f;
+    public float followRange = 10.0f;
+    public float damageInterval = 1.0f;
 
-    // Private variables
+    public int maxHealth = 3;
+    private int currentHealth;
+
+    public Slider healthBar; // Assign in Inspector
+
     private Rigidbody2D rigidbody2d;
-    private Transform playerTransform; // Reference to the player's transform
-    private bool isFollowing = false; // Whether the enemy is currently following the player
-    private float damageTimer = 0f; // Timer to track damage intervals
+    private Transform playerTransform;
+    private bool isFollowing = false;
+    private float damageTimer = 0f;
 
-    bool broken = true;
+    private bool broken = false;
+
     void Start()
     {
+        currentHealth = maxHealth;
+
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+
         rigidbody2d = GetComponent<Rigidbody2D>();
 
-        // Find the player in the scene by name
         GameObject player = GameObject.Find("Player Character");
         if (player != null)
         {
@@ -29,69 +39,58 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Player not found! Make sure the player GameObject is named 'Player Character'.");
+            Debug.LogError("Player not found!");
         }
     }
 
-    // FixedUpdate has the same call rate as the physics system
     void FixedUpdate()
     {
-        if (!broken)
-        {
-            return;
-        }
-        if (playerTransform != null)
-        {
-            // Calculate the distance to the player
-            float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
+        if (broken || playerTransform == null) return;
 
-            // Check if the player is within the follow range
-            if (distanceToPlayer <= followRange)
-            {
-                isFollowing = true;
-            }
-            else
-            {
-                isFollowing = false;
-            }
+        float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
+        isFollowing = distanceToPlayer <= followRange;
 
-            // If following, move toward the player
-            if (isFollowing)
-            {
-                Vector2 direction = (playerTransform.position - transform.position).normalized;
-                Vector2 position = rigidbody2d.position + direction * speed * Time.deltaTime;
-                rigidbody2d.MovePosition(position);
-            }
+        if (isFollowing)
+        {
+            Vector2 direction = (playerTransform.position - transform.position).normalized;
+            Vector2 position = rigidbody2d.position + direction * speed * Time.deltaTime;
+            rigidbody2d.MovePosition(position);
         }
 
-        // Update the damage timer
         damageTimer += Time.deltaTime;
     }
 
-    // Trigger-based collision detection
     void OnTriggerStay2D(Collider2D other)
     {
         PlayerController controller = other.GetComponent<PlayerController>();
-        EnemyController enemy = other.GetComponent<EnemyController>();
-        if (enemy != null)
-        {
-            enemy.Fix();
-        }
         if (controller != null && damageTimer >= damageInterval)
         {
-            controller.ChangeHealth(-1); // Apply damage to the player
-            damageTimer = 0f; // Reset the timer
+            controller.ChangeHealth(-1);
+            damageTimer = 0f;
         }
+    }
 
-    }
-    public void Fix()
+    public void TakeDamage(int amount)
     {
-        broken = false;
-        rigidbody2d.simulated = false;
+        currentHealth -= amount;
+        if (healthBar != null)
+            healthBar.value = currentHealth;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
-    void OnCollisionEnter2D(Collision2D other)
+
+    void Die()
     {
         Destroy(gameObject);
-  }
-}
+    }
 
+    public void Fix() // Now unused if you're replacing this with health
+    {
+        broken = true;
+        rigidbody2d.simulated = false;
+    }
+
+}
