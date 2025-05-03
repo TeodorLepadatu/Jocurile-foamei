@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
     private NonPlayerCharacter nearbyNPC; 
 
     public int gold = 0;
-
+    private Vector2 lastMovement;
     public GameObject projectilePrefab;
+    public GameObject pickedUpObject = null;
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -40,6 +41,9 @@ public class PlayerController : MonoBehaviour
         {
             movement = movement.normalized;
         }
+        if (movement != Vector2.zero)
+            lastMovement = movement;
+
         if (Input.GetKeyDown(KeyCode.Q)) 
         {
             Launch();
@@ -51,6 +55,17 @@ public class PlayerController : MonoBehaviour
             {
                 UIHandler.instance.DisplayDialogue();
                 nearbyNPC.DisplayDialogue();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            if ((pickedUpObject))
+            {
+                
+            }
+            else
+            {
+
             }
         }
     }

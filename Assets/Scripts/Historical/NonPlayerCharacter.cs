@@ -5,14 +5,14 @@ using UnityEngine;
 public class NonPlayerCharacter : MonoBehaviour
 {
     [TextArea(2, 5)]
-    public AudioClip dialogueAudio; 
-    private AudioSource audioSource;
+    //public AudioClip dialogueAudio; 
+    //private AudioSource audioSource;
 
     public bool playerNearby = false; 
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
 
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null)
@@ -44,7 +44,7 @@ public class NonPlayerCharacter : MonoBehaviour
     {
         if (playerNearby)
         {
-            // Play the dialogue audio if available
+            /* Play the dialogue audio if available
             if (dialogueAudio != null)
             {
                 audioSource.clip = dialogueAudio;
@@ -54,6 +54,7 @@ public class NonPlayerCharacter : MonoBehaviour
             {
                 Debug.LogWarning("No audio clip assigned for this NPC.");
             }
+            */
         }
         else
         {
