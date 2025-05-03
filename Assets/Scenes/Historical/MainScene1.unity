@@ -246,7 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2320e17c85108604fa1698ac461c88cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueAudio: {fileID: 0}
   playerNearby: 0
 --- !u!82 &111132729
 AudioSource:
@@ -83121,6 +83120,53 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.1395416, y: 1.067483}
   m_EdgeRadius: 0
+--- !u!1 &429665199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429665201}
+  - component: {fileID: 429665200}
+  m_Layer: 0
+  m_Name: MagicZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &429665200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429665199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5159d86c76a61847a3dad51279c69a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leafObject: {fileID: 1991713533}
+  waterObject: {fileID: 765795242}
+  fireObject: {fileID: 2119791651}
+--- !u!4 &429665201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429665199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &482432773
 GameObject:
   m_ObjectHideFlags: 0
@@ -84114,6 +84160,30 @@ PolygonCollider2D:
       - {x: -2.0249999, y: -1.135}
       - {x: 0.965, y: -1.135}
   m_UseDelaunayMesh: 0
+--- !u!1 &765795237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 356444105076085636, guid: aba11b5187697b74ba71387de424ed80, type: 3}
+  m_PrefabInstance: {fileID: 8098101193902479034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &765795242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765795237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5f3fcf03ecee94b90ac931ab206114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: Water
+  areaMinLeaf: {x: 5, y: 0}
+  areaMaxLeaf: {x: 6, y: -2}
+  areaMinWater: {x: 4, y: -2.5}
+  areaMaxWater: {x: 5, y: -4}
+  areaMinFire: {x: 6.5, y: -3}
+  areaMaxFire: {x: 7, y: -4}
 --- !u!1 &789421727
 GameObject:
   m_ObjectHideFlags: 0
@@ -85852,6 +85922,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 755227e6d16c976428f92717667c98fd, type: 3}
+--- !u!1 &1991713528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1827586700785893235, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
+  m_PrefabInstance: {fileID: 2321453883285514858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1991713533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991713528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5f3fcf03ecee94b90ac931ab206114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: Leaf
+  areaMinLeaf: {x: 5, y: 0}
+  areaMaxLeaf: {x: 6, y: -2}
+  areaMinWater: {x: 4, y: -2.5}
+  areaMaxWater: {x: 5, y: -4}
+  areaMinFire: {x: 6.5, y: -3}
+  areaMaxFire: {x: 7, y: -4}
 --- !u!1001 &2057807896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86155,6 +86249,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25a8bed7cef2227499d25371a722dfe7, type: 3}
+--- !u!1 &2119791646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1999384628638700317, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
+  m_PrefabInstance: {fileID: 9012294461356965311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2119791651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119791646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5f3fcf03ecee94b90ac931ab206114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: Fire
+  areaMinLeaf: {x: 5, y: 0}
+  areaMaxLeaf: {x: 6, y: -2}
+  areaMinWater: {x: 4, y: -2.5}
+  areaMaxWater: {x: 5, y: -4}
+  areaMinFire: {x: 6.5, y: -3}
+  areaMaxFire: {x: 7, y: -4}
 --- !u!1 &2128332862
 GameObject:
   m_ObjectHideFlags: 0
@@ -86478,13 +86596,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: leaves_0
       objectReference: {fileID: 0}
+    - target: {fileID: 1827586700785893235, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827586700785893235, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
+      propertyPath: m_TagString
+      value: Pickable
+      objectReference: {fileID: 0}
     - target: {fileID: 8903293339396232063, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.91
+      value: 17.34
       objectReference: {fileID: 0}
     - target: {fileID: 8903293339396232063, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.82
+      value: -2.48
       objectReference: {fileID: 0}
     - target: {fileID: 8903293339396232063, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -86521,7 +86647,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1827586700785893235, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1991713533}
   m_SourcePrefab: {fileID: 100100000, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
 --- !u!1001 &2528081372210823020
 PrefabInstance:
@@ -86673,6 +86802,14 @@ PrefabInstance:
       propertyPath: talkAction.m_Name
       value: Talk
       objectReference: {fileID: 0}
+    - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
+      propertyPath: pickableLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
+      propertyPath: upgradedProjectilePrefab
+      value: 
+      objectReference: {fileID: 6378095528871724257, guid: a790f5a6e6ab1dc438607aade832dbaa, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -86874,13 +87011,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: water-bottle_0
       objectReference: {fileID: 0}
+    - target: {fileID: 356444105076085636, guid: aba11b5187697b74ba71387de424ed80, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 356444105076085636, guid: aba11b5187697b74ba71387de424ed80, type: 3}
+      propertyPath: m_TagString
+      value: Pickable
+      objectReference: {fileID: 0}
     - target: {fileID: 591424809668883073, guid: aba11b5187697b74ba71387de424ed80, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.0151963
+      value: -13.03
       objectReference: {fileID: 0}
     - target: {fileID: 591424809668883073, guid: aba11b5187697b74ba71387de424ed80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.24
+      value: -4.67
       objectReference: {fileID: 0}
     - target: {fileID: 591424809668883073, guid: aba11b5187697b74ba71387de424ed80, type: 3}
       propertyPath: m_LocalPosition.z
@@ -86917,7 +87062,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 356444105076085636, guid: aba11b5187697b74ba71387de424ed80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 765795242}
   m_SourcePrefab: {fileID: 100100000, guid: aba11b5187697b74ba71387de424ed80, type: 3}
 --- !u!1001 &9012294461356965311
 PrefabInstance:
@@ -86929,11 +87077,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1318873522324183176, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.39
+      value: -3.93
       objectReference: {fileID: 0}
     - target: {fileID: 1318873522324183176, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.23
+      value: 7.22
       objectReference: {fileID: 0}
     - target: {fileID: 1318873522324183176, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -86971,10 +87119,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: fire-cauldron_0
       objectReference: {fileID: 0}
+    - target: {fileID: 1999384628638700317, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999384628638700317, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
+      propertyPath: m_TagString
+      value: Pickable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1999384628638700317, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2119791651}
   m_SourcePrefab: {fileID: 100100000, guid: fd5384a4d827e1b42adf06198333e50d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -87029,3 +87188,4 @@ SceneRoots:
   - {fileID: 2128332864}
   - {fileID: 367939403}
   - {fileID: 503081933}
+  - {fileID: 429665201}
