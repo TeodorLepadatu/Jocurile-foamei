@@ -1,0 +1,12 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="NPCDialogue" src="project://database/Assets/NPCDialogue.uxml?fileID=9197481963319205126&amp;guid=44c5a7a2531d66d4a85422faaa412fda&amp;type=3#NPCDialogue" />
+    <TabButton name="HealthBarBackground" style="background-image: url(&quot;project://database/Assets/Art/Historical/SugarLand/UI/UIHealthFrame.png?fileID=21300000&amp;guid=587ae468f8de9ec419f7f86c5433bcbf&amp;type=3#UIHealthFrame&quot;); height: 156px; width: 272px; -unity-background-scale-mode: scale-to-fit; position: absolute; top: 0%; left: 0%;">
+        <TabButton name="HealthBarContainer" style="position: absolute; top: 48px; left: 135px; width: 147px; height: 52px;">
+            <TabButton name="HealthBar" style="background-image: url(&quot;project://database/Assets/Art/Historical/SugarLand/UI/UIHealthBar.png?fileID=21300000&amp;guid=b28ee55f43291f14ab9219808f397b88&amp;type=3#UIHealthBar&quot;); height: 56px; position: absolute; width: 168px; left: -18px;" />
+        </TabButton>
+    </TabButton>
+    <engine:VisualElement name="GoldInventoryBackground" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Historical/SugarLand/un_leu_leutz.png?fileID=-7512974917120377016&amp;guid=3c00fdf88e513624c80d7bb0a8f5fa07&amp;type=3#un_leu_leutz_0&quot;); top: 35%; left: 0%; width: 257px; height: 50%; -unity-background-scale-mode: scale-to-fit; right: auto; position: relative; bottom: auto;">
+        <engine:Label text="0 leu leutzi" name="goldAmount" style="top: 50%; font-size: 43%; -unity-font-style: bold; color: rgb(197, 60, 0);" />
+    </engine:VisualElement>
+    <engine:Instance template="NPCDialogue" name="NPCDialogue" style="width: 657px; position: absolute; top: 70%; left: 30%; height: 221px; font-size: 30px; -unity-font-style: bold;" />
+</engine:UXML>
