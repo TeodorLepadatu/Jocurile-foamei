@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 lastMovement;
     public GameObject projectilePrefab;
     public GameObject pickedUpObject = null;
+    public GameObject upgradedProjectilePrefab;
+    public float pickupRadius = 1f;
+    public LayerMask pickableLayer;
+
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -57,19 +61,42 @@ public class PlayerController : MonoBehaviour
                 nearbyNPC.DisplayDialogue();
             }
         }
-        if(Input.GetKeyDown(KeyCode.P))
+
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            if ((pickedUpObject))
+            if (pickedUpObject != null)
             {
-                
+                // Drop the object in front of player
+                PickableObject po = pickedUpObject.GetComponent<PickableObject>();
+                if (po != null)
+                {
+                    Vector2 dropPos = rb.position + lastMovement.normalized * 0.5f;
+                    po.Drop(dropPos);
+                }
+                pickedUpObject = null;
             }
             else
             {
-
+                // Try to pick up a nearby object
+                Collider2D[] hits = Physics2D.OverlapCircleAll(rb.position, pickupRadius, pickableLayer);
+                foreach (Collider2D hit in hits)
+                {
+                    if (hit.CompareTag("Pickable"))
+                    {
+                        PickableObject po = hit.GetComponent<PickableObject>();
+                        if (po != null)
+                        {
+                            po.PickUp(transform);
+                            pickedUpObject = po.gameObject;
+                            break;
+                        }
+                    }
+                }
             }
         }
+
     }
-        
+
     private void FixedUpdate()
     {
         rb.linearVelocity = movement * speed;
@@ -115,7 +142,14 @@ public class PlayerController : MonoBehaviour
         Vector2 lookDirection = movement.normalized;
         if (lookDirection == Vector2.zero)
             lookDirection = Vector2.up;
-
+        if(MagicZoneManager.allPlacedCorrectly)
+        {
+            projectilePrefab = upgradedProjectilePrefab;
+        }
+        else
+        {
+            projectilePrefab = projectilePrefab;
+        }
         GameObject projectileObject = Instantiate(projectilePrefab, rb.position + lookDirection * 0.5f, Quaternion.identity);
 
         Collider2D playerCollider = GetComponent<Collider2D>();

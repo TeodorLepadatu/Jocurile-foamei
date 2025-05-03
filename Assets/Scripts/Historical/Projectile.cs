@@ -19,7 +19,14 @@ public class Projectile : MonoBehaviour
         EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null)
         {
-            enemy.TakeDamage(1); 
+            if(MagicZoneManager.allPlacedCorrectly)
+            {
+                enemy.TakeDamage(10);
+            }
+            else
+            {
+                enemy.TakeDamage(1);
+            }
         }
 
         Destroy(gameObject); 
