@@ -133,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 75793360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e8f5afbcdc31042a72a39147f524d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 48eeeafc5e9500e44b958692ce26b0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
@@ -226,10 +226,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 111132719}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93621a332b5eb324496c456871f8147e, type: 3}
+  m_Script: {fileID: 11500000, guid: 158ab9f5b616d394e819cd28f16e0168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 0.25
   vertical: 1
   changeTime: 1
 --- !u!114 &111132728
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 111132719}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10cc030aa2c635c4ba6be001f5bca400, type: 3}
+  m_Script: {fileID: 11500000, guid: 2320e17c85108604fa1698ac461c88cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: Hey, you! Do you want to escape? To get the weapon you are looking
@@ -25054,11 +25054,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 34
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -25182,7 +25182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 601848375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc7ccc395933c44479961676f1617981, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b38c5c7177aab94b92715c13a7255a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   displayTime: 4
@@ -25809,7 +25809,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 1, y: 1, z: 1}
+  Damping: {x: 0, y: 0, z: 0}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -25839,10 +25839,10 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 34
-    OrthographicSize: 5
-    NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -26832,7 +26832,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1663762656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d85dd47083a41a4aa287bb97dc12450, type: 3}
+  m_Script: {fileID: 11500000, guid: 38ad68ee6952b034d84ffcaae5dfd8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &1663762658
@@ -27870,6 +27870,10 @@ PrefabInstance:
     - target: {fileID: 8163190337352822720, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
+      propertyPath: speed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
       propertyPath: m_Enabled

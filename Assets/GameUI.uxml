@@ -1,14 +1,12 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:Template name="NPCDialogue" src="project://database/Assets/NPCDialogue.uxml?fileID=9197481963319205126&amp;guid=44c5a7a2531d66d4a85422faaa412fda&amp;type=3#NPCDialogue" />
-    <TabButton name="HealthBarBackground" style="background-image: url(&quot;project://database/Assets/Art/SugarLand/UI/UIHealthFrame.png?fileID=21300000&amp;guid=587ae468f8de9ec419f7f86c5433bcbf&amp;type=3#UIHealthFrame&quot;); height: 156px; width: 272px; -unity-background-scale-mode: scale-to-fit;">
-        <TabButton name="HealthBarContainer" style="position: absolute; top: 48px; left: 135px; width: 147px; height: 52px;">
-            <TabButton name="HealthBar" style="background-image: url(&quot;project://database/Assets/Art/SugarLand/UI/UIHealthBar.png?fileID=21300000&amp;guid=b28ee55f43291f14ab9219808f397b88&amp;type=3#UIHealthBar&quot;); height: 56px; position: absolute; width: 168px; left: -18px;" />
-        </TabButton>
-    </TabButton>
     <TabButton name="GoldInventory">
         <TabButton name="GoldContainer">
             <TabButton name="Gold" />
         </TabButton>
     </TabButton>
-    <engine:Instance template="NPCDialogue" name="NPCDialogue" style="position: absolute; top: 214px; left: -12px; right: 60%;" />
+    <TabButton name="HealthBarBackground" style="background-image: url(&quot;project://database/Assets/Art/Historical/SugarLand/UI/UIHealthFrame.png?fileID=21300000&amp;guid=587ae468f8de9ec419f7f86c5433bcbf&amp;type=3#UIHealthFrame&quot;); height: 156px; width: 272px; -unity-background-scale-mode: scale-to-fit; position: absolute; top: 97px; left: 191px;">
+        <TabButton name="HealthBarContainer" style="position: absolute; top: 48px; left: 135px; width: 147px; height: 52px;">
+            <TabButton name="HealthBar" style="background-image: url(&quot;project://database/Assets/Art/Historical/SugarLand/UI/UIHealthBar.png?fileID=21300000&amp;guid=b28ee55f43291f14ab9219808f397b88&amp;type=3#UIHealthBar&quot;); height: 56px; position: absolute; width: 168px; left: -18px;" />
+        </TabButton>
+    </TabButton>
 </engine:UXML>

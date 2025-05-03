@@ -122,21 +122,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 666485736529849201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea85d316e6512e4ea386fdb52608932, type: 3}
+  m_Script: {fileID: 11500000, guid: a42d94f56c14b094a8351a5132db6166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 26566411-f634-4074-ba46-1a1b1d63af93
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  speed: 5
-  maxHealth: 100
-  timeInvincible: 2
+  speed: 3
+  maxHealth: 5
+  gold: 0
 --- !u!50 &5538211010839139996
 Rigidbody2D:
   serializedVersion: 5
