@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public int health { get { return currentHealth; } }
 
     private int currentHealth = 1;
-
+    public InputAction talkAction;
     private NonPlayerCharacter nearbyNPC; // Reference to the NPC the player is near
 
     public int gold = 0;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
 
         rb = GetComponent<Rigidbody2D>();
+        talkAction.Enable();
     }
 
     private void Update()
@@ -46,8 +47,16 @@ public class PlayerController : MonoBehaviour
             Launch();
         }
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (nearbyNPC != null && nearbyNPC.playerNearby)
+            {
+                UIHandler.instance.DisplayDialogue();
+                nearbyNPC.DisplayDialogue();
+            }
+        }
     }
-
+        
     private void FixedUpdate()
     {
         // Move the player using Rigidbody2D

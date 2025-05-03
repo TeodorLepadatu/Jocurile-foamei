@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     public float followRange = 10.0f;
     public float damageInterval = 1.0f;
 
-    public int maxHealth = 3;
+    public int maxHealth = 100;
     private int currentHealth;
 
     public Slider healthBar; // Assign in Inspector

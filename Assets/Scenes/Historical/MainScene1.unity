@@ -139,7 +139,7 @@ MonoBehaviour:
   speed: 2.5
   followRange: 10
   damageInterval: 1
-  maxHealth: 3
+  maxHealth: 100
   healthBar: {fileID: 0}
 --- !u!50 &75793362
 Rigidbody2D:
