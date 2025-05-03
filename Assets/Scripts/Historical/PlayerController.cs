@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     public void ChangeGold(int amount)
     {
         gold += amount;
-        //UIHandler.instance.SetGoldValue(gold);
+        UIHandler.instance.SetGoldValue(gold);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
