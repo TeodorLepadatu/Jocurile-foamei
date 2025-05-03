@@ -5,19 +5,15 @@ using UnityEngine;
 public class NonPlayerCharacter : MonoBehaviour
 {
     [TextArea(2, 5)]
-    public string dialogueText = "Hey, you! Do you want to escape? To get the weapon you are looking for, think of something magic."; // The text the NPC will say
-
-    public AudioClip dialogueAudio; // The audio clip for the dialogue
+    public AudioClip dialogueAudio; 
     private AudioSource audioSource;
 
-    public bool playerNearby = false; // Tracks if the player is near
+    public bool playerNearby = false; 
 
     private void Start()
     {
-        // Get the AudioSource component
         audioSource = GetComponent<AudioSource>();
 
-        // Ensure the Collider2D is set as a trigger
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null)
         {
@@ -27,7 +23,6 @@ public class NonPlayerCharacter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the player entered the NPC's trigger
         PlayerController player = other.GetComponent<PlayerController>();
         if (player != null)
         {
@@ -38,12 +33,10 @@ public class NonPlayerCharacter : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        // Check if the player exited the NPC's trigger
         PlayerController player = other.GetComponent<PlayerController>();
         if (player != null)
         {
             playerNearby = false;
-            Debug.Log("Player left NPC: " + gameObject.name);
         }
     }
 
@@ -51,9 +44,6 @@ public class NonPlayerCharacter : MonoBehaviour
     {
         if (playerNearby)
         {
-            // Display the dialogue text in the UI
-            Debug.Log("NPC says: " + dialogueText);
-
             // Play the dialogue audio if available
             if (dialogueAudio != null)
             {

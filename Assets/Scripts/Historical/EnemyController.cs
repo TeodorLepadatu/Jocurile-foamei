@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
 
-    public Slider healthBar; // Assign in Inspector
+    public Slider healthBar; 
 
     private Rigidbody2D rigidbody2d;
     private Transform playerTransform;
@@ -86,11 +86,4 @@ public class EnemyController : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-    public void Fix() // Now unused if you're replacing this with health
-    {
-        broken = true;
-        rigidbody2d.simulated = false;
-    }
-
 }

@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    // Public variables
     public float speed = 0.25f;
     public bool vertical = true;
     public float changeTime = 1.0f;
 
-    // Private variables
-    Rigidbody2D rigidbody2d;
-    float timer;
-    int direction = 1;
+    private Rigidbody2D rigidbody2d;
+    private float timer;
+    private int direction = 1;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         timer = changeTime;
     }
 
-    // Update is called every frame
     void Update()
     {
 
@@ -36,7 +32,6 @@ public class NPCController : MonoBehaviour
         }
     }
 
-    // FixedUpdate has the same call rate as the physics system
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;

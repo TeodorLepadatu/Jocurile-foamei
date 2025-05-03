@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private int currentHealth = 1;
     public InputAction talkAction;
-    private NonPlayerCharacter nearbyNPC; // Reference to the NPC the player is near
+    private NonPlayerCharacter nearbyNPC; 
 
     public int gold = 0;
 
@@ -31,18 +31,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Read movement from old InputManager (still fine for now)
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         movement = new Vector2(horizontal, vertical);
 
-        // Normalize to avoid faster diagonal movement
         if (movement.magnitude > 1)
         {
             movement = movement.normalized;
         }
-        if (Input.GetKeyDown(KeyCode.Q)) // You can change this to another key
+        if (Input.GetKeyDown(KeyCode.Q)) 
         {
             Launch();
         }
@@ -59,7 +57,6 @@ public class PlayerController : MonoBehaviour
         
     private void FixedUpdate()
     {
-        // Move the player using Rigidbody2D
         rb.linearVelocity = movement * speed;
     }
 
@@ -77,14 +74,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the player entered an NPC's hitbox
         NonPlayerCharacter npc = other.GetComponent<NonPlayerCharacter>();
         if (npc != null)
         {
-            nearbyNPC = npc; // Store a reference to the NPC
+            nearbyNPC = npc; 
             Debug.Log("Player entered NPC hitbox: " + npc.gameObject.name);
 
-            // Automatically trigger the NPC's dialogue
+
             npc.playerNearby = true;
             nearbyNPC.DisplayDialogue();
         }
@@ -92,12 +88,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        // Check if the player exited an NPC's hitbox
         NonPlayerCharacter npc = other.GetComponent<NonPlayerCharacter>();
         if (npc != null && npc == nearbyNPC)
         {
-            nearbyNPC = null; // Clear the reference to the NPC
-            Debug.Log("Player exited NPC hitbox: " + npc.gameObject.name);
+            nearbyNPC = null; 
         }
     }
 
@@ -105,12 +99,20 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 lookDirection = movement.normalized;
         if (lookDirection == Vector2.zero)
-            lookDirection = Vector2.up; // Default direction if player is idle
+            lookDirection = Vector2.up;
 
-        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
+        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + lookDirection * 0.5f, Quaternion.identity);
+
+        Collider2D playerCollider = GetComponent<Collider2D>();
+        Collider2D projectileCollider = projectileObject.GetComponent<Collider2D>();
+        if (playerCollider != null && projectileCollider != null)
+        {
+            Physics2D.IgnoreCollision(playerCollider, projectileCollider);
+        }
 
         Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.Launch(lookDirection, 10f); // Choose a force value that works well
+        projectile.Launch(lookDirection, 10f);
     }
+
 
 }

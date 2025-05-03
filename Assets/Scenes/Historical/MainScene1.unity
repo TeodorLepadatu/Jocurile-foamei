@@ -246,8 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2320e17c85108604fa1698ac461c88cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: Hey, you! Do you want to escape? To get the weapon you are looking
-    for, think of something magic.
   dialogueAudio: {fileID: 0}
   playerNearby: 0
 --- !u!82 &111132729
@@ -86070,6 +86068,10 @@ PrefabInstance:
     - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
       propertyPath: MoveAction.m_Name
       value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 9149076039245785207, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
+      propertyPath: talkAction.m_Name
+      value: Talk
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
