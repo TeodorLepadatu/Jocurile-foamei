@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6364e0a18362bd04a978ead05c3f8734
+guid: 40ad46bbe8099584695a7af3d2a21cbb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8649392411088928328
-    second: water-bottle_0
+      213: -7443756053782179069
+    second: background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: water-bottle_0
+      name: background_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 137
-        height: 200
+        width: 1280
+        height: 720
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84e3ae94290d80870800000000000000
-      internalID: 8649392411088928328
+      spriteID: 30356abce4772b890800000000000000
+      internalID: -7443756053782179069
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      water-bottle_0: 8649392411088928328
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
