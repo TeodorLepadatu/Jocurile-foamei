@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    public void Play()
+    {
+        SceneManager.UnloadScene("MainMenu");
+        SceneManager.LoadScene("MainScene1");
+    }
+
     public void Start()
     {
         QualitySettings.vSyncCount = 0;
