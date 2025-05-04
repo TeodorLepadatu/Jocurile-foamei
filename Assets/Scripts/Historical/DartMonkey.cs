@@ -24,6 +24,10 @@ public class DartMonkey : MonoBehaviour
             {
                 SceneManager.LoadScene("TowerDefence");
             }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
