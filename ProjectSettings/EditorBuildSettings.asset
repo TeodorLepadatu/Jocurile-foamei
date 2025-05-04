@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Historical/DeathScreenScene.unity
     guid: c65c8968ad6d5da46a5e4e5428ba44fe
+  - enabled: 1
+    path: Assets/Scenes/Historical/TowerDefence.unity
+    guid: 9a363c475264cef46a4bee31c057fda5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
