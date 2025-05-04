@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
+//[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Collider2D))]
 public class NonPlayerCharacter : MonoBehaviour
 {
