@@ -106,6 +106,13 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Player is dead!");
+            GameManager.instance.GameOver();
+        }
+
     }
 
     public void ChangeGold(int amount)
@@ -145,10 +152,6 @@ public class PlayerController : MonoBehaviour
         if(MagicZoneManager.allPlacedCorrectly)
         {
             projectilePrefab = upgradedProjectilePrefab;
-        }
-        else
-        {
-            projectilePrefab = projectilePrefab;
         }
         GameObject projectileObject = Instantiate(projectilePrefab, rb.position + lookDirection * 0.5f, Quaternion.identity);
 
