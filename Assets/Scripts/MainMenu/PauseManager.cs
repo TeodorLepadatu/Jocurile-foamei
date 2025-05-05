@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public GameObject gameWrapper;
     private bool isPaused = false;
 
     void Update()
@@ -19,6 +21,7 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        gameWrapper.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
     }
@@ -26,6 +29,7 @@ public class PauseManager : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        gameWrapper.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -33,7 +37,15 @@ public class PauseManager : MonoBehaviour
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
-        // Load main menu scene if needed:
-        // SceneManager.LoadScene("MainMenu");
+        SceneManager.UnloadScene("MainScene1");
+        SceneManager.LoadScene("MainMenu");
+    }
+    
+    public void QuitGame()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }
