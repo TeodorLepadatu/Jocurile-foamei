@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3c00fdf88e513624c80d7bb0a8f5fa07
+guid: eb1b8a66f91f43c4382f27a59ebe0c71
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7512974917120377016
-    second: un_leu_leutz_0
+      213: -2819586383909281935
+    second: snow_caveman_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: un_leu_leutz_0
+      name: snow_caveman_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 988
-        height: 505
+        x: 32
+        y: 107
+        width: 416
+        height: 343
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84fbe9a4e1d8cb790800000000000000
-      internalID: -7512974917120377016
+      spriteID: 17f1f856f11ded8d0800000000000000
+      internalID: -2819586383909281935
       vertices: []
       indices: 
       edges: []
@@ -147,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      un_leu_leutz_0: -7512974917120377016
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

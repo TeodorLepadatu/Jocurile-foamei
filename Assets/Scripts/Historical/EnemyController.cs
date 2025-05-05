@@ -85,5 +85,7 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        PlayerController.gold += 10;
+        PlayerController.minigamesCompleted += 1;
     }
 }

@@ -7,8 +7,49 @@ public class LevelManager : MonoBehaviour
     public static LevelManager main;
     public Transform[] path;
     public Transform startPoint;
+
+    public int currency;
     private void Awake()
     {
         main = this;
+    }
+
+    private void Start()
+    {
+        currency = PlayerController.gold;
+    }
+
+    public void DamagePlayer(int damage)
+    {
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (player != null)
+        {
+            player.ChangeHealth(-damage); // Deduct health
+        }
+    }
+
+    private void Update()
+    {
+        PlayerController.gold = currency;
+    }
+
+    public void IncreaseCurrency(int amount)
+    {
+        currency += amount;
+    }
+
+    public bool SpendCurrency(int amount)
+    {
+        if (currency >= amount)
+        {
+            //BUY TOWER
+            currency -= amount;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Not enough currency!");
+            return false;
+        }
     }
 }

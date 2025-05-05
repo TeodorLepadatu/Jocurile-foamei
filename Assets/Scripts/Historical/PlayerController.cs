@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -16,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public InputAction talkAction;
     private NonPlayerCharacter nearbyNPC; 
 
-    public int gold = 0;
+    public static int gold = 0;
     private Vector2 lastMovement;
     public GameObject projectilePrefab;
     public GameObject pickedUpObject = null;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float pickupRadius = 1f;
     public LayerMask pickableLayer;
 
+    public static int minigamesCompleted = 0;
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -94,9 +97,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
+        if(minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(16f,12f), new Vector2(10f, 8f)))
+        {
+            Debug.Log("You have completed the game!");
+            SceneManager.LoadScene("VictoryScreenScene");
+        }
     }
-
+    private bool IsInArea(Vector2 pos, Vector2 min, Vector2 max)
+    {
+        return pos.x >= min.x && pos.x <= max.x && pos.y <= min.y && pos.y >= max.y;
+    }
     private void FixedUpdate()
     {
         rb.linearVelocity = movement * speed;
@@ -110,7 +120,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead!");
-            GameManager.instance.GameOver();
+            GameManager.GameOver();
         }
 
     }

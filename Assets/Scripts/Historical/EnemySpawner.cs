@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -35,8 +36,13 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!isSpawning)
             return;
+
         timeSinceLastSpawn += Time.deltaTime;
-        if(timeSinceLastSpawn >= 1f / enemiesPerSecond && enemiesLeftToSpawn > 0)
+
+        // Gradually increase the spawn rate over time
+        enemiesPerSecond += Time.deltaTime * 0.05f; // Adjust the multiplier (0.05f) to control the rate of increase
+
+        if (timeSinceLastSpawn >= 1f / enemiesPerSecond && enemiesLeftToSpawn > 0)
         {
             SpawnEnemy();
             enemiesLeftToSpawn--;
@@ -44,18 +50,43 @@ public class EnemySpawner : MonoBehaviour
             timeSinceLastSpawn = 0f;
         }
 
-        if(enemiesAlive == 0 && enemiesLeftToSpawn == 0)
+        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0)
         {
             EndWave();
         }
+
+        if (currentWave > 20)
+        {
+            PlayerController.minigamesCompleted++;
+            SceneManager.LoadScene("MainScene1");
+        }
     }
+
 
     private void SpawnEnemy()
     {
-        GameObject prefabToSpawn = enemyPrefabs[0];
-        //Debug.Log("Spawning enemy at: " + LevelManager.main.startPoint.position);
+        GameObject prefabToSpawn;
+
+        if (currentWave % 10 == 0) // Spawn boss every 10th wave
+        {
+            prefabToSpawn = enemyPrefabs[3]; // Final Boss
+        }
+        else if (currentWave > 5 && Random.value < 0.2f) // 20% chance for tank after wave 5
+        {
+            prefabToSpawn = enemyPrefabs[1]; // Tank
+        }
+        else if (Random.value < 0.3f) // 30% chance for fast enemy
+        {
+            prefabToSpawn = enemyPrefabs[2]; // Fast Enemy
+        }
+        else
+        {
+            prefabToSpawn = enemyPrefabs[0]; // Normal Enemy
+        }
+
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
+
 
     private void EnemyDestroyed()
     {
