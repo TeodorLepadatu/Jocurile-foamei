@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9149076039245785207}
   - component: {fileID: 5538211010839139996}
   - component: {fileID: 7358513182724880292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,10 +125,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42d94f56c14b094a8351a5132db6166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   maxHealth: 5
+  talkAction:
+    m_Name: Talk
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0ce8f3c6-42f9-46bd-be8d-9f04ec310fa1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   gold: 0
   projectilePrefab: {fileID: 2830134091370768577, guid: 0793ed6288f394143a9fa834406b7c49, type: 3}
+  pickedUpObject: {fileID: 0}
+  upgradedProjectilePrefab: {fileID: 6378095528871724257, guid: a790f5a6e6ab1dc438607aade832dbaa, type: 3}
+  pickupRadius: 1
+  pickableLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &5538211010839139996
 Rigidbody2D:
   serializedVersion: 5
