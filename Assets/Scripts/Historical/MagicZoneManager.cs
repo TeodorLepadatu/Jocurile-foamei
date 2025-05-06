@@ -24,6 +24,9 @@ public class MagicZoneManager : MonoBehaviour
                 Destroy(waterObject);
                 Destroy(fireObject);
                 */
+                leafObject.GetDestroyed();
+                waterObject.GetDestroyed();
+                fireObject.GetDestroyed();
             }
         }
     }
