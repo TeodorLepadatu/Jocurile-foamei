@@ -2506,7 +2506,7 @@ GameObject:
   - component: {fileID: 1190560992}
   - component: {fileID: 1190560993}
   m_Layer: 0
-  m_Name: BodySeldctor
+  m_Name: BodySelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2546,14 +2546,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe708c0944f78c40a98e3faa077c7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyPart: {fileID: 1833962635}
+  bodyPart: {fileID: 1833962634}
   options:
-  - {fileID: 21300000, guid: 468244f274f38f64b85773c7888444b6, type: 3}
-  - {fileID: 21300000, guid: f7e7bed775fff8347b9e53c67e20875f, type: 3}
-  - {fileID: 21300000, guid: ae2d3e3bacfacde4981510b116293dba, type: 3}
-  - {fileID: 21300000, guid: dcb72940063c94f44abc2366768e713a, type: 3}
-  - {fileID: 21300000, guid: 20eb058aea3c3a744bb5d47a1610550a, type: 3}
-  - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: 215dd6c48c732d744aecd29e7fecbbfa, type: 3}
+  - {fileID: 21300000, guid: 90458a12b047bb84ba77cb7ea81ba457, type: 3}
+  - {fileID: 21300000, guid: 124013dbba7f284489ac16156c930131, type: 3}
+  - {fileID: 21300000, guid: 3d9056df586b6024fbc5b9fee2433eef, type: 3}
+  - {fileID: 21300000, guid: fff248787aa9dc44d819b77a6686c0af, type: 3}
+  - {fileID: 21300000, guid: 250530d3e9754ed418009e3d539275b3, type: 3}
 --- !u!114 &1190560993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3626,6 +3626,7 @@ GameObject:
   - component: {fileID: 1678696336}
   - component: {fileID: 1678696335}
   - component: {fileID: 1678696334}
+  - component: {fileID: 1678696337}
   m_Layer: 5
   m_Name: RandomizeButton
   m_TagString: Untagged
@@ -3696,7 +3697,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1678696335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 629118909}
+        m_TargetAssemblyTypeName: CharacterCreation, Assembly-CSharp
+        m_MethodName: RandomizeCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1678696335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3735,6 +3748,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678696332}
   m_CullTransparentMesh: 1
+--- !u!114 &1678696337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678696332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d22fbb27f91c3049a3146a8a5877a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 1833962637}
+  outfitChangers:
+  - {fileID: 1862878845}
+  - {fileID: 1703434981}
+  - {fileID: 1969587370}
+  - {fileID: 1190560992}
 --- !u!1 &1703434979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,14 +3818,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe708c0944f78c40a98e3faa077c7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyPart: {fileID: 1833962635}
+  bodyPart: {fileID: 1833962636}
   options:
-  - {fileID: 21300000, guid: 468244f274f38f64b85773c7888444b6, type: 3}
-  - {fileID: 21300000, guid: f7e7bed775fff8347b9e53c67e20875f, type: 3}
-  - {fileID: 21300000, guid: ae2d3e3bacfacde4981510b116293dba, type: 3}
-  - {fileID: 21300000, guid: dcb72940063c94f44abc2366768e713a, type: 3}
-  - {fileID: 21300000, guid: 20eb058aea3c3a744bb5d47a1610550a, type: 3}
-  - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: 518ab34707033904cb1d99dbfcc9f4bb, type: 3}
+  - {fileID: 21300000, guid: 8e016bdb4d00e70429de56b91135940c, type: 3}
+  - {fileID: 21300000, guid: 41375989850254546b76c3a6813e6d19, type: 3}
+  - {fileID: 21300000, guid: f0dca671fefddc54c98270536b979b8b, type: 3}
+  - {fileID: 21300000, guid: 7db7af78e8f9c45418a407bdd7958560, type: 3}
 --- !u!114 &1703434982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3889,9 +3919,24 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1833962638}
   m_SourcePrefab: {fileID: 100100000, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
+--- !u!212 &1833962633 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212000011487683862, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
+  m_PrefabInstance: {fileID: 1833962632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1833962634 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212000010222169336, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
+  m_PrefabInstance: {fileID: 1833962632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &1833962635 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 212000013352628812, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
+  m_PrefabInstance: {fileID: 1833962632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1833962636 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212000010938263010, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
   m_PrefabInstance: {fileID: 1833962632}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1833962637 stripped
@@ -4049,14 +4094,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe708c0944f78c40a98e3faa077c7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyPart: {fileID: 1833962635}
+  bodyPart: {fileID: 1833962633}
   options:
-  - {fileID: 21300000, guid: 468244f274f38f64b85773c7888444b6, type: 3}
-  - {fileID: 21300000, guid: f7e7bed775fff8347b9e53c67e20875f, type: 3}
-  - {fileID: 21300000, guid: ae2d3e3bacfacde4981510b116293dba, type: 3}
-  - {fileID: 21300000, guid: dcb72940063c94f44abc2366768e713a, type: 3}
-  - {fileID: 21300000, guid: 20eb058aea3c3a744bb5d47a1610550a, type: 3}
-  - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: c376d5b80d02ffe4ba89fd03d60ec471, type: 3}
+  - {fileID: 21300000, guid: 27fe921d9d4bdb24eb91cc1e96a04f02, type: 3}
+  - {fileID: 21300000, guid: 0c6412d95175c2b40bd9a27f7d1fa096, type: 3}
+  - {fileID: 21300000, guid: 4807dc8cba98f89409729f6aac2945a7, type: 3}
+  - {fileID: 21300000, guid: f5e38fc0746afdb408f3af29c6c737cc, type: 3}
+  - {fileID: 21300000, guid: b1babcb6ce4ee78478abc5076a6d1b8d, type: 3}
 --- !u!114 &1969587371
 MonoBehaviour:
   m_ObjectHideFlags: 0
