@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7358513182724880292}
   m_Layer: 0
   m_Name: Player Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   maxHealth: 5
+  currentHealth: 1
   talkAction:
     m_Name: Talk
     m_Type: 0

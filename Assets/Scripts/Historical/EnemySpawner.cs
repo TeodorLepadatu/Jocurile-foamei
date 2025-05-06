@@ -55,8 +55,9 @@ public class EnemySpawner : MonoBehaviour
             EndWave();
         }
 
-        if (currentWave > 20)
+        if (currentWave > 10)
         {
+            Debug.Log("Am terminat!");
             PlayerController.minigamesCompleted++;
             SceneManager.LoadScene("MainScene1");
         }

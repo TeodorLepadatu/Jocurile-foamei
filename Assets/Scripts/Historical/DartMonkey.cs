@@ -23,6 +23,8 @@ public class DartMonkey : MonoBehaviour
             if(!hasCompletedMinigame)
             {
                 SceneManager.LoadScene("TowerDefence");
+                hasCompletedMinigame = true;
+                Destroy(gameObject);
             }
             else
             {

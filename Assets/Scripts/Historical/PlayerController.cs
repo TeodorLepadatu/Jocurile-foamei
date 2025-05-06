@@ -111,11 +111,13 @@ public class PlayerController : MonoBehaviour
             }
         }
         //hitpointsTransmitted = currentHealth;
-        if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(16f,12f), new Vector2(10f, 8f)))
+        if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
         {
             Debug.Log("You have completed the game!");
             SceneManager.LoadScene("VictoryScreenScene");
         }
+        UIHandler.instance.SetGoldValue(gold);
+        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
     private bool IsInArea(Vector2 pos, Vector2 min, Vector2 max)
     {

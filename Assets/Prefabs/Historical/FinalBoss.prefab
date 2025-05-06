@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -33410370684760028}
   - component: {fileID: -3639688013158093112}
   - component: {fileID: -8005098011560880827}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FinalBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -19,6 +19,11 @@ public class MagicZoneManager : MonoBehaviour
             {
                 allPlacedCorrectly = true;
                 Debug.Log("All objects are in their correct magic zones!");
+                /*
+                Destroy(leafObject);
+                Destroy(waterObject);
+                Destroy(fireObject);
+                */
             }
         }
     }

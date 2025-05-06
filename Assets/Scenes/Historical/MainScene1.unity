@@ -83690,6 +83690,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayTime: 4
+--- !u!1 &605230654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605230656}
+  - component: {fileID: 605230655}
+  m_Layer: 0
+  m_Name: CameraManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &605230655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605230654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef58268d45151b498e6403fe0b8b297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &605230656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605230654}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.22, y: -3.51, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -84292,12 +84336,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Water
-  areaMinLeaf: {x: 5, y: 0}
-  areaMaxLeaf: {x: 6, y: -2}
-  areaMinWater: {x: 4, y: -2.5}
-  areaMaxWater: {x: 5, y: -4}
-  areaMinFire: {x: 6.5, y: -3}
-  areaMaxFire: {x: 7, y: -4}
+  areaMinLeaf: {x: 4, y: 0}
+  areaMaxLeaf: {x: 8, y: -3}
+  areaMinWater: {x: 3, y: -2}
+  areaMaxWater: {x: 6, y: -5}
+  areaMinFire: {x: 5, y: -2}
+  areaMaxFire: {x: 8, y: -5}
 --- !u!1 &789421727
 GameObject:
   m_ObjectHideFlags: 0
@@ -84311,7 +84355,7 @@ GameObject:
   - component: {fileID: 789421728}
   m_Layer: 0
   m_Name: VirtualCamera
-  m_TagString: Untagged
+  m_TagString: VirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86233,12 +86277,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Leaf
-  areaMinLeaf: {x: 5, y: 0}
-  areaMaxLeaf: {x: 6, y: -2}
-  areaMinWater: {x: 4, y: -2.5}
-  areaMaxWater: {x: 5, y: -4}
-  areaMinFire: {x: 6.5, y: -3}
-  areaMaxFire: {x: 7, y: -4}
+  areaMinLeaf: {x: 4, y: 0}
+  areaMaxLeaf: {x: 8, y: -3}
+  areaMinWater: {x: 3, y: -2}
+  areaMaxWater: {x: 6, y: -5}
+  areaMinFire: {x: 5, y: -2}
+  areaMaxFire: {x: 8, y: -5}
 --- !u!1001 &2057807896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86560,12 +86604,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Fire
-  areaMinLeaf: {x: 5, y: 0}
-  areaMaxLeaf: {x: 6, y: -2}
-  areaMinWater: {x: 4, y: -2.5}
-  areaMaxWater: {x: 5, y: -4}
-  areaMinFire: {x: 6.5, y: -3}
-  areaMaxFire: {x: 7, y: -4}
+  areaMinLeaf: {x: 4, y: 0}
+  areaMaxLeaf: {x: 8, y: -3}
+  areaMinWater: {x: 3, y: -2}
+  areaMaxWater: {x: 6, y: -5}
+  areaMinFire: {x: 5, y: -2}
+  areaMaxFire: {x: 8, y: -5}
 --- !u!1 &2128332862
 GameObject:
   m_ObjectHideFlags: 0
@@ -86899,11 +86943,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8903293339396232063, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.76
+      value: 17.06
       objectReference: {fileID: 0}
     - target: {fileID: 8903293339396232063, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.48
+      value: -1.37
       objectReference: {fileID: 0}
     - target: {fileID: 8903293339396232063, guid: a9193f01e12061243850a645c4b79fc2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -87030,6 +87074,10 @@ PrefabInstance:
     - target: {fileID: 666485736529849201, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 666485736529849201, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8163190337352822720, guid: c83ec20711099f14aa2eb4ba3931cf1d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -87487,3 +87535,4 @@ SceneRoots:
   - {fileID: 287941018}
   - {fileID: 443093287}
   - {fileID: 1116550445}
+  - {fileID: 605230656}
