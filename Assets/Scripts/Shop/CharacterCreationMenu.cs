@@ -20,6 +20,12 @@ public class CharacterCreation : MonoBehaviour
 
     }
 
+    public void Play()
+    {
+        SceneManager.UnloadScene("Shop");
+        SceneManager.LoadScene("MainScene1");
+    }
+
     public void Submit()
     {
         PrefabUtility.SaveAsPrefabAsset(gameObject, "Assets/Character/Prefabs/Player.prefab");
