@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
 
     private bool broken = false;
     private static bool enemyExists = false; // Static flag to track if the enemy already exists
-
+    /*
     void Awake()
     {
         if (enemyExists)
@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
         enemyExists = true; // Mark that the enemy exists
         DontDestroyOnLoad(gameObject); // Persist this enemy across scenes
     }
-
+    */
     void Start()
     {
         currentHealth = maxHealth;
