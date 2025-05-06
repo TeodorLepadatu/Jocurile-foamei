@@ -13,8 +13,13 @@ public class MainMenuController : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+    }
+
+    public void Shop()
+    {
 
     }
+
     public void QuitGame()
     {
         Application.Quit();
