@@ -11,28 +11,43 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform target;
     private int pathIndex = 0;
+
+    private float baseSpeed;
     private void Start()
     {
+        baseSpeed = moveSpeed;
         target = LevelManager.main.path[pathIndex];
     }
     private void Update()
     {
-        if(Vector2.Distance(target.position, transform.position) <= 0.1f)
+        if (Vector2.Distance(target.position, transform.position) <= 0.1f)
         {
             pathIndex++;
             if (pathIndex >= LevelManager.main.path.Length)
             {
-                EnemySpawner.onEnemyDestroy.Invoke();
-                Destroy(gameObject);
+                // Enemy slips through
+                LevelManager.main.DamagePlayer(1); // Deal 1 damage to the player
+                EnemySpawner.onEnemyDestroy.Invoke(); // Notify the spawner
+                Destroy(gameObject); // Destroy the enemy
                 return;
             }
             target = LevelManager.main.path[pathIndex];
-        }    
+        }
     }
 
     private void FixedUpdate()
     {
         Vector2 direction = (target.position - transform.position).normalized;
         rb.linearVelocity = direction * moveSpeed;
-    }   
+    }
+    
+    public void UpdateSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+    public void ResetSpeed()
+    {
+        moveSpeed = baseSpeed;
+    }
 }

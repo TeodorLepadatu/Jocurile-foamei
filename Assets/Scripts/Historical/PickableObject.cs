@@ -4,12 +4,12 @@ public class PickableObject : MonoBehaviour
 {
     public string objectName;
     private Rigidbody2D rb;
-    public Vector2 areaMinLeaf = new Vector2(5f, 0f);  
-    public Vector2 areaMaxLeaf = new Vector2(6f, -2f);  
-    public Vector2 areaMinWater = new Vector2(4f, -2.5f);
-    public Vector2 areaMaxWater = new Vector2(5f, -4f);
-    public Vector2 areaMinFire = new Vector2(6.5f, -3f);
-    public Vector2 areaMaxFire = new Vector2(7f, -4f);
+    public Vector2 areaMinLeaf = new Vector2(4f, 0f);  
+    public Vector2 areaMaxLeaf = new Vector2(8f, -3f);  
+    public Vector2 areaMinWater = new Vector2(3f, -2f);
+    public Vector2 areaMaxWater = new Vector2(6f, -5f);
+    public Vector2 areaMinFire = new Vector2(5f, -2f);
+    public Vector2 areaMaxFire = new Vector2(8f, -5f);
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

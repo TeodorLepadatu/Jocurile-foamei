@@ -19,6 +19,19 @@ public class EnemyController : MonoBehaviour
     private float damageTimer = 0f;
 
     private bool broken = false;
+    private static bool enemyExists = false; // Static flag to track if the enemy already exists
+
+    void Awake()
+    {
+        if (enemyExists)
+        {
+            Destroy(gameObject); // Destroy duplicate enemy
+            return;
+        }
+
+        enemyExists = true; // Mark that the enemy exists
+        DontDestroyOnLoad(gameObject); // Persist this enemy across scenes
+    }
 
     void Start()
     {
@@ -85,5 +98,8 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        PlayerController.gold += 10;
+        PlayerController.minigamesCompleted += 1;
+        Debug.Log("a facut: " + PlayerController.minigamesCompleted);
     }
 }

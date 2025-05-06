@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Pickable
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - Character
   - Project
   - Pickable
-  - 
-  - 
-  - 
+  - Turrets
+  - Enemy
+  - Bullet
   - 
   - 
   - 
@@ -41,6 +42,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Turrets
+    uniqueID: 9
     locked: 0
   m_RenderingLayers:
   - Default

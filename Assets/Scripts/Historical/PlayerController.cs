@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -9,14 +11,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    public int maxHealth = 5;
+    public int maxHealth = 10;
     public int health { get { return currentHealth; } }
 
-    private int currentHealth = 1;
+    public int currentHealth = 1;
     public InputAction talkAction;
     private NonPlayerCharacter nearbyNPC; 
 
-    public int gold = 0;
+    public static int gold = 0;
     private Vector2 lastMovement;
     public GameObject projectilePrefab;
     public GameObject pickedUpObject = null;
@@ -24,16 +26,30 @@ public class PlayerController : MonoBehaviour
     public float pickupRadius = 1f;
     public LayerMask pickableLayer;
 
+    public static int minigamesCompleted = 0;
+    public static PlayerController instance;
+    //[SerializeField] public static int hitpointsTransmitted = 0;
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 120;
         currentHealth = maxHealth;
-
+        //hitpointsTransmitted = currentHealth;
         rb = GetComponent<Rigidbody2D>();
         talkAction.Enable();
     }
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Prevent destruction on scene load
+        }
+        else
+        {
+            Destroy(gameObject); // Ensure only one instance exists
+        }
+    }
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -94,9 +110,19 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
+        //hitpointsTransmitted = currentHealth;
+        if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
+        {
+            Debug.Log("You have completed the game!");
+            SceneManager.LoadScene("VictoryScreenScene");
+        }
+        UIHandler.instance.SetGoldValue(gold);
+        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
-
+    private bool IsInArea(Vector2 pos, Vector2 min, Vector2 max)
+    {
+        return pos.x >= min.x && pos.x <= max.x && pos.y <= min.y && pos.y >= max.y;
+    }
     private void FixedUpdate()
     {
         rb.linearVelocity = movement * speed;
@@ -106,11 +132,12 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
-
+        //hitpointsTransmitted -= amount;
+        //Debug.Log("Ce pula mea:" + hitpointsTransmitted);
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead!");
-            GameManager.instance.GameOver();
+            GameManager.GameOver();
         }
 
     }

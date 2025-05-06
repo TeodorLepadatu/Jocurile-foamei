@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void GameOver()
+    public static void GameOver()
     {
         SceneManager.LoadScene("DeathScreenScene");
     }
