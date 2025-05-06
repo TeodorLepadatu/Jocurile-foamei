@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      snow_caveman_0: -2819586383909281935
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
