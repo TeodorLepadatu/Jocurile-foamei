@@ -11,10 +11,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    public int maxHealth = 5;
+    public int maxHealth = 10;
     public int health { get { return currentHealth; } }
 
-    private int currentHealth = 1;
+    public int currentHealth = 1;
     public InputAction talkAction;
     private NonPlayerCharacter nearbyNPC; 
 
@@ -27,16 +27,29 @@ public class PlayerController : MonoBehaviour
     public LayerMask pickableLayer;
 
     public static int minigamesCompleted = 0;
+    public static PlayerController instance;
+    //[SerializeField] public static int hitpointsTransmitted = 0;
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 120;
         currentHealth = maxHealth;
-
+        //hitpointsTransmitted = currentHealth;
         rb = GetComponent<Rigidbody2D>();
         talkAction.Enable();
     }
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Prevent destruction on scene load
+        }
+        else
+        {
+            Destroy(gameObject); // Ensure only one instance exists
+        }
+    }
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -97,7 +110,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if(minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(16f,12f), new Vector2(10f, 8f)))
+        //hitpointsTransmitted = currentHealth;
+        if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(16f,12f), new Vector2(10f, 8f)))
         {
             Debug.Log("You have completed the game!");
             SceneManager.LoadScene("VictoryScreenScene");
@@ -116,7 +130,8 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
-
+        //hitpointsTransmitted -= amount;
+        //Debug.Log("Ce pula mea:" + hitpointsTransmitted);
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead!");

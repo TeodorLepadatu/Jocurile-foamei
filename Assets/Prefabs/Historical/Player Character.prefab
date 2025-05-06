@@ -136,10 +136,9 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  gold: 0
   projectilePrefab: {fileID: 2830134091370768577, guid: 0793ed6288f394143a9fa834406b7c49, type: 3}
   pickedUpObject: {fileID: 0}
-  upgradedProjectilePrefab: {fileID: 0}
+  upgradedProjectilePrefab: {fileID: 6378095528871724257, guid: a790f5a6e6ab1dc438607aade832dbaa, type: 3}
   pickupRadius: 1
   pickableLayer:
     serializedVersion: 2

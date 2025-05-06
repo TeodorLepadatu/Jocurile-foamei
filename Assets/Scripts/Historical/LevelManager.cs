@@ -22,9 +22,11 @@ public class LevelManager : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         PlayerController player = FindObjectOfType<PlayerController>();
+        Debug.Log("HP: "+player.currentHealth);
         if (player != null)
         {
             player.ChangeHealth(-damage); // Deduct health
+            //PlayerController.hitpointsTransmitted -= damage;
         }
     }
 
