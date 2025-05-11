@@ -21,7 +21,6 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        gameWrapper.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
     }
@@ -33,12 +32,12 @@ public class PauseManager : MonoBehaviour
         SceneManager.UnloadScene(activeScene);
         SceneManager.LoadScene("MainScene1");
         Time.timeScale = 1f;
+        isPaused = false;
     }
 
     void Pause()
     {
         pauseMenuUI.SetActive(true);
-        gameWrapper.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -51,6 +50,7 @@ public class PauseManager : MonoBehaviour
 
         SceneManager.UnloadScene(activeScene);
         SceneManager.LoadScene("MainMenu");
+        isPaused = false;
     }
     
     public void QuitGame()
