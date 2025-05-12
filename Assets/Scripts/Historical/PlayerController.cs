@@ -40,15 +40,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Prevent destruction on scene load
-        }
-        else
-        {
-            Destroy(gameObject); // Ensure only one instance exists
-        }
+        
     }
     private void Update()
     {
