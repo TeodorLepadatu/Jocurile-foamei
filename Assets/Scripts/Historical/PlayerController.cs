@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private NonPlayerCharacter nearbyNPC; 
 
     public static int gold = 0;
+    public static bool resetGold = false;
     private Vector2 lastMovement;
     public GameObject projectilePrefab;
     public GameObject pickedUpObject = null;
@@ -31,12 +32,16 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] public static int hitpointsTransmitted = 0;
     private void Start()
     {
+        if(resetGold) {
+            gold = 0;
+        }
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 60;
         currentHealth = maxHealth;
         //hitpointsTransmitted = currentHealth;
         rb = GetComponent<Rigidbody2D>();
         talkAction.Enable();
+        resetGold = true;
     }
     private void Awake()
     {

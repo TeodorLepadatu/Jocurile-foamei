@@ -22,7 +22,9 @@ public class DartMonkey : MonoBehaviour
             playerNearby = true;
             if(!hasCompletedMinigame)
             {
+                PlayerController.resetGold = false;
                 SceneManager.LoadScene("TowerDefence");
+
                 hasCompletedMinigame = true;
                 Destroy(gameObject);
             }

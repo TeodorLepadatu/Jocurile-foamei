@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
-    public GameObject gameWrapper;
     private bool isPaused = false;
 
     void Update()
@@ -27,13 +26,19 @@ public class PauseManager : MonoBehaviour
 
     public void Restart()
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        
-        //SceneManager.UnloadScene(activeScene);
-        SceneManager.LoadScene("MainScene1");
         Time.timeScale = 1f;
         isPaused = false;
+        
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if(sceneName == "TowerDefence") {
+            SceneManager.LoadScene("MainScene1");
+        }
+        else {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
+
 
     void Pause()
     {
