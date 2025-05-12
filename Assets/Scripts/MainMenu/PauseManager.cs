@@ -29,8 +29,8 @@ public class PauseManager : MonoBehaviour
     public void Restart()
     {
         Scene activeScene = SceneManager.GetActiveScene();
-
-        SceneManager.UnloadScene(activeScene);
+        
+        //SceneManager.UnloadScene(activeScene);
         SceneManager.LoadScene("MainScene1");
         Time.timeScale = 1f;
     }
@@ -49,7 +49,7 @@ public class PauseManager : MonoBehaviour
 
         Scene activeScene = SceneManager.GetActiveScene();
 
-        SceneManager.UnloadScene(activeScene);
+        //SceneManager.UnloadScene(activeScene);
         SceneManager.LoadScene("MainMenu");
     }
     

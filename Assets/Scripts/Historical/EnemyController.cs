@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     private float damageTimer = 0f;
 
     private bool broken = false;
-    private static bool enemyExists = false; // Static flag to track if the enemy already exists
+    //private static bool enemyExists = false; // Static flag to track if the enemy already exists
     /*
     void Awake()
     {

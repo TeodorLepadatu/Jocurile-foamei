@@ -132,8 +132,6 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
-        //hitpointsTransmitted -= amount;
-        //Debug.Log("Ce pula mea:" + hitpointsTransmitted);
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead!");
