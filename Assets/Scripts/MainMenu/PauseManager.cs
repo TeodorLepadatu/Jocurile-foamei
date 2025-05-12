@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
-    public GameObject gameWrapper;
     private bool isPaused = false;
 
     void Update()
@@ -40,6 +39,7 @@ public class PauseManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
 
     void Pause()
     {
