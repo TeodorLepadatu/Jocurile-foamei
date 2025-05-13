@@ -42,6 +42,20 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         talkAction.Enable();
         resetGold = true;
+
+        if (SceneManager.GetActiveScene().name == "TowerDefence")
+        {
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            BoxCollider2D[] boxColliders = FindObjectsOfType<BoxCollider2D>();
+
+            foreach (BoxCollider2D box in boxColliders)
+            {
+                if (box != null && playerCollider != null)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, box);
+                }
+            }
+        }
     }
     private void Awake()
     {
