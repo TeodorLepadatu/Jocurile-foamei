@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask pickableLayer;
 
     public static int minigamesCompleted = 0;
-    public static PlayerController instance;
+    //public static PlayerController instance;
     //[SerializeField] public static int hitpointsTransmitted = 0;
     private void Start()
     {
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
     private void Update()
     {
