@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TurretSlowmo : MonoBehaviour 
 {
@@ -11,8 +12,15 @@ public class TurretSlowmo : MonoBehaviour
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float aps = 0.25f; //attacks per second
     [SerializeField] private float freezeTime = 1f;
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
     private float timeUntilFire;
     public int cost = 20;
+    //private bool isUIOpen = false;
+    private void Start()
+    {
+        upgradeUI.SetActive(false);
+    }
     private void Update()
     { 
             timeUntilFire += Time.deltaTime;
@@ -49,4 +57,46 @@ public class TurretSlowmo : MonoBehaviour
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
+
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.SetActive(true);
+    }
+
+    public void CloseUpgradeUI()
+    {
+        upgradeUI.SetActive(false);
+    }
+
+    private void OnMouseEnter()
+    {
+        OpenUpgradeUI();
+        //isUIOpen = true;
+    }
+
+    private void OnMouseExit()
+    {
+        CloseUpgradeUI();
+        //isUIOpen = false;
+    }
+
+    public void Upgrade()
+    {
+        if (LevelManager.main.currency >= cost)
+        {
+            LevelManager.main.SpendCurrency(cost);
+
+            targetingRange *= 1.2f;
+            aps *= 1.1f;
+            freezeTime *= 1.2f;
+            cost = Mathf.RoundToInt(cost * 2f);
+
+            Debug.Log("Ice Turret upgraded! New range: " + targetingRange + ", New APS: " + aps + ", New freeze time: " + freezeTime + ", Next cost: " + cost);
+        }
+        else
+        {
+            Debug.Log("Not enough currency to upgrade!");
+        }
+    }
+
 }

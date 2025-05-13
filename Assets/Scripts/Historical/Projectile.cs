@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Projectile : MonoBehaviour
 {
@@ -11,6 +12,20 @@ public class Projectile : MonoBehaviour
 
     public void Launch(Vector2 direction, float force)
     {
+        // Only ignore BoxCollider2D in the TowerDefence scene
+        if (SceneManager.GetActiveScene().name == "TowerDefence")
+        {
+            Collider2D myCollider = GetComponent<Collider2D>();
+            BoxCollider2D[] boxColliders = FindObjectsOfType<BoxCollider2D>();
+            foreach (var box in boxColliders)
+            {
+                if (myCollider != null && box != null)
+                {
+                    Physics2D.IgnoreCollision(myCollider, box);
+                }
+            }
+        }
+
         rigidbody2d.AddForce(direction * force, ForceMode2D.Impulse);
     }
 
@@ -28,7 +43,23 @@ public class Projectile : MonoBehaviour
                 enemy.TakeDamage(1);
             }
         }
+        if(SceneManager.GetActiveScene().name == "TowerDefence")
+        {
 
+            var TDEnemy = other.gameObject.GetComponent<Health>();
+            if (TDEnemy != null)
+            {
+                if (MagicZoneManager.allPlacedCorrectly)
+                {
+                    TDEnemy.TakeDamage(10);
+                }
+                else
+                {
+                    TDEnemy.TakeDamage(1);
+                }
+            }
+        }
+        
         Destroy(gameObject); 
     }
 }

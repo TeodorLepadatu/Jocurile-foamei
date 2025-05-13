@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     public float speed = 2.5f;
     public float followRange = 10.0f;
-    public float damageInterval = 1.0f;
+    
 
     public int maxHealth = 100;
     private int currentHealth;
@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
     private bool isFollowing = false;
     private float damageTimer = 0f;
-
+    public float damageInterval = 1.0f;
     private bool broken = false;
     //private static bool enemyExists = false; // Static flag to track if the enemy already exists
     /*

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoldCollectible : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GoldCollectible : MonoBehaviour
         if (controller != null)
         {
             controller.ChangeGold(1);
+            if(SceneManager.GetActiveScene().name == "TowerDefence")
+                LevelManager.main.IncreaseCurrency(1);
             Destroy(gameObject);
         }
     }
