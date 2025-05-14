@@ -115,6 +115,10 @@ public class PlayerController : MonoBehaviour
                         {
                             po.PickUp(transform);
                             pickedUpObject = po.gameObject;
+                            GameObject dartMonkey = GameObject.Find("dart_monkey");
+
+                            if(dartMonkey!=null)
+                                Destroy(dartMonkey);
                             break;
                         }
                     }

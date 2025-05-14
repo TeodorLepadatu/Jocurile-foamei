@@ -138,9 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   followRange: 10
-  damageInterval: 1
   maxHealth: 100
   healthBar: {fileID: 0}
+  damageInterval: 1
 --- !u!50 &75793362
 Rigidbody2D:
   serializedVersion: 5
@@ -83209,6 +83209,7 @@ MonoBehaviour:
   leafObject: {fileID: 1991713533}
   waterObject: {fileID: 765795242}
   fireObject: {fileID: 2119791651}
+  dartMonkeyPrefab: {fileID: 1909011703409923291, guid: c14116be700e06548832133abb02437e, type: 3}
 --- !u!4 &429665201
 Transform:
   m_ObjectHideFlags: 0
@@ -84222,7 +84223,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 639774892}
-  gameWrapper: {fileID: 0}
 --- !u!4 &692508699
 Transform:
   m_ObjectHideFlags: 0
@@ -86130,11 +86130,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 354281783290992090, guid: c14116be700e06548832133abb02437e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.78
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 354281783290992090, guid: c14116be700e06548832133abb02437e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.38
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 354281783290992090, guid: c14116be700e06548832133abb02437e, type: 3}
       propertyPath: m_LocalPosition.z
