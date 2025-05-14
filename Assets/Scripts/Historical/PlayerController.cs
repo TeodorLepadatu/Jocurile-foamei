@@ -129,6 +129,7 @@ public class PlayerController : MonoBehaviour
         if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
         {
             Debug.Log("You have completed the game!");
+            Destroy(gameObject);
             SceneManager.LoadScene("VictoryScreenScene");
         }
         UIHandler.instance.SetGoldValue(gold);

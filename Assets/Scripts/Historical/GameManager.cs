@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
 
     public static void GameOver()
     {
+        GameObject player = FindObjectOfType<PlayerController>().gameObject;
+        if (player != null)
+        {
+            Destroy(player);
+        }
         SceneManager.LoadScene("DeathScreenScene");
     }
 }
