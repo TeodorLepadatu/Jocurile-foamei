@@ -28,9 +28,22 @@ public class PlayerController : MonoBehaviour
     public LayerMask pickableLayer;
 
     public static int minigamesCompleted = 0;
-    public static PlayerController instance;
     private float launchCooldown = 0.5f;
     private float launchTimer = 0f;
+    public static PlayerController instance;
+    public static bool hasKilledBoss = false;
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        //Debug.Log("mg: " + minigamesCompleted);
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         if(resetGold) {
@@ -56,12 +69,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     private void Update()
     {
@@ -129,7 +136,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
+        if (minigamesCompleted >= 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
         {
             Debug.Log("You have completed the game!");
             Destroy(gameObject);

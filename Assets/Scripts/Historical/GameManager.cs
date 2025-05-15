@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("DeathScreenScene");
     }
 
-    public void SpawnGold(GameObject goldPrefab)
+    public void SpawnGold(GameObject goldPrefab, Vector3 pos)
     {
         Vector2 offset = Random.insideUnitCircle * 1f;
-        Vector3 spawnPos = transform.position + new Vector3(offset.x, offset.y, 0);
+        Vector3 spawnPos = pos + new Vector3(offset.x, offset.y, 0);
         Instantiate(goldPrefab, spawnPos, Quaternion.identity);
     }
 }

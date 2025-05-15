@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac0472178e27ef44b2f5a66e371a559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 4
+  hitPoints: 5
   currencyWorth: 5
   goldPrefab: {fileID: 2718525843238698832, guid: ee56df70542d728438e19c8c62aec09f, type: 3}
 --- !u!58 &-1451711491283119532

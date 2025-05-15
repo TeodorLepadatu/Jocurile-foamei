@@ -23,6 +23,11 @@ public class EnemyController : MonoBehaviour
     public GameObject goldPrefab;
     void Start()
     {
+        if(PlayerController.hasKilledBoss)
+        {
+            Destroy(gameObject);
+            return;
+        }
         currentHealth = maxHealth;
 
         if (healthBar != null)
@@ -89,9 +94,10 @@ public class EnemyController : MonoBehaviour
         //PlayerController.gold += 10;
         for (int i = 0; i < 10; i++)
         {
-            GameManager.instance.SpawnGold(goldPrefab);
+            GameManager.instance.SpawnGold(goldPrefab, transform.position);
         }
         PlayerController.minigamesCompleted += 1;
         Debug.Log("a facut: " + PlayerController.minigamesCompleted);
+        PlayerController.hasKilledBoss = true;
     }
 }

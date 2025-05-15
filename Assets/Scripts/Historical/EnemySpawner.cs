@@ -55,9 +55,9 @@ public class EnemySpawner : MonoBehaviour
             EndWave();
         }
 
-        if (currentWave > 10)
+        if (currentWave > 10) //total number of waves
         {
-            Debug.Log("Am terminat!");
+            Debug.Log("Am terminat TD!");
             PlayerController.minigamesCompleted++;
             SceneManager.LoadScene("MainScene1");
         }
