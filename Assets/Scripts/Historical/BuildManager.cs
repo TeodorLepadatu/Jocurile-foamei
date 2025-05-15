@@ -43,6 +43,7 @@ public class BuildManager : MonoBehaviour
         if (distance > craftingTable.proximityDistance)
         {
             Debug.Log("You must be near the crafting table to select a tower.");
+            Debug.Log("Distance: " + distance);
             return null;
         }
 

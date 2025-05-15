@@ -9,7 +9,7 @@ public class TowerPlacer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (BuildManager.main.GetSelectedTower() == null)
+            if (BuildManager.selectedTower > BuildManager.main.towerPrefabs.Length)
             {
                 Debug.Log("No tower selected! Please select a tower before placing.");
                 return;
@@ -33,7 +33,7 @@ public class TowerPlacer : MonoBehaviour
 
             if (IsPositionValid(worldPos))
             {
-                towerPrefab = BuildManager.main.GetSelectedTower();
+                towerPrefab = BuildManager.main.towerPrefabs[BuildManager.selectedTower];
 
                 if (BuildManager.costDictionary[towerPrefab] > PlayerController.gold)
                 {
