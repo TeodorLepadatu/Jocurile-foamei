@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead!");
-            GameManager.GameOver();
+            //GameManager.GameOver();
         }
 
     }
