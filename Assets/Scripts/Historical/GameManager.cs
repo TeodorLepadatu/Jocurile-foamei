@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        else
-            Destroy(gameObject);
     }
 
     public static void GameOver()
@@ -21,5 +19,12 @@ public class GameManager : MonoBehaviour
             Destroy(player);
         }
         SceneManager.LoadScene("DeathScreenScene");
+    }
+
+    public void SpawnGold(GameObject goldPrefab)
+    {
+        Vector2 offset = Random.insideUnitCircle * 1f;
+        Vector3 spawnPos = transform.position + new Vector3(offset.x, offset.y, 0);
+        Instantiate(goldPrefab, spawnPos, Quaternion.identity);
     }
 }

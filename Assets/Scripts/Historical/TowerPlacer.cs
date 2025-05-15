@@ -3,13 +3,12 @@ using UnityEngine;
 public class TowerPlacer : MonoBehaviour
 {
     [SerializeField] private GameObject towerPrefab;
+    [SerializeField] private float placementRange = 3.0f;
 
     private void Update()
     {
-        // Check if the left mouse button is clicked
         if (Input.GetMouseButtonDown(0))
         {
-            // Ensure a tower has been selected before placement
             if (BuildManager.main.GetSelectedTower() == null)
             {
                 Debug.Log("No tower selected! Please select a tower before placing.");
@@ -17,6 +16,20 @@ public class TowerPlacer : MonoBehaviour
             }
 
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // Proximity check
+            PlayerController player = FindObjectOfType<PlayerController>();
+            if (player == null)
+            {
+                Debug.LogWarning("Player not found in scene!");
+                return;
+            }
+            float distance = Vector2.Distance(player.transform.position, worldPos);
+            if (distance > placementRange)
+            {
+                Debug.Log("You are too far away to place a tower here!");
+                return;
+            }
 
             if (IsPositionValid(worldPos))
             {
@@ -38,6 +51,7 @@ public class TowerPlacer : MonoBehaviour
             }
         }
     }
+
 
     private bool IsPositionValid(Vector2 position)
     {

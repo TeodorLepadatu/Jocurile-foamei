@@ -141,6 +141,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 0}
   damageInterval: 1
+  goldPrefab: {fileID: 2718525843238698832, guid: ee56df70542d728438e19c8c62aec09f, type: 3}
 --- !u!50 &75793362
 Rigidbody2D:
   serializedVersion: 5

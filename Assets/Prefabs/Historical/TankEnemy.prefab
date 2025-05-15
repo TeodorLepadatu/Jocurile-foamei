@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6085352645284353353}
   - component: {fileID: 7667147254808730215}
   - component: {fileID: 3430359224451442477}
+  - component: {fileID: -3088757739921294992}
   m_Layer: 10
   m_Name: TankEnemy
   m_TagString: Untagged
@@ -146,7 +147,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 20
   currencyWorth: 10
+  goldPrefab: {fileID: 2718525843238698832, guid: ee56df70542d728438e19c8c62aec09f, type: 3}
 --- !u!58 &3430359224451442477
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772341089838873893}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1.195
+--- !u!58 &-3088757739921294992
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

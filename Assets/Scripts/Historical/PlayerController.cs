@@ -28,8 +28,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask pickableLayer;
 
     public static int minigamesCompleted = 0;
-    //public static PlayerController instance;
+    public static PlayerController instance;
     //[SerializeField] public static int hitpointsTransmitted = 0;
+    private float launchCooldown = 0.5f;
+    private float launchTimer = 0f;
     private void Start()
     {
         if(resetGold) {
@@ -56,16 +58,21 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        //UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
     private void Awake()
     {
+        if(instance == null)
+            instance = this;
+        //UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
         DontDestroyOnLoad(gameObject);
     }
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
+        if (launchTimer > 0f)
+            launchTimer -= Time.deltaTime;
         movement = new Vector2(horizontal, vertical);
 
         if (movement.magnitude > 1)
@@ -75,9 +82,10 @@ public class PlayerController : MonoBehaviour
         if (movement != Vector2.zero)
             lastMovement = movement;
 
-        if (Input.GetKeyDown(KeyCode.Q)) 
+        if (Input.GetKeyDown(KeyCode.Q) && launchTimer <= 0f)
         {
             Launch();
+            launchTimer = launchCooldown;
         }
 
         if (Input.GetKeyDown(KeyCode.H))

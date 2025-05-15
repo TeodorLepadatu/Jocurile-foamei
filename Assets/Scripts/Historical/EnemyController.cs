@@ -19,20 +19,8 @@ public class EnemyController : MonoBehaviour
     private float damageTimer = 0f;
     public float damageInterval = 1.0f;
     private bool broken = false;
-    //private static bool enemyExists = false; // Static flag to track if the enemy already exists
-    /*
-    void Awake()
-    {
-        if (enemyExists)
-        {
-            Destroy(gameObject); // Destroy duplicate enemy
-            return;
-        }
 
-        enemyExists = true; // Mark that the enemy exists
-        DontDestroyOnLoad(gameObject); // Persist this enemy across scenes
-    }
-    */
+    public GameObject goldPrefab;
     void Start()
     {
         currentHealth = maxHealth;
@@ -98,7 +86,11 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        PlayerController.gold += 10;
+        //PlayerController.gold += 10;
+        for (int i = 0; i < 10; i++)
+        {
+            GameManager.instance.SpawnGold(goldPrefab);
+        }
         PlayerController.minigamesCompleted += 1;
         Debug.Log("a facut: " + PlayerController.minigamesCompleted);
     }

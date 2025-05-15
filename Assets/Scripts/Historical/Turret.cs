@@ -93,15 +93,22 @@ public class Turret : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        OpenUpgradeUI();
-        //isUIOpen = true;
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (player != null)
+        {
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+            if (distance <= 3f)
+            {
+                OpenUpgradeUI();
+            }
+        }
     }
 
     private void OnMouseExit()
     {
         CloseUpgradeUI();
-        //isUIOpen = false;
     }
+
     public void Upgrade()
     {
         if (LevelManager.main.currency >= cost)
@@ -115,6 +122,28 @@ public class Turret : MonoBehaviour
         else
         {
             Debug.Log("Not enough currency to upgrade!");
+        }
+    }
+    private void Sell()
+    {
+        int refund = Mathf.RoundToInt(cost * 0.5f);
+        LevelManager.main.currency += refund;
+        Debug.Log($"Turret sold! Refunded {refund} currency.");
+        Destroy(gameObject);
+    }
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1)) // Right mouse button
+        {
+            PlayerController player = FindObjectOfType<PlayerController>();
+            if (player != null)
+            {
+                float distance = Vector2.Distance(transform.position, player.transform.position);
+                if (distance <= 3f)
+                {
+                    Sell();
+                }
+            }
         }
     }
 

@@ -62,4 +62,26 @@ public class Projectile : MonoBehaviour
         
         Destroy(gameObject); 
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (SceneManager.GetActiveScene().name == "TowerDefence")
+        {
+
+            var TDEnemy = other.gameObject.GetComponent<Health>();
+            if (TDEnemy != null)
+            {
+                if (MagicZoneManager.allPlacedCorrectly)
+                {
+                    TDEnemy.TakeDamage(10);
+                }
+                else
+                {
+                    TDEnemy.TakeDamage(1);
+                }
+            }
+        }
+
+        Destroy(gameObject);
+    }
 }
