@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TowerPlacer : MonoBehaviour
@@ -33,6 +34,7 @@ public class TowerPlacer : MonoBehaviour
 
             if (IsPositionValid(worldPos))
             {
+                Debug.Log(BuildManager.selectedTower);
                 towerPrefab = BuildManager.main.towerPrefabs[BuildManager.selectedTower];
 
                 if (BuildManager.costDictionary[towerPrefab] > PlayerController.gold)

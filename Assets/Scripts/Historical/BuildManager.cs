@@ -23,8 +23,15 @@ public class BuildManager : MonoBehaviour
             }
             catch(System.Exception)
             {
-                costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<TurretSlowmo>().cost);
-                Debug.Log(towerPrefabs[i].name + " costs: " + costDictionary[towerPrefabs[i]]);
+                try
+                {
+                    costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<TurretSlowmo>().cost);
+                    Debug.Log(towerPrefabs[i].name + " costs: " + costDictionary[towerPrefabs[i]]);
+                }
+                catch(System.Exception)
+                {
+                    costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<BananaFarm>().cost);
+                }
             }
         }
     }
