@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
     public static int minigamesCompleted = 0;
     public static PlayerController instance;
-    //[SerializeField] public static int hitpointsTransmitted = 0;
     private float launchCooldown = 0.5f;
     private float launchTimer = 0f;
     private void Start()
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         currentHealth = maxHealth;
-        //hitpointsTransmitted = currentHealth;
         rb = GetComponent<Rigidbody2D>();
         talkAction.Enable();
         resetGold = true;
@@ -58,13 +56,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        //UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
     private void Awake()
     {
         if(instance == null)
             instance = this;
-        //UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
         DontDestroyOnLoad(gameObject);
     }
     private void Update()
@@ -133,7 +129,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        //hitpointsTransmitted = currentHealth;
         if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
         {
             Debug.Log("You have completed the game!");
@@ -159,7 +154,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead!");
-            //GameManager.GameOver();
+            GameManager.GameOver();
         }
 
     }

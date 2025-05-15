@@ -16,7 +16,6 @@ public class TurretSlowmo : MonoBehaviour
     [SerializeField] private Button upgradeButton;
     private float timeUntilFire;
     public int cost = 20;
-    //private bool isUIOpen = false;
     private void Start()
     {
         upgradeUI.SetActive(false);

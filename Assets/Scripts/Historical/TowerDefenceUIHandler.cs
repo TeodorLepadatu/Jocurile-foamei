@@ -21,7 +21,6 @@ public class TowerDefenceUIHandler : MonoBehaviour
         PlayerController player = FindObjectOfType<PlayerController>();
         currentHealth = player.health;
         m_Healthbar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
-        //Debug.Log("HealthBar: " + m_Healthbar);
         SetHealthValue((float)currentHealth / (float)player.maxHealth);
     }
     private void Update()

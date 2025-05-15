@@ -14,15 +14,6 @@ public class PickableObject : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    void Update()
-    {
-        /*
-        if (IsInTargetZone())
-        {
-            Debug.Log(name + " is inside the magic zone!");
-        }
-        */
-    }
     public bool IsInTargetZone()
     {
         Vector2 pos = transform.position;

@@ -26,7 +26,6 @@ public class LevelManager : MonoBehaviour
         if (player != null)
         {
             player.ChangeHealth(-damage); // Deduct health
-            //PlayerController.hitpointsTransmitted -= damage;
         }
     }
 
@@ -44,7 +43,6 @@ public class LevelManager : MonoBehaviour
     {
         if (currency >= amount)
         {
-            //BUY TOWER
             currency -= amount;
             return true;
         }

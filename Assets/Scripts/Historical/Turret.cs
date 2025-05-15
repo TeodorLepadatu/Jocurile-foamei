@@ -21,7 +21,6 @@ public class Turret : MonoBehaviour
     private float timeUntilFire;
     public float angleAdjustment = -90f;
     public int cost = 10;
-    //private bool isUIOpen = false;
     private void Start()
     {
         upgradeUI.SetActive(false);

@@ -53,7 +53,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        // Example: go back to main menu scene
         appliedMessageText.text = "";
     }
 }

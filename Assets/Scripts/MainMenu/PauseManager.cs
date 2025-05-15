@@ -28,7 +28,6 @@ public class PauseManager : MonoBehaviour
     {
         Scene activeScene = SceneManager.GetActiveScene();
         
-        //SceneManager.UnloadScene(activeScene);
         SceneManager.LoadScene("MainScene1");
         Time.timeScale = 1f;
         isPaused = false;
@@ -48,7 +47,6 @@ public class PauseManager : MonoBehaviour
 
         Scene activeScene = SceneManager.GetActiveScene();
 
-        //SceneManager.UnloadScene(activeScene);
         SceneManager.LoadScene("MainMenu");
         isPaused = false;
     }

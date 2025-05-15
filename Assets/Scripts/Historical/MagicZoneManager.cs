@@ -25,7 +25,6 @@ public class MagicZoneManager : MonoBehaviour
                 fireObject.GetDestroyed();
 
                 Instantiate(dartMonkeyPrefab, new Vector3(4f, 11f, 0f), Quaternion.identity);
-                //Debug.Log(Equals(dartMonkeyPrefab, null) + " " + dartMonkeyPrefab.transform.position);
             }
         }
     }
