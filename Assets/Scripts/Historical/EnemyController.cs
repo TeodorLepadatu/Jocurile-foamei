@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     public float speed = 2.5f;
     public float followRange = 10.0f;
-    public float damageInterval = 1.0f;
+    
 
     public int maxHealth = 100;
     private int currentHealth;
@@ -17,24 +17,17 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
     private bool isFollowing = false;
     private float damageTimer = 0f;
-
+    public float damageInterval = 1.0f;
     private bool broken = false;
-    //private static bool enemyExists = false; // Static flag to track if the enemy already exists
-    /*
-    void Awake()
-    {
-        if (enemyExists)
-        {
-            Destroy(gameObject); // Destroy duplicate enemy
-            return;
-        }
 
-        enemyExists = true; // Mark that the enemy exists
-        DontDestroyOnLoad(gameObject); // Persist this enemy across scenes
-    }
-    */
+    public GameObject goldPrefab;
     void Start()
     {
+        if(PlayerController.hasKilledBoss)
+        {
+            Destroy(gameObject);
+            return;
+        }
         currentHealth = maxHealth;
 
         if (healthBar != null)
@@ -98,8 +91,13 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        PlayerController.gold += 10;
+        //PlayerController.gold += 10;
+        for (int i = 0; i < 10; i++)
+        {
+            GameManager.instance.SpawnGold(goldPrefab, transform.position);
+        }
         PlayerController.minigamesCompleted += 1;
         Debug.Log("a facut: " + PlayerController.minigamesCompleted);
+        PlayerController.hasKilledBoss = true;
     }
 }

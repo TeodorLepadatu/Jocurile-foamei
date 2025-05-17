@@ -46,5 +46,8 @@ TagManager:
   - name: Turrets
     uniqueID: 9
     locked: 0
+  - name: UI
+    uniqueID: 1920033657
+    locked: 0
   m_RenderingLayers:
   - Default

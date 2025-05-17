@@ -26,7 +26,6 @@ public class LevelManager : MonoBehaviour
         if (player != null)
         {
             player.ChangeHealth(-damage); // Deduct health
-            //PlayerController.hitpointsTransmitted -= damage;
         }
     }
 
@@ -44,7 +43,6 @@ public class LevelManager : MonoBehaviour
     {
         if (currency >= amount)
         {
-            //BUY TOWER
             currency -= amount;
             return true;
         }
@@ -54,4 +52,12 @@ public class LevelManager : MonoBehaviour
             return false;
         }
     }
+
+    public void SpawnGold(GameObject goldPrefab, Vector3 pos)
+    {
+        Vector2 offset = Random.insideUnitCircle * 1f;
+        Vector3 spawnPos = pos + new Vector3(offset.x, offset.y, 0);
+        Instantiate(goldPrefab, spawnPos, Quaternion.identity);
+    }
+
 }

@@ -24,20 +24,13 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
     }
 
-    
     public void Restart()
     {
+        Scene activeScene = SceneManager.GetActiveScene();
+        
+        SceneManager.LoadScene("MainScene1");
         Time.timeScale = 1f;
         isPaused = false;
-        
-        string sceneName = SceneManager.GetActiveScene().name;
-
-        if(sceneName == "TowerDefence") {
-            SceneManager.LoadScene("MainScene1");
-        }
-        else {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
 
 
@@ -54,7 +47,6 @@ public class PauseManager : MonoBehaviour
 
         Scene activeScene = SceneManager.GetActiveScene();
 
-        //SceneManager.UnloadScene(activeScene);
         SceneManager.LoadScene("MainMenu");
         isPaused = false;
     }

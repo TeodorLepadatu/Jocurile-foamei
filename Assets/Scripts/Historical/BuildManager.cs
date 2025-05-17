@@ -23,20 +23,45 @@ public class BuildManager : MonoBehaviour
             }
             catch(System.Exception)
             {
-                costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<TurretSlowmo>().cost);
-                Debug.Log(towerPrefabs[i].name + " costs: " + costDictionary[towerPrefabs[i]]);
+                try
+                {
+                    costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<TurretSlowmo>().cost);
+                    Debug.Log(towerPrefabs[i].name + " costs: " + costDictionary[towerPrefabs[i]]);
+                }
+                catch(System.Exception)
+                {
+                    costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<BananaFarm>().cost);
+                }
             }
         }
     }
     public GameObject GetSelectedTower()
     {
-        if(selectedTower < 0 || selectedTower >= towerPrefabs.Length)
+        // Proximity check: player must be near the crafting table
+        PlayerController player = FindObjectOfType<PlayerController>();
+        CraftingTable craftingTable = FindObjectOfType<CraftingTable>();
+        if (player == null || craftingTable == null)
+        {
+            Debug.LogWarning("Player or CraftingTable not found in the scene.");
+            return null;
+        }
+
+        float distance = Vector2.Distance(player.transform.position, craftingTable.transform.position);
+        if (distance > craftingTable.proximityDistance)
+        {
+            Debug.Log("You must be near the crafting table to select a tower.");
+            Debug.Log("Distance: " + distance);
+            return null;
+        }
+
+        if (selectedTower < 0 || selectedTower >= towerPrefabs.Length)
         {
             Debug.LogError("Invalid tower selection: " + selectedTower);
             return null;
         }
         return towerPrefabs[selectedTower];
     }
+
 
     public void SetSelectedTower(int _selectedTower)
     {

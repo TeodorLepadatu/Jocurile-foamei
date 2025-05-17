@@ -5,6 +5,7 @@ public class MagicZoneManager : MonoBehaviour
     public PickableObject leafObject;
     public PickableObject waterObject;
     public PickableObject fireObject;
+    public GameObject dartMonkeyPrefab; 
 
     public static bool allPlacedCorrectly = false;
 
@@ -19,14 +20,11 @@ public class MagicZoneManager : MonoBehaviour
             {
                 allPlacedCorrectly = true;
                 Debug.Log("All objects are in their correct magic zones!");
-                /*
-                Destroy(leafObject);
-                Destroy(waterObject);
-                Destroy(fireObject);
-                */
                 leafObject.GetDestroyed();
                 waterObject.GetDestroyed();
                 fireObject.GetDestroyed();
+
+                Instantiate(dartMonkeyPrefab, new Vector3(4f, 11f, 0f), Quaternion.identity);
             }
         }
     }

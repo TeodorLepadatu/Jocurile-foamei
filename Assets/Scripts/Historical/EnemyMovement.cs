@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     private int pathIndex = 0;
 
     private float baseSpeed;
+
     private void Start()
     {
         baseSpeed = moveSpeed;
@@ -50,4 +51,15 @@ public class EnemyMovement : MonoBehaviour
     {
         moveSpeed = baseSpeed;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerController controller = collision.gameObject.GetComponent<PlayerController>();
+        if (controller != null)
+        {
+            controller.ChangeHealth(-1);
+        }
+    }
+
+
 }

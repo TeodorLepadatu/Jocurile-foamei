@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 354281783290992090}
   - component: {fileID: 5189989170297501552}
   - component: {fileID: 6045589025060829493}
+  - component: {fileID: 2751642264328859684}
   m_Layer: 0
   m_Name: dart_monkey
   m_TagString: Untagged
@@ -134,3 +135,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.68, y: 3.26}
   m_EdgeRadius: 0
+--- !u!114 &2751642264328859684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909011703409923291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88d746b2f3a6134584451dd2d1ee5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNearby: 0

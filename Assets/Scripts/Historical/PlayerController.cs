@@ -28,8 +28,22 @@ public class PlayerController : MonoBehaviour
     public LayerMask pickableLayer;
 
     public static int minigamesCompleted = 0;
+    private float launchCooldown = 0.5f;
+    private float launchTimer = 0f;
     public static PlayerController instance;
-    //[SerializeField] public static int hitpointsTransmitted = 0;
+    public static bool hasKilledBoss = false;
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        //Debug.Log("mg: " + minigamesCompleted);
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         if(resetGold) {
@@ -38,20 +52,30 @@ public class PlayerController : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         currentHealth = maxHealth;
-        //hitpointsTransmitted = currentHealth;
         rb = GetComponent<Rigidbody2D>();
         talkAction.Enable();
         resetGold = true;
-    }
-    private void Awake()
-    {
-        
+
+        if (SceneManager.GetActiveScene().name == "TowerDefence")
+        {
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            BoxCollider2D[] boxColliders = FindObjectsOfType<BoxCollider2D>();
+
+            foreach (BoxCollider2D box in boxColliders)
+            {
+                if (box != null && playerCollider != null)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, box);
+                }
+            }
+        }
     }
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
+        if (launchTimer > 0f)
+            launchTimer -= Time.deltaTime;
         movement = new Vector2(horizontal, vertical);
 
         if (movement.magnitude > 1)
@@ -61,9 +85,10 @@ public class PlayerController : MonoBehaviour
         if (movement != Vector2.zero)
             lastMovement = movement;
 
-        if (Input.GetKeyDown(KeyCode.Q)) 
+        if (Input.GetKeyDown(KeyCode.Q) && launchTimer <= 0f)
         {
             Launch();
+            launchTimer = launchCooldown;
         }
 
         if (Input.GetKeyDown(KeyCode.H))
@@ -101,16 +126,20 @@ public class PlayerController : MonoBehaviour
                         {
                             po.PickUp(transform);
                             pickedUpObject = po.gameObject;
+                            GameObject dartMonkey = GameObject.Find("dart_monkey");
+
+                            if(dartMonkey!=null)
+                                Destroy(dartMonkey);
                             break;
                         }
                     }
                 }
             }
         }
-        //hitpointsTransmitted = currentHealth;
-        if (minigamesCompleted == 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
+        if (minigamesCompleted >= 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
         {
             Debug.Log("You have completed the game!");
+            Destroy(gameObject);
             SceneManager.LoadScene("VictoryScreenScene");
         }
         UIHandler.instance.SetGoldValue(gold);
