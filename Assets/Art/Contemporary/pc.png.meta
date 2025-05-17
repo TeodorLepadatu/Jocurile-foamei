@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4afb56a4119e1474f8d9bf51e2b90924
+guid: c8681bdab672c134199cdf5ead444e8c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4455706796767966169
-    second: crafting-table_0
+      213: 629997682135226199
+    second: pc_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crafting-table_0
+      name: pc_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 15
-        width: 220
-        height: 230
+        x: 0
+        y: 0
+        width: 53
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d3f5ac69b9d5dd30800000000000000
-      internalID: 4455706796767966169
+      spriteID: 7575df4dd833eb800800000000000000
+      internalID: 629997682135226199
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      crafting-table_0: 4455706796767966169
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
