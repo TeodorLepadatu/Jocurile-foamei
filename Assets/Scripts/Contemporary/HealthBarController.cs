@@ -13,8 +13,6 @@ public class HealthBar : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
-
-        TakeDamage(100);
     }
 
     public void TakeDamage(float amount)
