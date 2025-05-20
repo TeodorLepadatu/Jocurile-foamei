@@ -1,21 +1,46 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerContemporary : PlayerBehaviour
+public class PlayerContemporary : MonoBehaviour
 {
     private GameObject heldObject = null;
     private GameObject nearbyObject = null;
     private string portName = null;
+    private float playerScale = 0.11f;
     public GameObject pccgeSprite;
     [SerializeField] private GameObject[] objectsToActivate;
     [SerializeField] private GameObject[] objectToDeactivate;
 
+    public float moveSpeed = 5f;
+    public Rigidbody2D rb;
+    public Animator animator;
 
-    protected override void Update()
+    protected Vector2 movement;
+
+    protected virtual void Update()
     {
-        base.Update(); // Keep movement
-
+        HandleMovement();
         HandlePickup();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    protected void HandleMovement()
+    {
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("moveX", movement.x);
+        animator.SetFloat("moveY", movement.y);
+        animator.SetFloat("speed", movement.sqrMagnitude);
+
+        if (movement.x > 0)
+            transform.localScale = new Vector3(playerScale, playerScale, 1);
+        else if (movement.x < 0)
+            transform.localScale = new Vector3(-playerScale, playerScale, 1);
     }
 
     private void HandlePickup()
