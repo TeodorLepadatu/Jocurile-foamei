@@ -22,6 +22,12 @@ public class PlayerContemporary : MonoBehaviour
 
     protected Vector2 movement;
 
+    void Start() {
+        currentStep = 1;
+        SwitchController.turnedSwitches = 0;
+        CoalGenerator.canGenerate = true;
+    }
+
 
     protected void Update()
     {
