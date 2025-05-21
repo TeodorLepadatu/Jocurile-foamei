@@ -47,11 +47,16 @@ public class InputManager : MonoBehaviour
         
         var sr = selectedSwitch.GetComponent<SpriteRenderer>();
         sr.color = Color.green;
+        SwitchController.turnedSwitches++;
         selectedSwitch.objectSelector.greenPermanently = true;
         Service.objectSelector.isSelected = false;
         inputField.text = "";
         inputFieldObject.SetActive(false);
 
         successObject.SetActive(false);
+
+        if(SwitchController.turnedSwitches == 2) {
+            
+        }
     }
 }

@@ -5,11 +5,15 @@ public class PlayerContemporary : MonoBehaviour
 {
     private GameObject heldObject = null;
     private GameObject nearbyObject = null;
+    public GameObject serverHealthBar;
+    public GameObject step3;
+    public GameObject step2;
     private string portName = null;
     private float playerScale = 0.11f;
     public GameObject pccgeSprite;
     [SerializeField] private GameObject[] objectsToActivate;
     [SerializeField] private GameObject[] objectToDeactivate;
+    public static int currentStep = 1;
 
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
@@ -17,13 +21,20 @@ public class PlayerContemporary : MonoBehaviour
 
     protected Vector2 movement;
 
-    protected virtual void Update()
+
+    protected void Update()
     {
         HandleMovement();
         HandlePickup();
+
+        if(SwitchController.turnedSwitches == 2) {
+            step2.SetActive(false);
+            step3.SetActive(true);
+            currentStep = 3;
+        }
     }
 
-    protected virtual void FixedUpdate()
+    protected void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
@@ -56,20 +67,38 @@ public class PlayerContemporary : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) && heldObject != null)
         {
-            GameObject dropZone = GameObject.Find("PCNOCGESprite");
-            if (dropZone != null && Vector2.Distance(heldObject.transform.position, dropZone.transform.position) < 3f)
-            {
-                Destroy(heldObject);
+            if(currentStep == 1) {
+                GameObject dropZone = GameObject.Find("PCNOCGESprite");
+                if (dropZone != null && Vector2.Distance(heldObject.transform.position, dropZone.transform.position) < 3f)
+                {
+                    Destroy(heldObject);
 
-                if (pccgeSprite != null) 
-                    pccgeSprite.SetActive(true);
+                    if (pccgeSprite != null) 
+                        pccgeSprite.SetActive(true);
 
-                dropZone.SetActive(false);
-                heldObject = null;
+                    dropZone.SetActive(false);
+                    heldObject = null;
 
-                StartCoroutine(DelayedActivate());
+                    StartCoroutine(DelayedActivate());
 
-                return;
+                    return;
+                }
+            }
+            else if(currentStep == 3) {
+                Debug.Log("Salut");
+                GameObject dropZone = GameObject.Find("Furnace");
+                if (dropZone != null && Vector2.Distance(heldObject.transform.position, dropZone.transform.position) < 3f)
+                {
+                    Destroy(heldObject);
+                    CoalGenerator.canGenerate = true;
+                    heldObject = null;
+
+                    HealthBarController health = serverHealthBar.GetComponent<HealthBarController>();
+                    health.TakeDamage(Random.Range(15, 26));
+
+
+                    return;
+                }
             }
 
             heldObject.GetComponent<Collider2D>().enabled = true;

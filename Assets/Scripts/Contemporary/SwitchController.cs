@@ -5,6 +5,7 @@ public class SwitchController : MonoBehaviour
 {
     [HideInInspector] public ObjectSelector objectSelector;
     public InputManager inputManager;
+    public static int turnedSwitches = 0;
 
     void Start()
     {

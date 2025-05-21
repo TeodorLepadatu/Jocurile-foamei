@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class HealthBar : MonoBehaviour
+public class HealthBarController : MonoBehaviour
 {
     public Image healthFill; // Assign in Inspector
     public float maxHealth = 100f;
