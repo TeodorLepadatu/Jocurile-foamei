@@ -54,9 +54,5 @@ public class InputManager : MonoBehaviour
         inputFieldObject.SetActive(false);
 
         successObject.SetActive(false);
-
-        if(SwitchController.turnedSwitches == 2) {
-            
-        }
     }
 }

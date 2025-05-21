@@ -14,6 +14,7 @@ public class PlayerContemporary : MonoBehaviour
     [SerializeField] private GameObject[] objectsToActivate;
     [SerializeField] private GameObject[] objectToDeactivate;
     public static int currentStep = 1;
+    private bool changePosition = true;
 
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
@@ -27,10 +28,12 @@ public class PlayerContemporary : MonoBehaviour
         HandleMovement();
         HandlePickup();
 
-        if(SwitchController.turnedSwitches == 2) {
+        if(changePosition && SwitchController.turnedSwitches == 2) {
             step2.SetActive(false);
             step3.SetActive(true);
             currentStep = 3;
+            changePosition = false;
+            transform.position = new Vector3(-2.83f, 0.71f, 0);
         }
     }
 
