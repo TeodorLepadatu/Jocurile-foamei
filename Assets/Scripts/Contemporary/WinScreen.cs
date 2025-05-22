@@ -18,7 +18,7 @@ public class WinScreen : MonoBehaviour
 
     private IEnumerator WinGame() {
         yield return new WaitForSeconds(3f);
-        SceneManager.UnloadScene("GameScene");
         SceneManager.LoadScene("ContemporaryMinigame2");
+        SceneManager.UnloadScene("GameScene");
     }
 }
