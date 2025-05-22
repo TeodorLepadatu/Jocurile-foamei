@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 
@@ -7,9 +8,12 @@ public class InputManager : MonoBehaviour
 {
     public GameObject inputFieldObject;
     private InputField inputField;
+    private string userInput;
 
     public GameObject successObject;
-
+    public GameObject minigame1;
+    public GameObject gameOverScreen;
+    
     private SwitchController selectedSwitch;
 
     void Start()
@@ -26,7 +30,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            string userInput = inputField.text.Trim().ToLower();
+            userInput = inputField.text.Trim().ToLower();
 
             if (userInput == "no shutdown")
             {   
@@ -36,14 +40,29 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Incorrect command: " + userInput);
+                StartCoroutine(DelayedReset());
             }
         }
     }
 
     private IEnumerator DelayedReset()
     {
-        yield return new WaitForSeconds(3f);
+        if(userInput != "no shutdown") {
+            yield return new WaitForSeconds(1f);
+        }
+        else {
+            yield return new WaitForSeconds(3f);
+        }
+        
+        if(userInput != "no shutdown") {
+            minigame1.SetActive(false);
+            gameOverScreen.SetActive(true);
+
+            yield return new WaitForSeconds(3f);
+
+            SceneManager.LoadScene("GameScene");
+            yield break;
+        }
         
         var sr = selectedSwitch.GetComponent<SpriteRenderer>();
         sr.color = Color.green;

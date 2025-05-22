@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerContemporary : MonoBehaviour
@@ -13,8 +14,15 @@ public class PlayerContemporary : MonoBehaviour
     public GameObject pccgeSprite;
     [SerializeField] private GameObject[] objectsToActivate;
     [SerializeField] private GameObject[] objectToDeactivate;
+    [SerializeField] public GameObject[] hearts;
     public static int currentStep = 1;
     private bool changePosition = true;
+    private int numberOfHearts = 3;
+    private float damageCooldown = 0f;
+    private bool isInCooldown = false;
+    public GameObject draganPrefab;
+    public GameObject minigame1;
+    public GameObject gameOverScreen;
 
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
@@ -40,6 +48,16 @@ public class PlayerContemporary : MonoBehaviour
             currentStep = 3;
             changePosition = false;
             transform.position = new Vector3(-2.83f, 0.71f, 0);
+        }
+
+        if (isInCooldown)
+        {
+            damageCooldown += Time.deltaTime;
+            if (damageCooldown >= 0.5f)
+            {
+                isInCooldown = false;
+                damageCooldown = 0f;
+            }
         }
     }
 
@@ -120,11 +138,30 @@ public class PlayerContemporary : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
+        damageCooldown += Time.deltaTime;
+
         if (other.CompareTag("Pickable"))
         {
             nearbyObject = other.gameObject;
+        }
+        
+        if (!isInCooldown && numberOfHearts > 0 && other.CompareTag("Projectile"))
+        {
+            hearts[numberOfHearts - 1].SetActive(false);
+            numberOfHearts--;
+
+            isInCooldown = true;
+        }
+
+        if(other.CompareTag("RegenerateHealth")) {
+            numberOfHearts = 3;
+            for(int i = 0; i < numberOfHearts; i++) {
+                hearts[i].SetActive(true);
+            }
+            Debug.Log("mar aur");
+            StartCoroutine(RespawnApple(other.gameObject, 10f));
         }
     }
 
@@ -136,9 +173,34 @@ public class PlayerContemporary : MonoBehaviour
         }
     }
 
+    private IEnumerator RespawnApple(GameObject apple, float delay)
+    {
+        apple.SetActive(false);
+        yield return new WaitForSeconds(delay);
+        apple.SetActive(true);
+    }
+
     private IEnumerator DelayedActivate()
     {
         yield return new WaitForSeconds(3f);
+
+        if (portName == "CFESprite")
+        {
+            GameObject dragan = Instantiate(draganPrefab, new Vector3(4.65f, 4f, 0), Quaternion.identity);
+
+            dragan.GetComponent<Rigidbody2D>().gravityScale = 0;
+            dragan.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, -5);
+
+            yield return new WaitForSeconds(3f);
+
+            minigame1.SetActive(false);
+            gameOverScreen.SetActive(true);
+
+            yield return new WaitForSeconds(5f);
+
+            SceneManager.LoadScene("GameScene");
+            yield break;
+        }
         
         foreach (GameObject obj in objectsToActivate)
         {

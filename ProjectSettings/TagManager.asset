@@ -9,6 +9,7 @@ TagManager:
   - DropZone
   - Coal
   - Projectile
+  - RegenerateHealth
   layers:
   - Default
   - TransparentFX
