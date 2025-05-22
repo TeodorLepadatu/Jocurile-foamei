@@ -121,7 +121,7 @@ public class PlayerContemporary : MonoBehaviour
                     heldObject = null;
 
                     HealthBarController health = serverHealthBar.GetComponent<HealthBarController>();
-                    health.TakeDamage(Random.Range(15, 26));
+                    health.TakeDamage(Random.Range(25, 36));
 
 
                     return;

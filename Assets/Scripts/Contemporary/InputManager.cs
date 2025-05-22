@@ -51,7 +51,7 @@ public class InputManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         else {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
         
         if(userInput != "no shutdown") {
