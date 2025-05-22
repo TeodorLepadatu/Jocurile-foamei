@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class HealthBarController : MonoBehaviour
@@ -8,6 +9,8 @@ public class HealthBarController : MonoBehaviour
     public float maxHealth = 100f;
     private float currentHealth;
     public GameObject serverObject;   // Drag the Server GameObject in Inspector
+    public GameObject winningScreen;
+    public GameObject minigame1;
 
     void Start()
     {
@@ -45,5 +48,14 @@ public class HealthBarController : MonoBehaviour
             serverObject.transform.rotation = Quaternion.Lerp(start, end, t);
             yield return null;
         }
+
+        yield return new WaitForSeconds(2f);
+
+        minigame1.SetActive(false);
+        winningScreen.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.UnloadScene("GameScene");
     }
 }

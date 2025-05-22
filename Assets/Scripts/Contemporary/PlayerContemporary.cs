@@ -152,6 +152,10 @@ public class PlayerContemporary : MonoBehaviour
             hearts[numberOfHearts - 1].SetActive(false);
             numberOfHearts--;
 
+            if(numberOfHearts == 0) {
+                StartCoroutine(GameOver());
+            }
+
             isInCooldown = true;
         }
 
@@ -160,7 +164,7 @@ public class PlayerContemporary : MonoBehaviour
             for(int i = 0; i < numberOfHearts; i++) {
                 hearts[i].SetActive(true);
             }
-            Debug.Log("mar aur");
+
             StartCoroutine(RespawnApple(other.gameObject, 10f));
         }
     }
@@ -180,6 +184,22 @@ public class PlayerContemporary : MonoBehaviour
         apple.SetActive(true);
     }
 
+    private IEnumerator GameOver()
+    {
+            minigame1.SetActive(false);
+            gameOverScreen.SetActive(true);
+
+            transform.position = new Vector3(0.31f, -1.95f, 0f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+
+            yield return new WaitForSeconds(5f);
+
+            SceneManager.LoadScene("GameScene");
+    }
+
     private IEnumerator DelayedActivate()
     {
         yield return new WaitForSeconds(3f);
@@ -190,15 +210,9 @@ public class PlayerContemporary : MonoBehaviour
 
             dragan.GetComponent<Rigidbody2D>().gravityScale = 0;
             dragan.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, -5);
-
+        
             yield return new WaitForSeconds(3f);
-
-            minigame1.SetActive(false);
-            gameOverScreen.SetActive(true);
-
-            yield return new WaitForSeconds(5f);
-
-            SceneManager.LoadScene("GameScene");
+            StartCoroutine(GameOver());
             yield break;
         }
         
