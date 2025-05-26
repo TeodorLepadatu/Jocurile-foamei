@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 482518907}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1047,9 +1047,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1900819587}
   monsterPrefabs:
-  - {fileID: 7135477195172337935, guid: 34a2b031a3b7de44b909f20daf56bdb1, type: 3}
-  - {fileID: 4713580247886361588, guid: 40dda8201818cbc4887f25e66105ae40, type: 3}
-  - {fileID: 4007883168840353467, guid: ba530eba922562f4d95e92e508c2fcd8, type: 3}
+  - {fileID: 100047539654440619, guid: 70755c32aad906a45812d54205b8eaa7, type: 3}
+  - {fileID: 7297096293053206748, guid: 6edc0e7c9cf17ad459d683ea43d1c5e0, type: 3}
+  - {fileID: 8255189810230300667, guid: 64468111d1abbe841a3e31c06b4969ba, type: 3}
   eggPrefab: {fileID: 2993341295927361203, guid: ad095cdea4c8a454183ca50aab2ad735, type: 3}
   goldenApplePrefab: {fileID: 3398129940280654834, guid: a416020457da3c64fb161a490cb4efd4, type: 3}
 --- !u!1 &1060864814
