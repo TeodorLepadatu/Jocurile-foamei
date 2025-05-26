@@ -7,6 +7,20 @@ public class CM2 : MonoBehaviour
     public GameObject[] monsterPrefabs;
     public GameObject eggPrefab;
     public GameObject goldenApplePrefab;
+    private Vector2[] positions = {
+            new Vector2(6.27f, -2.8f),
+            new Vector2(2.78f, -2.68f),
+            new Vector2(-1.27f, -2.74f),
+            new Vector2(-6.12f, -2.78f),
+            new Vector2(-4.95f, -0.84f),
+            new Vector2(-2.37f, -0.82f),
+            new Vector2(1.02f, -0.86f),
+            new Vector2(3.93f, -0.39f),
+            new Vector2(3.04f, 1.16f),
+            new Vector2(0.87f, 1.2f),
+            new Vector2(-2.39f, 1.2f)
+        };
+        
 
     private int currentMonster = 0;
     private float eggTimer;
@@ -78,9 +92,6 @@ public class CM2 : MonoBehaviour
 
     Vector2 RandomPosition()
     {
-        float margin = 1f;
-        float x = Random.Range(-7f, 7f);
-        float y = Random.Range(-3f, 3f);
-        return new Vector2(x, y);
+        return positions[Random.Range(0, 11)];
     }
 }
