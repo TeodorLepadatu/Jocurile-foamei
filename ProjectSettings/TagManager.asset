@@ -10,6 +10,10 @@ TagManager:
   - Coal
   - Projectile
   - RegenerateHealth
+  - Monster
+  - Egg
+  - GoldenApple
+  - EggProjectile
   layers:
   - Default
   - TransparentFX
