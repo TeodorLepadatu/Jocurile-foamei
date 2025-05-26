@@ -80,8 +80,8 @@ public class CM2 : MonoBehaviour
     Vector2 RandomPosition()
     {
         float margin = 1f;
-        float x = Random.Range(-4f, 4f);
-        float y = Random.Range(-2f, 2f);
+        float x = Random.Range(-7f, 7f);
+        float y = Random.Range(-3f, 3f);
         return new Vector2(x, y);
     }
 }

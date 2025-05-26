@@ -55,7 +55,7 @@ public class CM2_MonsterAI : MonoBehaviour
             }
         }
 
-        if (collision.CompareTag("Egg"))
+        if (collision.CompareTag("EggProjectile"))
         {
             TakeDamage();
             Destroy(collision.gameObject);

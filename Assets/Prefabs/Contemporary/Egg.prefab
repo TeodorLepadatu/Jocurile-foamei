@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7945825168385738175}
   - component: {fileID: 3057374257409244712}
   - component: {fileID: 8728132312737004798}
+  - component: {fileID: 5063089671311048597}
+  - component: {fileID: -6294777144690040026}
   m_Layer: 0
   m_Name: Egg
   m_TagString: Egg
@@ -76,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -4072622106568590741, guid: b389a929502088f4b80796a501ed8958, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -134,3 +136,43 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.38, y: 2.6}
   m_EdgeRadius: 0
+--- !u!50 &5063089671311048597
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2993341295927361203}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-6294777144690040026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2993341295927361203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d9051e7e0a27c458fccf873d052c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10

@@ -65,8 +65,14 @@ public class CM2_PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Egg"))
         {
-            Destroy(other.gameObject);
-            PickUpEgg();
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+
+            CM2_ThrownEgg eggScript = other.GetComponent<CM2_ThrownEgg>();
+            if (eggScript != null)
+            {
+                eggScript.Launch(mousePos);
+            }
         }
         else if (other.CompareTag("GoldenApple"))
         {
