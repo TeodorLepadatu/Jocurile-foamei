@@ -5,6 +5,7 @@ public class CM2_MonsterAI : MonoBehaviour
     public int health = 3;
     public float speed = 2f;
     private Transform player;
+    private bool isDead = false;
 
     void Start()
     {
@@ -20,9 +21,13 @@ public class CM2_MonsterAI : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (isDead) return;
+
         health--;
         if (health <= 0)
         {
+            isDead = true;
+            
             CM2.Instance.MonsterDefeated();
             Destroy(gameObject);
         }
@@ -30,7 +35,7 @@ public class CM2_MonsterAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-    Debug.Log("Collided with: " + collision.gameObject.name);
+        Debug.Log("Collided with: " + collision.gameObject.name);
 
         if (collision.gameObject.CompareTag("Player"))
         {

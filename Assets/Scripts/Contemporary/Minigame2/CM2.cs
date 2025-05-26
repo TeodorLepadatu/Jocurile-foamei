@@ -33,7 +33,7 @@ public class CM2 : MonoBehaviour
             eggTimer = 0;
         }
 
-        if (appleTimer >= 10f && GameObject.FindGameObjectsWithTag("GoldenApple").Length == 0)
+        if (appleTimer >= 8f && GameObject.FindGameObjectsWithTag("GoldenApple").Length == 0)
         {
             SpawnGoldenApple();
             appleTimer = 0;
@@ -46,7 +46,6 @@ public class CM2 : MonoBehaviour
 
         if (currentMonster < monsterPrefabs.Length)
         {
-            player.transform.position = Vector2.zero;
             SpawnMonster();
         }
         else

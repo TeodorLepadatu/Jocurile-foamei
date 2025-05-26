@@ -5,13 +5,15 @@ public class CM2_ThrownEgg : MonoBehaviour
     public float speed = 10f;
     private Vector3 targetPosition;
     private bool isThrown = false;
+    private float f = 0;
 
     public void Launch(Vector3 target)
     {
-        gameObject.tag = "EggProjectile";  // ← change this to any tag you define
+        gameObject.tag = "EggProjectile";
         targetPosition = target;
         isThrown = true;
-        // Rotate toward direction if desired
+
+        // Rotate toward direction
         Vector2 dir = (target - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -19,12 +21,12 @@ public class CM2_ThrownEgg : MonoBehaviour
 
     void Update()
     {
+        f += Time.deltaTime;
         if (isThrown)
         {
             Vector3 direction = (targetPosition - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
 
-            // Optional: destroy after certain time
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 Destroy(gameObject);
@@ -36,7 +38,13 @@ public class CM2_ThrownEgg : MonoBehaviour
     {
         if (other.CompareTag("Monster") && gameObject.tag == "EggProjectile")
         {
-            other.GetComponent<CM2_MonsterAI>().TakeDamage();
+            Debug.Log(f);
+            var monster = other.GetComponent<CM2_MonsterAI>();
+
+            if(monster != null) {
+                other.GetComponent<CM2_MonsterAI>().TakeDamage();
+            }
+
             Destroy(gameObject);
         }
     }
