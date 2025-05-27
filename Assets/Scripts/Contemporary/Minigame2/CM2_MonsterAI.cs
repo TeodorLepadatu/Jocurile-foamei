@@ -3,7 +3,7 @@ using UnityEngine;
 public class CM2_MonsterAI : MonoBehaviour
 {
     public int health = 3;
-    public float speed = 2f;
+    public float speed = 5f;
     private Transform player;
     private bool isDead = false;
     private float lastDamageTime = -999f; // initialized way in the past

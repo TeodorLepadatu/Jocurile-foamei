@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerContemporary : MonoBehaviour
 {
+    public static PlayerContemporary Instance { get; private set; }
     private GameObject heldObject = null;
     private GameObject nearbyObject = null;
     public GameObject serverHealthBar;
@@ -17,12 +19,14 @@ public class PlayerContemporary : MonoBehaviour
     [SerializeField] public GameObject[] hearts;
     public static int currentStep = 1;
     private bool changePosition = true;
-    private int numberOfHearts = 3;
+    private int numberOfHearts = 5;
+    private int maxHearts = 5;
     private float damageCooldown = 0f;
     private bool isInCooldown = false;
     public GameObject draganPrefab;
     public GameObject minigame1;
     public GameObject gameOverScreen;
+    public Text coinText;
 
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
@@ -31,9 +35,18 @@ public class PlayerContemporary : MonoBehaviour
     protected Vector2 movement;
 
     void Start() {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         currentStep = 1;
         SwitchController.turnedSwitches = 0;
         CoalGenerator.canGenerate = true;
+        coinText.text = CurrencyHolder.getCurrency().ToString();
     }
 
 
@@ -122,6 +135,9 @@ public class PlayerContemporary : MonoBehaviour
                     HealthBarController health = serverHealthBar.GetComponent<HealthBarController>();
                     health.TakeDamage(Random.Range(25, 36));
 
+                    CurrencyHolder.addCurrency(3);
+                    coinText.text = CurrencyHolder.getCurrency().ToString();
+
 
                     return;
                 }
@@ -148,9 +164,10 @@ public class PlayerContemporary : MonoBehaviour
         
         if (!isInCooldown && numberOfHearts > 0 && other.CompareTag("Projectile"))
         {
-            hearts[numberOfHearts - 1].SetActive(false);
             numberOfHearts--;
-
+            for (int i = 0; i < maxHearts; i++) {
+                hearts[i].SetActive(i < numberOfHearts);
+            }
             if(numberOfHearts == 0) {
                 StartCoroutine(GameOver());
             }
@@ -159,9 +176,9 @@ public class PlayerContemporary : MonoBehaviour
         }
 
         if(other.CompareTag("RegenerateHealth")) {
-            numberOfHearts = 3;
-            for(int i = 0; i < numberOfHearts; i++) {
-                hearts[i].SetActive(true);
+            numberOfHearts++;
+            for(int i = 0; i < maxHearts; i++) {
+                hearts[i].SetActive(i < numberOfHearts);
             }
 
             StartCoroutine(RespawnApple(other.gameObject, 10f));
@@ -214,6 +231,9 @@ public class PlayerContemporary : MonoBehaviour
             StartCoroutine(GameOver());
             yield break;
         }
+
+        CurrencyHolder.addCurrency(8);
+        coinText.text = CurrencyHolder.getCurrency().ToString();
         
         foreach (GameObject obj in objectsToActivate)
         {

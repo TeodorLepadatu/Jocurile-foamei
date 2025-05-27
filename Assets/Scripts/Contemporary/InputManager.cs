@@ -36,6 +36,9 @@ public class InputManager : MonoBehaviour
             {   
                 successObject.SetActive(true);
 
+                CurrencyHolder.addCurrency(5);
+                PlayerContemporary.Instance.coinText.text = CurrencyHolder.getCurrency().ToString();
+
                 StartCoroutine(DelayedReset());
             }
             else
