@@ -112,7 +112,6 @@ public class PlayerContemporary : MonoBehaviour
                 }
             }
             else if(currentStep == 3) {
-                Debug.Log("Salut");
                 GameObject dropZone = GameObject.Find("Furnace");
                 if (dropZone != null && Vector2.Distance(heldObject.transform.position, dropZone.transform.position) < 3f)
                 {
@@ -197,7 +196,7 @@ public class PlayerContemporary : MonoBehaviour
 
             yield return new WaitForSeconds(5f);
 
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("CMinigame2");
     }
 
     private IEnumerator DelayedActivate()

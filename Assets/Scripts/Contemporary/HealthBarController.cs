@@ -53,9 +53,5 @@ public class HealthBarController : MonoBehaviour
 
         minigame1.SetActive(false);
         winningScreen.SetActive(true);
-
-        yield return new WaitForSeconds(3f);
-
-        SceneManager.UnloadScene("GameScene");
     }
 }
