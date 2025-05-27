@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
 
             yield return new WaitForSeconds(3f);
 
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("CMinigame2");
             yield break;
         }
         

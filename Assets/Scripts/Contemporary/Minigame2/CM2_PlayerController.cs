@@ -7,6 +7,8 @@ public class CM2_PlayerController : MonoBehaviour
     public int currentHealth;
     public GameObject eggPrefab;
     private bool hasEgg = false;
+    private float playerScale = 0.15f;
+    public Animator animator;
 
     Rigidbody2D rb;
     Vector2 movement;
@@ -20,8 +22,23 @@ public class CM2_PlayerController : MonoBehaviour
 
     void Update()
     {
+        HandleMovement();
+    }
+
+
+    protected void HandleMovement()
+    {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("moveX", movement.x);
+        animator.SetFloat("moveY", movement.y);
+        animator.SetFloat("speed", movement.sqrMagnitude);
+
+        if (movement.x > 0)
+            transform.localScale = new Vector3(playerScale, playerScale, 1);
+        else if (movement.x < 0)
+            transform.localScale = new Vector3(-playerScale, playerScale, 1);
     }
 
     void FixedUpdate()
@@ -48,6 +65,12 @@ public class CM2_PlayerController : MonoBehaviour
             CM2_UIManager.Instance.UpdateHearts(currentHealth);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collided with: " + collision.gameObject.name);
+    }
+
 
     public void PickUpEgg()
     {
