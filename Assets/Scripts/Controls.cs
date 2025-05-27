@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public static class Controls
 {
@@ -19,22 +20,32 @@ public static class Controls
 
     static Controls()
     {
-        SetDefaultBindings();
+        keyBindings = new Dictionary<Action, KeyCode>();
+
+        foreach (Action action in Enum.GetValues(typeof(Action)))
+        {
+            string savedKey = PlayerPrefs.GetString(action.ToString(), "");
+            if (Enum.TryParse(savedKey, out KeyCode key))
+                keyBindings[action] = key;
+            else
+                keyBindings[action] = GetDefaultKey(action);
+        }
     }
 
-    private static void SetDefaultBindings()
+    private static KeyCode GetDefaultKey(Action action)
     {
-        keyBindings = new Dictionary<Action, KeyCode>
+        switch (action)
         {
-            [Action.MoveUp] = KeyCode.W,
-            [Action.MoveDown] = KeyCode.S,
-            [Action.MoveLeft] = KeyCode.A,
-            [Action.MoveRight] = KeyCode.D,
-            [Action.Pickup] = KeyCode.E,
-            [Action.Drop] = KeyCode.F,
-            [Action.Shoot] = KeyCode.Space,
-            [Action.InteractWithNPC] = KeyCode.H
-        };
+            case Action.MoveUp: return KeyCode.W;
+            case Action.MoveDown: return KeyCode.S;
+            case Action.MoveLeft: return KeyCode.A;
+            case Action.MoveRight: return KeyCode.D;
+            case Action.Pickup: return KeyCode.E;
+            case Action.Drop: return KeyCode.F;
+            case Action.Shoot: return KeyCode.Space;
+            case Action.InteractWithNPC: return KeyCode.H;
+            default: return KeyCode.None;
+        }
     }
 
     public static void SetKey(Action action, KeyCode newKey)
