@@ -7,7 +7,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 	public float speed = 0;
 	public float acceleration = 0.000000000001f;
 	private Rigidbody2D rb;
-	public float jumpForce = 15f;
+	public float jumpForce = 14f;
 	public bool isJumping = false;
 
 	void Start()
@@ -45,7 +45,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 	void Jump()
 	{
-		Vector2 jumpVelocity = new Vector2(0.7f, jumpForce);
+		Vector2 jumpVelocity = new Vector2(0, jumpForce);
 		rb.linearVelocity = jumpVelocity;
 		isJumping = true;
 	}
