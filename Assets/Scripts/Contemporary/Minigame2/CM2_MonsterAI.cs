@@ -6,6 +6,9 @@ public class CM2_MonsterAI : MonoBehaviour
     public float speed = 2f;
     private Transform player;
     private bool isDead = false;
+    private float lastDamageTime = -999f; // initialized way in the past
+    private float damageCooldown = 0f;
+
 
     void Start()
     {
@@ -16,7 +19,7 @@ public class CM2_MonsterAI : MonoBehaviour
     void Update()
     {
         if (player != null)
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime * 0.3f);
+            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime * 0.5f);
     }
 
     public void TakeDamage()
@@ -50,20 +53,29 @@ public class CM2_MonsterAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Trigger hit with player");
-            CM2_PlayerController player = collision.GetComponent<CM2_PlayerController>();
-            if (player != null)
-            {
-                player.TakeDamage();
-            }
-        }
-
         if (collision.CompareTag("EggProjectile"))
         {
             TakeDamage();
             Destroy(collision.gameObject);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (Time.time - lastDamageTime >= damageCooldown)
+            {
+                CM2_PlayerController player = collision.GetComponent<CM2_PlayerController>();
+                if (player != null)
+                {
+                    Debug.Log("take player damage");
+                    player.TakeDamage();
+                    lastDamageTime = Time.time;
+                    damageCooldown = 2f;
+                }
+            }
+        }
+    }
+
 }

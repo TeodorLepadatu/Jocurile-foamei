@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class CM2 : MonoBehaviour
 {
@@ -20,6 +23,12 @@ public class CM2 : MonoBehaviour
             new Vector2(0.87f, 1.2f),
             new Vector2(-2.39f, 1.2f)
         };
+
+    public GameObject winPanel;
+    public Text winText;
+    public Text twistText;
+    public GameObject losePanel;
+
         
 
     private int currentMonster = 0;
@@ -34,6 +43,37 @@ public class CM2 : MonoBehaviour
     void Start()
     {
         SpawnMonster();
+    }
+
+    public void PlayerDied()
+    {
+        losePanel.SetActive(true);
+        StartCoroutine(ReloadSceneAfterDelay(3f));
+    }
+    public void PlayerWon()
+    {
+        StartCoroutine(ShowWinSequence());
+    }
+
+    IEnumerator ShowWinSequence()
+    {
+        winPanel.SetActive(true);
+        winText.gameObject.SetActive(true);
+        twistText.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        twistText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene("CMinigame2");
+    }
+
+    IEnumerator ReloadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void Update()
@@ -65,7 +105,7 @@ public class CM2 : MonoBehaviour
         else
         {
             Debug.Log("All monsters defeated! You win!");
-            // You can trigger a Win screen or reload scene, etc.
+            CM2.Instance.PlayerWon();
         }
     }
 

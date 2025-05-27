@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CM2_PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public int maxHealth = 7;
+    public float moveSpeed = 3f;
+    public int maxHealth = 5;
     public int currentHealth;
     public GameObject eggPrefab;
     private bool hasEgg = false;
@@ -33,9 +33,10 @@ public class CM2_PlayerController : MonoBehaviour
     {
         currentHealth--;
         CM2_UIManager.Instance.UpdateHearts(currentHealth);
+
         if (currentHealth <= 0)
         {
-            // Handle Game Over
+            gameObject.SetActive(false);
         }
     }
 

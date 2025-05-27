@@ -24,10 +24,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Shop/Shop.unity
     guid: a9f7c010e02aa4041bae76c15b4e9d65
   - enabled: 1
-    path: Assets/Scenes/Contemporary/GameScene.unity
+    path: Assets/Scenes/Contemporary/CMinigame2.unity
     guid: 4fdb3481e9df356468fa72f65d329482
   - enabled: 1
-    path: Assets/Scenes/Contemporary/ContemporaryMinigame2.unity
+    path: Assets/Scenes/Contemporary/CMinigame1.unity
     guid: f08a4cd6c8a9db248a74b1fc4294d04b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
