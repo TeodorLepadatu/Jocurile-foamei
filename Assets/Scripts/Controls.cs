@@ -11,7 +11,8 @@ public static class Controls
         MoveRight,
         Pickup,
         Drop,
-        Shoot
+        Shoot,
+        InteractWithNPC
     }
 
     private static Dictionary<Action, KeyCode> keyBindings;

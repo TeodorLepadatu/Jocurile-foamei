@@ -119,8 +119,7 @@ public class PlayerController : MonoBehaviour
             launchTimer = launchCooldown;
         }
 
-        // DE MODIFICAT AICI
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Controls.GetKey(Controls.Action.InteractWithNPC))
         {
             if (nearbyNPC != null && nearbyNPC.playerNearby)
             {
