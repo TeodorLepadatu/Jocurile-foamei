@@ -1313,6 +1313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   acceleration: 1.2
+  jumpForce: 12
 --- !u!1 &1681271863
 GameObject:
   m_ObjectHideFlags: 0
