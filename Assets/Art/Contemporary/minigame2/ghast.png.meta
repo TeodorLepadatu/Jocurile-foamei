@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ghast_0: 7092517460000809291
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
