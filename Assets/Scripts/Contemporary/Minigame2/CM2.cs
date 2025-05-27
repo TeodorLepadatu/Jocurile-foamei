@@ -28,7 +28,7 @@ public class CM2 : MonoBehaviour
     public Text winText;
     public Text twistText;
     public GameObject losePanel;
-
+    public Text coinText;
         
 
     private int currentMonster = 0;
@@ -43,6 +43,7 @@ public class CM2 : MonoBehaviour
     void Start()
     {
         SpawnMonster();
+        coinText.text = CurrencyHolder.getCurrency().ToString();
     }
 
     public void PlayerDied()
@@ -97,6 +98,8 @@ public class CM2 : MonoBehaviour
     public void MonsterDefeated()
     {
         currentMonster++;
+        CurrencyHolder.addCurrency(10);
+        coinText.text = CurrencyHolder.getCurrency().ToString();
 
         if (currentMonster < monsterPrefabs.Length)
         {
