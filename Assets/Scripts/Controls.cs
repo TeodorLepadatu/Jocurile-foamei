@@ -31,7 +31,8 @@ public static class Controls
             [Action.MoveRight] = KeyCode.D,
             [Action.Pickup] = KeyCode.E,
             [Action.Drop] = KeyCode.F,
-            [Action.Shoot] = KeyCode.Q
+            [Action.Shoot] = KeyCode.Space,
+            [Action.InteractWithNPC] = KeyCode.H
         };
     }
 
