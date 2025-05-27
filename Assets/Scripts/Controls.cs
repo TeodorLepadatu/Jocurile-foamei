@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class Controls : MonoBehaviour
 {
-    public static InputManager Instance { get; private set; }
+    public static Controls Instance { get; private set; }
 
     public enum Action
     {
