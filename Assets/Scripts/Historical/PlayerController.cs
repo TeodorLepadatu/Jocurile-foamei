@@ -42,7 +42,30 @@ public class PlayerController : MonoBehaviour
         instance = this;
         //Debug.Log("mg: " + minigamesCompleted);
         DontDestroyOnLoad(gameObject);
+        if (SceneManager.GetActiveScene().name == "MainScene1")
+        {
+            transform.position = new Vector3(10.22f, -3.51f, 0f);
+        }
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene1")
+        {
+            transform.position = new Vector3(10.22f, -3.51f, 0f);
+        }
+    }
+
     private void Start()
     {
         if(resetGold) {

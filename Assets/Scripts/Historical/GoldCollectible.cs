@@ -9,8 +9,10 @@ public class GoldCollectible : MonoBehaviour
         if (controller != null)
         {
             controller.ChangeGold(1);
+            /*
             if(SceneManager.GetActiveScene().name == "TowerDefence")
                 LevelManager.main.IncreaseCurrency(1);
+            */
             Destroy(gameObject);
         }
     }

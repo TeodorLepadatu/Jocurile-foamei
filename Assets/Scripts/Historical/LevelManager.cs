@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        //currency = PlayerController.gold;
+        currency = CurrencyHolder.getCurrency();
     }
 
     public void DamagePlayer(int damage)
@@ -31,7 +31,8 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        //PlayerController.gold = currency;
+        currency = CurrencyHolder.getCurrency();
+        CurrencyHolder.setCurrency(currency);
     }
 
     public void IncreaseCurrency(int amount)
@@ -44,6 +45,7 @@ public class LevelManager : MonoBehaviour
         if (CurrencyHolder.getCurrency() >= amount)
         {
             CurrencyHolder.addCurrency(-amount);
+            //Debug.Log("Spent " + amount + " currency. Remaining: " + CurrencyHolder.getCurrency());
             return true;
         }
         else

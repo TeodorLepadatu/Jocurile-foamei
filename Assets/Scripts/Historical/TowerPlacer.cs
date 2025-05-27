@@ -45,8 +45,8 @@ public class TowerPlacer : MonoBehaviour
                 else
                 {
                     Instantiate(towerPrefab, worldPos, Quaternion.identity);
-                    LevelManager.main.currency -= BuildManager.costDictionary[towerPrefab];
-
+                    //LevelManager.main.currency -= BuildManager.costDictionary[towerPrefab];
+                    CurrencyHolder.addCurrency(-BuildManager.costDictionary[towerPrefab]);
                     // Reset the selected tower after placement
                     BuildManager.main.SetSelectedTower(-1);
                 }
