@@ -95,4 +95,9 @@ public class PlayerControllerFuturistic : MonoBehaviour
 		}
 	}
 
+	public bool IsDead()
+	{
+		return anim.GetBool("isDead");
+	}
+
 }
