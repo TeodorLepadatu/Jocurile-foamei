@@ -8,4 +8,7 @@ public class CurrencyHolder
     public static int getCurrency() {
         return currency;
     }
+    public static void reset() {
+        currency = 0;
+    }
 }
