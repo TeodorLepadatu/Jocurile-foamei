@@ -37,7 +37,7 @@ public class TowerPlacer : MonoBehaviour
                 Debug.Log(BuildManager.selectedTower);
                 towerPrefab = BuildManager.main.towerPrefabs[BuildManager.selectedTower];
 
-                if (BuildManager.costDictionary[towerPrefab] > PlayerController.gold)
+                if (BuildManager.costDictionary[towerPrefab] > CurrencyHolder.getCurrency())
                 {
                     Debug.Log("You do not have enough gold to buy this tower!");
                     return;

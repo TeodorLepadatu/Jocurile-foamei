@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     public InputAction talkAction;
     private NonPlayerCharacter nearbyNPC; 
 
-    public static int gold = 0;
     public static bool resetGold = false;
     private Vector2 lastMovement;
     public GameObject projectilePrefab;
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         if(resetGold) {
-            gold = 0;
+            CurrencyHolder.reset();
         }
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
@@ -142,7 +141,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             SceneManager.LoadScene("VictoryScreenScene");
         }
-        UIHandler.instance.SetGoldValue(gold);
+        UIHandler.instance.SetGoldValue(CurrencyHolder.getCurrency());
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
     private bool IsInArea(Vector2 pos, Vector2 min, Vector2 max)
@@ -168,8 +167,8 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeGold(int amount)
     {
-        gold += amount;
-        UIHandler.instance.SetGoldValue(gold);
+        CurrencyHolder.addCurrency(amount);
+        UIHandler.instance.SetGoldValue(CurrencyHolder.getCurrency());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
