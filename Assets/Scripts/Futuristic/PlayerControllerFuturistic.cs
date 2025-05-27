@@ -51,7 +51,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 		isJumping = true;
 	}
 
-	void OnCollissionEnter2D(Collision2D other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.gameObject.CompareTag("Ground"))
 		{

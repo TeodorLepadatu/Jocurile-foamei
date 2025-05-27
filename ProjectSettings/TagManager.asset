@@ -15,6 +15,7 @@ TagManager:
   - GoldenApple
   - EggProjectile
   - Border
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 103761157}
   m_Layer: 0
   m_Name: Ground (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 727672670}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1314,6 +1314,7 @@ MonoBehaviour:
   speed: 5
   acceleration: 1.2
   jumpForce: 12
+  isJumping: 0
 --- !u!1 &1681271863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1432,7 @@ GameObject:
   - component: {fileID: 1737179356}
   m_Layer: 0
   m_Name: Ground (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
