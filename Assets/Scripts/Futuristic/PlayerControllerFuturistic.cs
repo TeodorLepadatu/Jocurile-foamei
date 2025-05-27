@@ -58,4 +58,13 @@ public class PlayerControllerFuturistic : MonoBehaviour
 			isJumping = false;
 		}
 	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			Debug.Log("Player hit an enemy!");
+			//LoseLife();
+		}
+	}
 }

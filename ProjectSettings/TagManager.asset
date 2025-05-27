@@ -16,6 +16,7 @@ TagManager:
   - EggProjectile
   - Border
   - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
