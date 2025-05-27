@@ -94,25 +94,32 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = 0f;
+        float vertical = 0f;
+
+        if (Controls.GetKey(Controls.Action.MoveRight)) horizontal += 1f;
+        if (Controls.GetKey(Controls.Action.MoveLeft))  horizontal -= 1f;
+        if (Controls.GetKey(Controls.Action.MoveUp))    vertical += 1f;
+        if (Controls.GetKey(Controls.Action.MoveDown))  vertical -= 1f;
+
         if (launchTimer > 0f)
             launchTimer -= Time.deltaTime;
+
         movement = new Vector2(horizontal, vertical);
 
         if (movement.magnitude > 1)
-        {
             movement = movement.normalized;
-        }
+
         if (movement != Vector2.zero)
             lastMovement = movement;
 
-        if (Input.GetKeyDown(KeyCode.Q) && launchTimer <= 0f)
+        if (Controls.GetKey(Controls.Action.Shoot) && launchTimer <= 0f)
         {
             Launch();
             launchTimer = launchCooldown;
         }
 
+        // DE MODIFICAT AICI
         if (Input.GetKeyDown(KeyCode.H))
         {
             if (nearbyNPC != null && nearbyNPC.playerNearby)
@@ -122,7 +129,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Controls.GetKey(Controls.Action.Pickup))
         {
             if (pickedUpObject != null)
             {
