@@ -38,8 +38,6 @@ public class CM2_MonsterAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collided with: " + collision.gameObject.name);
-
         if (collision.gameObject.CompareTag("Player"))
         {
             CM2_PlayerController player = collision.gameObject.GetComponent<CM2_PlayerController>();

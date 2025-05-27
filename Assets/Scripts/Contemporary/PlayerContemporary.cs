@@ -81,8 +81,16 @@ public class PlayerContemporary : MonoBehaviour
 
     protected void HandleMovement()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement = Vector2.zero;
+
+        if (Controls.GetKey(Controls.Action.MoveUp))
+            movement.y += 1;
+        if (Controls.GetKey(Controls.Action.MoveDown))
+            movement.y -= 1;
+        if (Controls.GetKey(Controls.Action.MoveRight))
+            movement.x += 1;
+        if (Controls.GetKey(Controls.Action.MoveLeft))
+            movement.x -= 1;
 
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
@@ -96,16 +104,14 @@ public class PlayerContemporary : MonoBehaviour
 
     private void HandlePickup()
     {
-        if (Input.GetKeyDown(KeyCode.E) && nearbyObject != null && heldObject == null)
+        if (Controls.GetKey(Controls.Action.Pickup) && nearbyObject != null && heldObject == null)
         {
             heldObject = nearbyObject;
             heldObject.GetComponent<Collider2D>().enabled = false;
             portName = heldObject.name;
-
-            Debug.Log(portName);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && heldObject != null)
+        if (Controls.GetKey(Controls.Action.Drop) && heldObject != null)
         {
             if(currentStep == 1) {
                 GameObject dropZone = GameObject.Find("PCNOCGESprite");
@@ -202,18 +208,18 @@ public class PlayerContemporary : MonoBehaviour
 
     private IEnumerator GameOver()
     {
-            minigame1.SetActive(false);
-            gameOverScreen.SetActive(true);
+        minigame1.SetActive(false);
+        gameOverScreen.SetActive(true);
 
-            transform.position = new Vector3(0.31f, -1.95f, 0f);
-            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        transform.position = new Vector3(0.31f, -1.95f, 0f);
+        transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
 
-            yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f);
 
-            SceneManager.LoadScene("CMinigame2");
+        SceneManager.LoadScene("CMinigame2");
     }
 
     private IEnumerator DelayedActivate()

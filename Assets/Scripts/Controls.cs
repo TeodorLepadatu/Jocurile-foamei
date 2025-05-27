@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controls : MonoBehaviour
+public static class Controls
 {
-    public static Controls Instance { get; private set; }
-
     public enum Action
     {
         MoveUp,
@@ -16,49 +14,44 @@ public class Controls : MonoBehaviour
         Shoot
     }
 
-    private Dictionary<Action, KeyCode> keyBindings = new Dictionary<Action, KeyCode>();
+    private static Dictionary<Action, KeyCode> keyBindings;
 
-    void Awake()
+    static Controls()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         SetDefaultBindings();
     }
 
-    private void SetDefaultBindings()
+    private static void SetDefaultBindings()
     {
-        keyBindings[Action.MoveUp] = KeyCode.W;
-        keyBindings[Action.MoveDown] = KeyCode.S;
-        keyBindings[Action.MoveLeft] = KeyCode.A;
-        keyBindings[Action.MoveRight] = KeyCode.D;
-        keyBindings[Action.Pickup] = KeyCode.E;
-        keyBindings[Action.Drop] = KeyCode.F;
-        keyBindings[Action.Shoot] = KeyCode.Q;
+        keyBindings = new Dictionary<Action, KeyCode>
+        {
+            [Action.MoveUp] = KeyCode.W,
+            [Action.MoveDown] = KeyCode.S,
+            [Action.MoveLeft] = KeyCode.A,
+            [Action.MoveRight] = KeyCode.D,
+            [Action.Pickup] = KeyCode.E,
+            [Action.Drop] = KeyCode.F,
+            [Action.Shoot] = KeyCode.Q
+        };
     }
 
-    public void SetKey(Action action, KeyCode newKey)
+    public static void SetKey(Action action, KeyCode newKey)
     {
         keyBindings[action] = newKey;
     }
 
-    public bool GetKey(Action action)
+    public static bool GetKey(Action action)
     {
         return Input.GetKey(keyBindings[action]);
     }
 
-    public bool GetKeyDown(Action action)
+    public static bool GetKeyDown(Action action)
     {
         return Input.GetKeyDown(keyBindings[action]);
     }
 
-    public KeyCode GetBoundKey(Action action)
+    public static KeyCode GetBoundKey(Action action)
     {
-        return keyBindings.ContainsKey(action) ? keyBindings[action] : KeyCode.None;
+        return keyBindings.TryGetValue(action, out var key) ? key : KeyCode.None;
     }
 }
