@@ -813,6 +813,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &500705851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8229084378382999572, guid: c22421c104875954da403ce952caa963, type: 3}
+  m_PrefabInstance: {fileID: 1983659628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &523108642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -914,6 +919,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1579560198437645382, guid: c22421c104875954da403ce952caa963, type: 3}
   m_PrefabInstance: {fileID: 523108642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &550558572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8229084378382999572, guid: c22421c104875954da403ce952caa963, type: 3}
+  m_PrefabInstance: {fileID: 252157784}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &561798980
 GameObject:
@@ -1567,6 +1577,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 727672669}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1005947223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8229084378382999572, guid: c22421c104875954da403ce952caa963, type: 3}
+  m_PrefabInstance: {fileID: 1173525164}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1173525164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1668,6 +1683,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1579560198437645382, guid: c22421c104875954da403ce952caa963, type: 3}
   m_PrefabInstance: {fileID: 1173525164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1542617113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8229084378382999572, guid: c22421c104875954da403ce952caa963, type: 3}
+  m_PrefabInstance: {fileID: 202724998}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578327385
 GameObject:
@@ -1959,7 +1979,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1.8
+  m_GravityScale: 1.7
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1987,6 +2007,12 @@ MonoBehaviour:
   acceleration: 1.2
   jumpForce: 14
   isJumping: 0
+  hearts:
+  - {fileID: 1005947223}
+  - {fileID: 500705851}
+  - {fileID: 1542617113}
+  - {fileID: 2054096784}
+  - {fileID: 550558572}
 --- !u!1 &1681271863
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,6 +2562,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2054096784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8229084378382999572, guid: c22421c104875954da403ce952caa963, type: 3}
+  m_PrefabInstance: {fileID: 523108642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2122896518
 GameObject:
   m_ObjectHideFlags: 0

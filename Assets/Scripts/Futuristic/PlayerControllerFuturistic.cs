@@ -10,16 +10,25 @@ public class PlayerControllerFuturistic : MonoBehaviour
 	public float jumpForce = 14f;
 	public bool isJumping = false;
 
+	public GameObject[] hearts;
+	private int health;
+
+
+	private bool isDead;
 	void Start()
 	{
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
+		health = hearts.Length;
 
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Return))
+		
+		isRunning = anim.GetBool("isRunning");
+		isDead = anim.GetBool("isDead");
+		if (Input.GetKeyDown(KeyCode.Return) && !isDead)
 		{
 			isRunning = !isRunning; 
 			anim.SetBool("isRunning", isRunning);
@@ -30,8 +39,8 @@ public class PlayerControllerFuturistic : MonoBehaviour
 		{
 			Jump();
 		}
-		isRunning = anim.GetBool("isRunning");
-		if (isRunning)
+
+		if (IsRunning())
 		{	
 			//speed += acceleration * Time.deltaTime;
 			transform.Translate(Vector3.right * Time.deltaTime * speed);
@@ -40,7 +49,9 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 	public bool IsRunning()
 	{
-		return isRunning;
+		isDead = anim.GetBool("isDead");
+		isRunning = anim.GetBool("isRunning");
+		return isRunning && !isDead;
 	}
 
 	void Jump()
@@ -61,10 +72,27 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.CompareTag("Enemy"))
+		if (other.CompareTag("Enemy"))
 		{
-			Debug.Log("Player hit an enemy!");
-			//LoseLife();
+			TakeDamage();
 		}
 	}
+
+	void TakeDamage()
+	{
+		if (health <= 0) return;
+
+		health--;
+
+		hearts[health].SetActive(false);
+
+		if (health <= 0)
+		{
+			Debug.Log("Game Over");
+			anim.SetBool("isDead", true);
+			anim.SetBool("isRunning", false);
+
+		}
+	}
+
 }
