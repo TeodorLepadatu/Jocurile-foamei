@@ -18,6 +18,7 @@ TagManager:
   - Ground
   - Enemy
   - Bush
+  - Heart
   layers:
   - Default
   - TransparentFX

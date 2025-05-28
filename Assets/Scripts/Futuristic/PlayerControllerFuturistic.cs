@@ -13,6 +13,8 @@ public class PlayerControllerFuturistic : MonoBehaviour
 	public GameObject[] hearts;
 	private int health;
 
+	private float elapsedTime = 0f;
+
 
 	private bool isDead;
 	private bool isAttacking;
@@ -26,38 +28,39 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 	void Update()
 	{
-		
+		elapsedTime += Time.deltaTime;
+
 		isRunning = anim.GetBool("isRunning");
 		isDead = anim.GetBool("isDead");
+
 		if (Input.GetKeyDown(KeyCode.Return) && !isDead)
 		{
-			isRunning = !isRunning; 
+			isRunning = !isRunning;
 			anim.SetBool("isRunning", isRunning);
-			speed = isRunning ? 2f : 0f;
 		}
 
-		if(Input.GetKeyDown(KeyCode.Space) && !isDead)
-		{
+		if (Input.GetKeyDown(KeyCode.Space) && !isDead)
 			anim.SetBool("isAttacking", true);
-		}
-
-		if(Input.GetKeyUp(KeyCode.Space) && !isDead)
-		{
+		if (Input.GetKeyUp(KeyCode.Space) && !isDead)
 			anim.SetBool("isAttacking", false);
-		}
-
 
 		if (Input.GetKeyDown(KeyCode.W) && !isJumping)
-		{
 			Jump();
-		}
 
 		if (IsRunning())
-		{	
-			speed += acceleration * Time.deltaTime * 0.001f;
+		{
+			
+			if (elapsedTime <= 20f)
+				speed = 2f;
+			else if (elapsedTime <= 40f)
+				speed = 3.5f;
+			else
+				speed = 5f;
+
 			transform.Translate(Vector3.right * Time.deltaTime * speed);
 		}
 	}
+
 
 	public bool IsRunning()
 	{
@@ -130,5 +133,15 @@ public class PlayerControllerFuturistic : MonoBehaviour
 	{
 		return anim.GetBool("isDead");
 	}
+
+	public void AddLife()
+	{
+		if (health < hearts.Length)
+		{
+			hearts[health].SetActive(true);
+			health++;
+		}
+	}
+
 
 }
