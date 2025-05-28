@@ -100,6 +100,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 				{
 
 						enemy.Die();
+						ScoreManager.instance.AddScore(1);
 				}
 			}
 		}
