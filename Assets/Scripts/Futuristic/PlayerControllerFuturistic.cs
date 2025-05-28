@@ -15,6 +15,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 
 	private bool isDead;
+	private bool isAttacking;
 	void Start()
 	{
 		anim = GetComponent<Animator>();
@@ -35,7 +36,18 @@ public class PlayerControllerFuturistic : MonoBehaviour
 			speed = isRunning ? 2f : 0f;
 		}
 
-		if(Input.GetKeyDown(KeyCode.Space) && !isJumping)
+		if(Input.GetKeyDown(KeyCode.Space) && !isDead)
+		{
+			anim.SetBool("isAttacking", true);
+		}
+
+		if(Input.GetKeyUp(KeyCode.Space) && !isDead)
+		{
+			anim.SetBool("isAttacking", false);
+		}
+
+
+		if (Input.GetKeyDown(KeyCode.W) && !isJumping)
 		{
 			Jump();
 		}
@@ -74,8 +86,21 @@ public class PlayerControllerFuturistic : MonoBehaviour
 	{
 		if (other.CompareTag("Enemy"))
 		{
-			TakeDamage();
+			EnemyControllerFuturistic enemy = other.GetComponent<EnemyControllerFuturistic>();
+			if (enemy != null)
+			{
+				if (!anim.GetBool("isAttacking") && !enemy.isDead)
+				{
+					TakeDamage();
+				}
+				else if (anim.GetBool("isAttacking") && !enemy.isDead)
+				{
+
+						enemy.Die();
+				}
+			}
 		}
+		
 	}
 
 	void TakeDamage()
