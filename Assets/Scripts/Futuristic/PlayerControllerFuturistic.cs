@@ -54,7 +54,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 		if (IsRunning())
 		{	
-			//speed += acceleration * Time.deltaTime;
+			speed += acceleration * Time.deltaTime * 0.001f;
 			transform.Translate(Vector3.right * Time.deltaTime * speed);
 		}
 	}
@@ -100,7 +100,13 @@ public class PlayerControllerFuturistic : MonoBehaviour
 				}
 			}
 		}
-		
+
+		else if (other.CompareTag("Bush"))
+		{
+			TakeDamage();
+		}
+
+
 	}
 
 	void TakeDamage()

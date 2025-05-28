@@ -1172,6 +1172,7 @@ Transform:
   m_Children:
   - {fileID: 2122896519}
   - {fileID: 953472480}
+  - {fileID: 2013607043}
   m_Father: {fileID: 1777319872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &727672670
@@ -1290,9 +1291,11 @@ MonoBehaviour:
   enemies:
   - {fileID: 8719336786887410591, guid: c8a6b95ea7d24d741a1995363e8aa20e, type: 3}
   - {fileID: 3165240327314590133, guid: 80bc745edbce74d4aa5c8551d044de93, type: 3}
+  - {fileID: 3690027193163768609, guid: 86ccda4cb8b79f941ad5d59e1c603a31, type: 3}
   spawnPoints:
   - {fileID: 2122896519}
   - {fileID: 953472480}
+  - {fileID: 2013607043}
 --- !u!1001 &757939876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2562,6 +2565,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2013607042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2013607043}
+  m_Layer: 0
+  m_Name: ThirdPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2013607043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013607042}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 24.5, y: 4.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 727672669}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2054096784 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8229084378382999572, guid: c22421c104875954da403ce952caa963, type: 3}

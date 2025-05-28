@@ -17,6 +17,7 @@ TagManager:
   - Border
   - Ground
   - Enemy
+  - Bush
   layers:
   - Default
   - TransparentFX
