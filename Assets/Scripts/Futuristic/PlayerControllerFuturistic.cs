@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerControllerFuturistic : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 	private bool isDead;
 	private bool isAttacking;
+
+	public GameObject gameOverScreen;
 	void Start()
 	{
 		anim = GetComponent<Animator>();
@@ -113,6 +116,17 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 	}
 
+	IEnumerator ShowGameOverAfterDelay()
+	{
+		yield return new WaitForSeconds(1f);
+
+		if (gameOverScreen != null)
+		{
+			gameOverScreen.SetActive(true);
+			Time.timeScale = 0f;
+		}
+	}
+
 	void TakeDamage()
 	{
 		if (health <= 0) return;
@@ -127,6 +141,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 			anim.SetBool("isDead", true);
 			anim.SetBool("isRunning", false);
 
+			StartCoroutine(ShowGameOverAfterDelay());
 		}
 	}
 
@@ -143,6 +158,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 			health++;
 		}
 	}
+
 
 
 }
