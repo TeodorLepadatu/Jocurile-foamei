@@ -6,6 +6,8 @@ public class ScoreManager : MonoBehaviour
 	public static ScoreManager instance;
 
 	public TextMeshProUGUI scoreText;
+	public GameObject winningScreen;
+
 	private int score = 0;
 
 	void Awake()
@@ -20,11 +22,25 @@ public class ScoreManager : MonoBehaviour
 	{
 		score += amount;
 		UpdateScoreUI();
+
+		if (score >= 25)
+		{
+			ShowWinningScreen();
+		}
 	}
 
 	void UpdateScoreUI()
 	{
 		if (scoreText != null)
 			scoreText.text = score.ToString();
+	}
+
+	void ShowWinningScreen()
+	{
+		if (winningScreen != null)
+		{
+			winningScreen.SetActive(true);
+			Time.timeScale = 0f; 
+		}
 	}
 }
