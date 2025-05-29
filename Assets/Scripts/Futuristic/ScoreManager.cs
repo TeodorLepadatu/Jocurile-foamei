@@ -10,6 +10,13 @@ public class ScoreManager : MonoBehaviour
 
 	private int score = 0;
 
+	void Start()
+	{
+		if (winningScreen != null)
+			winningScreen.SetActive(false);
+	}
+
+
 	void Awake()
 	{
 		if (instance == null)

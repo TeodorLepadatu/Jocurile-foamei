@@ -26,6 +26,14 @@ public class PlayerControllerFuturistic : MonoBehaviour
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		health = hearts.Length;
+		if (gameOverScreen != null)
+			gameOverScreen.SetActive(false);
+		anim.SetBool("isRunning", false);
+		anim.SetBool("isDead", false);
+		anim.SetBool("isAttacking", false);
+		speed = 0;
+		health = 5;
+
 
 	}
 
