@@ -33,7 +33,7 @@ TagManager:
   - Enemy
   - Bullet
   - Border
-  - 
+  - RestartText
   - 
   - 
   - 
@@ -61,6 +61,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1920033657
+    locked: 0
+  - name: RestartText
+    uniqueID: 4210270795
     locked: 0
   m_RenderingLayers:
   - Default

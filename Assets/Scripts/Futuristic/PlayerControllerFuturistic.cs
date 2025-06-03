@@ -62,7 +62,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 		{
 			
 			if (elapsedTime <= 20f)
-				speed = 2f;
+				speed = 3f;
 			else if (elapsedTime <= 40f)
 				speed = 3.5f;
 			else
