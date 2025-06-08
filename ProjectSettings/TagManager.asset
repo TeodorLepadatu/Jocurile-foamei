@@ -37,7 +37,7 @@ TagManager:
   - Ball
   - VolleyPlayer
   - Net
-  - 
+  - PlayerCollider
   - 
   - 
   - 
@@ -61,6 +61,9 @@ TagManager:
     locked: 0
   - name: VolleyPlayer
     uniqueID: 4044086747
+    locked: 0
+  - name: PlayerCollider
+    uniqueID: 3006644819
     locked: 0
   - name: Net
     uniqueID: 2319729927
