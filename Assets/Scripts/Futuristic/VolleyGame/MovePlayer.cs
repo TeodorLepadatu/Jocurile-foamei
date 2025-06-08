@@ -5,7 +5,7 @@ public class MovePlayer : MonoBehaviour
 {
 	[Header("Movement Settings")]
 	[Tooltip("Viteza de miscare")]
-	public float moveSpeed = 7f;
+	public float moveSpeed = 30f;
 
 	private Rigidbody2D rb;
 	private Vector2 movement;
@@ -27,15 +27,17 @@ public class MovePlayer : MonoBehaviour
 		float moveX = 0f;
 		float moveY = 0f;
 
-		if (Input.GetKey(KeyCode.RightArrow)) moveX = 1f;
-		if (Input.GetKey(KeyCode.LeftArrow)) moveX = -1f;
-		if (Input.GetKey(KeyCode.UpArrow)) moveY = 1f;
-		if (Input.GetKey(KeyCode.DownArrow)) moveY = -1f;
+		bool running = false;
+
+		if (Input.GetKey(KeyCode.RightArrow)) { moveX = 1f; running = true; }
+		if (Input.GetKey(KeyCode.LeftArrow)) {moveX = -1f; running = true; }
+		if (Input.GetKey(KeyCode.UpArrow)) {moveY = 1f; running = true; }
+		if (Input.GetKey(KeyCode.DownArrow)) {moveY = -1f; running = true; }
 
 		movement = new Vector2(moveX, moveY).normalized;
 
-		bool running = movement != Vector2.zero;
 		animator.SetBool("isRunning", running);
+		Debug.Log($"Running: {running}");
 	}
 
 	void FixedUpdate()
