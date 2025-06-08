@@ -5,7 +5,7 @@ public class MovePlayer : MonoBehaviour
 {
 	[Header("Movement Settings")]
 	[Tooltip("Viteza de miscare")]
-	public float moveSpeed = 5f;
+	public float moveSpeed = 7f;
 
 	private Rigidbody2D rb;
 	private Vector2 movement;
