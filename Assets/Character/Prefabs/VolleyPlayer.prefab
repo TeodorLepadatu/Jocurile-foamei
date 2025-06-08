@@ -838,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4000014005838040
 Transform:
   m_ObjectHideFlags: 0
@@ -1196,7 +1196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4000012764379542
 Transform:
   m_ObjectHideFlags: 0
@@ -1713,7 +1713,7 @@ GameObject:
   - component: {fileID: 4000011914616612}
   - component: {fileID: 95000010398391834}
   m_Layer: 0
-  m_Name: Rogue_05
+  m_Name: VolleyPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
