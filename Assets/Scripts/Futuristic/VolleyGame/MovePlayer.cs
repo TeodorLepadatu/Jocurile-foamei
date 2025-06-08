@@ -9,11 +9,12 @@ public class MovePlayer : MonoBehaviour
 
 	private Rigidbody2D rb;
 	private Vector2 movement;
+	private Animator animator;
 
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-
+		animator = GetComponent<Animator>();
 		// dezactivam gravitatia
 		rb.gravityScale = 0f;
 
@@ -32,6 +33,9 @@ public class MovePlayer : MonoBehaviour
 		if (Input.GetKey(KeyCode.DownArrow)) moveY = -1f;
 
 		movement = new Vector2(moveX, moveY).normalized;
+
+		bool running = movement != Vector2.zero;
+		animator.SetBool("isRunning", running);
 	}
 
 	void FixedUpdate()

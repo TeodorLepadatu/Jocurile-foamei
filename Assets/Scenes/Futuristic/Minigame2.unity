@@ -345,6 +345,7 @@ MonoBehaviour:
   hitStrength: 8
   borderBounceMultiplier: 1.5
   bouncyMaterial: {fileID: 6200000, guid: fdfcb0a0fd6bf3b49a853ae13dac80ea, type: 2}
+  maxSpeed: 12
 --- !u!1 &786330676
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +737,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95000010398391834, guid: db6d1ae5da5965248835f0fe0a212d61, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4e23fced4adb3064fa16945559bcff6f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
