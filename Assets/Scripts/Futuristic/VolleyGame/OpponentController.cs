@@ -4,24 +4,26 @@ using UnityEngine;
 public class OpponentController : MonoBehaviour
 {
 	[Header("References")]
-	[Tooltip("The ball to chase")]
 	public Transform ballTransform;
 
-	[Header("Movement")]
-	[Tooltip("How fast the opponent runs")]
-	public float moveSpeed = 15f;
+	[Header("Movement Settings")]
+
+	public float moveSpeed = 5f;
+	public float xOffsetFromBall = 1f;
+	public float yOffsetFromBall = 0.5f;
 
 	[Header("Court Settings")]
-	[Tooltip("X position of the net (middle of the court)")]
 	public float netX = 0f;
 
+	[Header("Smash Settings")]
+	public float hitStrength = 10f;
+
 	private Rigidbody2D rb;
-	private float direction;
+	private Vector2 targetPos;
 
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		rb.gravityScale = 0f;
 		rb.freezeRotation = true;
@@ -30,24 +32,41 @@ public class OpponentController : MonoBehaviour
 
 	void Update()
 	{
-	
+		
 		if (ballTransform.position.x > netX)
 		{
-			float dx = ballTransform.position.x - transform.position.x;
-			direction = Mathf.Abs(dx) > 0.1f ? Mathf.Sign(dx) : 0f;
+			
+			targetPos = new Vector2(
+				ballTransform.position.x + xOffsetFromBall,
+				ballTransform.position.y + yOffsetFromBall
+			);
 		}
 		else
 		{
 		
-			direction = 0f;
+			targetPos = rb.position;
 		}
 	}
 
 	void FixedUpdate()
 	{
-		
-		Vector2 v = rb.linearVelocity;
-		v.x = direction * moveSpeed;
-		rb.linearVelocity = v;
+	
+		Vector2 dir = (targetPos - rb.position).normalized;
+
+		rb.linearVelocity = dir * moveSpeed;
+	}
+
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (!collision.collider.CompareTag("Ball")) return;
+
+		Rigidbody2D ballRb = collision.collider.attachedRigidbody;
+		if (ballRb == null) return;
+
+		ContactPoint2D cp = collision.contacts[0];
+		Vector2 smashDir = (cp.point - (Vector2)transform.position).normalized;
+
+		ballRb.linearVelocity = new Vector2(ballRb.linearVelocity.x, 0f);
+		ballRb.AddForce(smashDir * hitStrength, ForceMode2D.Impulse);
 	}
 }

@@ -5,7 +5,7 @@ public class BallController : MonoBehaviour
 {
 	[Header("Hit Settings")]
 	public float playerHitStrength = 8f;
-	public float opponentHitStrength = 12f;   // mai tare
+	public float opponentHitStrength = 12f;   // mai tare pentru adversar
 
 	[Header("Border Bounce Settings")]
 	public float borderBounceMultiplier = 1.5f;
@@ -34,8 +34,9 @@ public class BallController : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		var tag = collision.collider.tag;
+		string tag = collision.collider.tag;
 
+	
 		if (tag == "Player" || tag == "Opponent")
 		{
 		
@@ -43,13 +44,16 @@ public class BallController : MonoBehaviour
 				? playerHitStrength
 				: opponentHitStrength;
 
+	
 			Vector2 hitDir = (rb.position - (Vector2)collision.transform.position).normalized;
+
 			rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+
 			rb.AddForce(hitDir * strength, ForceMode2D.Impulse);
 			return;
 		}
 
-		// bounce la margini
+		// 2) Bounce la margini
 		if (tag == "Border")
 		{
 			Vector2 incoming = rb.linearVelocity;
@@ -67,7 +71,8 @@ public class BallController : MonoBehaviour
 
 	void LateUpdate()
 	{
-		var p = transform.position;
+
+		Vector3 p = transform.position;
 		p.z = 0f;
 		transform.position = p;
 	}
