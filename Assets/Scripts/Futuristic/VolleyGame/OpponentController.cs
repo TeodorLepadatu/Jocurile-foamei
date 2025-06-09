@@ -6,8 +6,9 @@ public class OpponentController : MonoBehaviour
 	[Header("References")]
 	public Transform ballTransform;
 
-	[Header("Movement Settings")]
+	public Transform homePoint;
 
+	[Header("Movement Settings")]
 	public float moveSpeed = 5f;
 	public float xOffsetFromBall = 1f;
 	public float yOffsetFromBall = 0.5f;
@@ -32,10 +33,8 @@ public class OpponentController : MonoBehaviour
 
 	void Update()
 	{
-		
 		if (ballTransform.position.x > netX)
 		{
-			
 			targetPos = new Vector2(
 				ballTransform.position.x + xOffsetFromBall,
 				ballTransform.position.y + yOffsetFromBall
@@ -43,18 +42,30 @@ public class OpponentController : MonoBehaviour
 		}
 		else
 		{
-		
-			targetPos = rb.position;
+			targetPos = homePoint.position;
 		}
 	}
 
 	void FixedUpdate()
 	{
-	
-		Vector2 dir = (targetPos - rb.position).normalized;
+		const float stopThreshold = 0.3f;
 
-		rb.linearVelocity = dir * moveSpeed;
+		Vector2 delta = targetPos - rb.position;
+		float dist = delta.magnitude;
+
+		if (dist < stopThreshold)
+		{
+			rb.linearVelocity = Vector2.zero;
+			rb.position = targetPos;
+		}
+		else
+		{
+	
+			Vector2 dir = delta / dist;       // same as normalized
+			rb.linearVelocity = dir * moveSpeed;
+		}
 	}
+
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
