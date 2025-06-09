@@ -11,7 +11,7 @@ public class OpponentController : MonoBehaviour
 	[Header("Movement Settings")]
 	public float moveSpeed = 5f;
 	public float xOffsetFromBall = 1f;
-	public float yOffsetFromBall = 0.5f;
+	public float yOffsetFromBall = -0.5f;
 
 	[Header("Court Settings")]
 	public float netX = 0f;
