@@ -19,6 +19,8 @@ TagManager:
   - Enemy
   - Bush
   - Heart
+  - Hitzone
+  - Opponent
   layers:
   - Default
   - TransparentFX
@@ -38,7 +40,7 @@ TagManager:
   - VolleyPlayer
   - Net
   - PlayerCollider
-  - 
+  - Opponent
   - 
   - 
   - 
@@ -67,6 +69,9 @@ TagManager:
     locked: 0
   - name: Net
     uniqueID: 2319729927
+    locked: 0
+  - name: Opponent
+    uniqueID: 3388506199
     locked: 0
   - name: Ball
     uniqueID: 3349133589

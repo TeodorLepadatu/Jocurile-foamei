@@ -4,7 +4,8 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
 	[Header("Hit Settings")]
-	public float hitStrength = 8f;
+	public float playerHitStrength = 8f;
+	public float opponentHitStrength = 12f;   // mai tare
 
 	[Header("Border Bounce Settings")]
 	public float borderBounceMultiplier = 1.5f;
@@ -12,6 +13,7 @@ public class BallController : MonoBehaviour
 	[Header("Physics Settings")]
 	public PhysicsMaterial2D bouncyMaterial;
 
+	[Header("Speed Clamp")]
 	public float maxSpeed = 14f;
 
 	private Rigidbody2D rb;
@@ -21,7 +23,6 @@ public class BallController : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		col = GetComponent<Collider2D>();
-
 		if (col != null && bouncyMaterial != null)
 			col.sharedMaterial = bouncyMaterial;
 
@@ -33,16 +34,23 @@ public class BallController : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
+		var tag = collision.collider.tag;
 
-		if (collision.collider.CompareTag("Player"))
+		if (tag == "Player" || tag == "Opponent")
 		{
+		
+			float strength = (tag == "Player")
+				? playerHitStrength
+				: opponentHitStrength;
+
 			Vector2 hitDir = (rb.position - (Vector2)collision.transform.position).normalized;
 			rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-			rb.AddForce(hitDir * hitStrength, ForceMode2D.Impulse);
+			rb.AddForce(hitDir * strength, ForceMode2D.Impulse);
 			return;
 		}
 
-		if (collision.collider.CompareTag("Border"))
+		// bounce la margini
+		if (tag == "Border")
 		{
 			Vector2 incoming = rb.linearVelocity;
 			Vector2 normal = collision.contacts[0].normal;
@@ -52,16 +60,15 @@ public class BallController : MonoBehaviour
 								* incoming.magnitude
 								* borderBounceMultiplier;
 
-			float clampedMag = Mathf.Min(boosted.magnitude, maxSpeed);
-			rb.linearVelocity = boosted.normalized * clampedMag;
+			float speed = Mathf.Min(boosted.magnitude, maxSpeed);
+			rb.linearVelocity = reflected.normalized * speed;
 		}
 	}
 
 	void LateUpdate()
 	{
-		Vector3 pos = transform.position;
-		pos.z = 0f;
-		transform.position = pos;
+		var p = transform.position;
+		p.z = 0f;
+		transform.position = p;
 	}
-
 }
