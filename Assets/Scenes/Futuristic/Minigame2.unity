@@ -2013,11 +2013,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballTransform: {fileID: 589828615}
   homePoint: {fileID: 1478387469}
-  moveSpeed: 5
+  moveSpeed: 7
   xOffsetFromBall: 1
   yOffsetFromBall: 0.5
   netX: 0
-  hitStrength: 10
+  hitStrength: 8
 --- !u!50 &1117047489
 Rigidbody2D:
   serializedVersion: 5
@@ -3238,7 +3238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1722337209
 MonoBehaviour:
   m_ObjectHideFlags: 0
