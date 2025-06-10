@@ -28,4 +28,14 @@ public class ScoreManagerVolley : MonoBehaviour
 		opponentScore++;
 		opponentScoreText.text = opponentScore.ToString();
 	}
+
+	public int PlayerScore
+	{
+		get { return playerScore; }
+	}
+
+	public int OpponentScore
+	{
+		get { return opponentScore; }
+	}
 }
