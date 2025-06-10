@@ -21,6 +21,9 @@ TagManager:
   - Heart
   - Hitzone
   - Opponent
+  - PoartaPlayer
+  - PoartaOponent
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -41,8 +44,8 @@ TagManager:
   - Net
   - PlayerCollider
   - Opponent
-  - 
-  - 
+  - ScoreSystem
+  - Porti
   - 
   - 
   - 
@@ -81,6 +84,9 @@ TagManager:
     locked: 0
   - name: RestartText
     uniqueID: 4210270795
+    locked: 0
+  - name: ScoreSystem
+    uniqueID: 2139373747
     locked: 0
   m_RenderingLayers:
   - Default

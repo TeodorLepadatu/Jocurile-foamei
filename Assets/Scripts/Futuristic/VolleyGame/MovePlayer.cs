@@ -37,7 +37,7 @@ public class MovePlayer : MonoBehaviour
 		movement = new Vector2(moveX, moveY).normalized;
 
 		animator.SetBool("isRunning", running);
-		Debug.Log($"Running: {running}");
+		//Debug.Log($"Running: {running}");
 	}
 
 	void FixedUpdate()
