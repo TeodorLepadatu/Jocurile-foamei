@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72dfb87b52b21874ebe121bf5df0a9e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: TowerDefence
+  sceneToLoad: MainScene1
 --- !u!1 &2029754154
 GameObject:
   m_ObjectHideFlags: 0
