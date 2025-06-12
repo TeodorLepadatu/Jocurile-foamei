@@ -3764,7 +3764,7 @@ MonoBehaviour:
   timerText: {fileID: 1606587754}
   resultCanvas: {fileID: 1722337208}
   resultText: {fileID: 1391822309}
-  matchDuration: 30
+  matchDuration: 120
 --- !u!4 &2138507322
 Transform:
   m_ObjectHideFlags: 0
