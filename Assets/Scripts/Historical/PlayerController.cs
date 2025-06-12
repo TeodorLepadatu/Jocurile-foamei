@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
         {
             projectilePrefab = upgradedProjectilePrefab;
         }
-        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + lookDirection * 0.5f, Quaternion.identity);
+        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + new Vector2(0,1) + lookDirection * 0.5f, Quaternion.identity);
 
         Collider2D playerCollider = GetComponent<Collider2D>();
         Collider2D projectileCollider = projectileObject.GetComponent<Collider2D>();
@@ -244,6 +244,4 @@ public class PlayerController : MonoBehaviour
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(lookDirection, 10f);
     }
-
-
 }
