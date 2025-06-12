@@ -15,6 +15,15 @@ TagManager:
   - GoldenApple
   - EggProjectile
   - Border
+  - Ground
+  - Enemy
+  - Bush
+  - Heart
+  - Hitzone
+  - Opponent
+  - PoartaPlayer
+  - PoartaOponent
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -29,14 +38,14 @@ TagManager:
   - Enemy
   - Bullet
   - Border
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - RestartText
+  - Ball
+  - VolleyPlayer
+  - Net
+  - PlayerCollider
+  - Opponent
+  - ScoreSystem
+  - Porti
   - 
   - 
   - 
@@ -55,8 +64,29 @@ TagManager:
   - name: Turrets
     uniqueID: 9
     locked: 0
+  - name: VolleyPlayer
+    uniqueID: 4044086747
+    locked: 0
+  - name: PlayerCollider
+    uniqueID: 3006644819
+    locked: 0
+  - name: Net
+    uniqueID: 2319729927
+    locked: 0
+  - name: Opponent
+    uniqueID: 3388506199
+    locked: 0
+  - name: Ball
+    uniqueID: 3349133589
+    locked: 0
   - name: UI
     uniqueID: 1920033657
+    locked: 0
+  - name: RestartText
+    uniqueID: 4210270795
+    locked: 0
+  - name: ScoreSystem
+    uniqueID: 2139373747
     locked: 0
   m_RenderingLayers:
   - Default
