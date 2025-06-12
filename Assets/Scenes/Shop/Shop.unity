@@ -3930,6 +3930,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000010208881502, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1833962638}
+    - targetCorrespondingSourceObject: {fileID: 1000010208881502, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1833962643}
   m_SourcePrefab: {fileID: 100100000, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
 --- !u!212 &1833962633 stripped
 SpriteRenderer:
@@ -3968,6 +3971,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5682ff3ac1de1a243841dcfa09b8aedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1833962643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833962637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071960eeff360cd448776cbf323d49c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outfitChangers:
+  - {fileID: 1862878845}
+  - {fileID: 1703434981}
+  - {fileID: 1969587370}
+  - {fileID: 1190560992}
 --- !u!1 &1862878843
 GameObject:
   m_ObjectHideFlags: 0
