@@ -6,12 +6,12 @@ public class WinningScreen : MonoBehaviour
 {
 	public string nextSceneName;
 
-	void Start()
+	public void ShowAndProceed()
 	{
 		StartCoroutine(ShowWinningScreenAndLoadNext());
 	}
 
-	IEnumerator ShowWinningScreenAndLoadNext()
+	private IEnumerator ShowWinningScreenAndLoadNext()
 	{
 		yield return new WaitForSeconds(5f);
 		SceneManager.LoadScene(nextSceneName);

@@ -1,6 +1,6 @@
 public class CurrencyHolder
 {
-    private static int currency = 0;
+    private static int currency = 10;
 
     public static void addCurrency(int amount) {
         currency += amount;
