@@ -31,6 +31,7 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("MainScene1");
         Time.timeScale = 1f;
         isPaused = false;
+        CurrencyHolder.setCurrency(10); // Reset coins
     }
 
 
