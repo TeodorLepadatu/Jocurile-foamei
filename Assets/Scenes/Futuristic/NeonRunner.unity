@@ -1198,7 +1198,6 @@ GameObject:
   - component: {fileID: 402520273}
   - component: {fileID: 402520272}
   - component: {fileID: 402520271}
-  - component: {fileID: 402520275}
   m_Layer: 5
   m_Name: WinScreen
   m_TagString: Untagged
@@ -1290,9 +1289,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
-<<<<<<< HEAD
---- !u!114 &402520275
-=======
 --- !u!1 &459868614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,21 +1327,11 @@ RectTransform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &459868616
->>>>>>> 31ac7c059ee28c6fac0bbe80a220525b1165a7f0
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 402520270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f195c597aefdcd41a90002c83df064e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: Minigame2
-=======
   m_GameObject: {fileID: 459868614}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1382,7 +1368,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459868614}
   m_CullTransparentMesh: 1
->>>>>>> 31ac7c059ee28c6fac0bbe80a220525b1165a7f0
 --- !u!1 &500705851 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8229084378382999572, guid: c22421c104875954da403ce952caa963, type: 3}
