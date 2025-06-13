@@ -27,6 +27,7 @@ public class PlayerContemporary : MonoBehaviour
     public GameObject minigame1;
     public GameObject gameOverScreen;
     public Text coinText;
+    public MusicManager musicManager;
 
     public float moveSpeed = 5f;
     public Rigidbody2D rb;

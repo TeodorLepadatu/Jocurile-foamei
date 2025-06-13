@@ -107,7 +107,6 @@ public class CM2 : MonoBehaviour
         }
         else
         {
-            Debug.Log("All monsters defeated! You win!");
             CM2.Instance.PlayerWon();
         }
     }

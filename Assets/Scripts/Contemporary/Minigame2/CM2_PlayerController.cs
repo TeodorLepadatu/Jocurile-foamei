@@ -62,6 +62,7 @@ public class CM2_PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             gameObject.SetActive(false);
+            CM2.Instance.PlayerDied();
         }
     }
 
