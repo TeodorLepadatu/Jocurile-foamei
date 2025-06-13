@@ -4,7 +4,7 @@ public class CM2_PlayerController : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public int maxHealth = 5;
-    public int currentHealth;
+    public int currentHealth = 5;
     public GameObject eggPrefab;
     private bool hasEgg = false;
     private float playerScale = 0.15f;
@@ -16,13 +16,16 @@ public class CM2_PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
         CM2_UIManager.Instance.UpdateHearts(currentHealth);
     }
 
     void Update()
     {
         HandleMovement();
+    }
+
+    public float getScale() {
+        return playerScale;
     }
 
 

@@ -35,6 +35,18 @@ public class PlayerContemporary : MonoBehaviour
 
     protected Vector2 movement;
 
+    public int getHearts() {
+        return numberOfHearts;
+    }
+
+    public float getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public float getPlayerScale() {
+        return playerScale;
+    }
+
     void Start() {
         if (Instance != null && Instance != this)
         {
