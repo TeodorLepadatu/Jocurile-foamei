@@ -3,25 +3,37 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class TurretSlowmo : MonoBehaviour 
+/// <summary>
+/// A turret that periodically slows enemies within range, can be upgraded or sold, and displays an upgrade UI.
+/// </summary>
+public class TurretSlowmo : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private LayerMask enemyMask; // Layer mask to identify enemy objects
 
     [Header("Attributes")]
-    [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private float aps = 0.25f; //attacks per second
-    [SerializeField] private float freezeTime = 1f;
-    [SerializeField] private GameObject upgradeUI;
-    [SerializeField] private Button upgradeButton;
-    private float timeUntilFire;
-    public int cost = 20;
+    [SerializeField] private float targetingRange = 5f; // Range in which enemies are affected
+    [SerializeField] private float aps = 0.25f;         // Attacks per second (how often the turret fires)
+    [SerializeField] private float freezeTime = 1f;     // Duration for which enemies are slowed
+    [SerializeField] private GameObject upgradeUI;      // UI panel for upgrades
+    [SerializeField] private Button upgradeButton;      // Button to trigger upgrade
+
+    private float timeUntilFire; // Timer for attack interval
+    public int cost = 20;        // Cost to upgrade or sell the turret
+
+    /// <summary>
+    /// Hides the upgrade UI at the start.
+    /// </summary>
     private void Start()
     {
         upgradeUI.SetActive(false);
     }
+
+    /// <summary>
+    /// Handles the attack timer and triggers freezing enemies at the specified rate.
+    /// </summary>
     private void Update()
-    { 
+    {
         timeUntilFire += Time.deltaTime;
         if (timeUntilFire >= 1f / aps)
         {
@@ -29,7 +41,10 @@ public class TurretSlowmo : MonoBehaviour
             timeUntilFire = 0f;
         }
     }
-    
+
+    /// <summary>
+    /// Finds all enemies within range and slows them for a duration.
+    /// </summary>
     private void FreezeEnemies()
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)transform.position, 0f, enemyMask);
@@ -39,34 +54,52 @@ public class TurretSlowmo : MonoBehaviour
             {
                 RaycastHit2D hit = hits[i];
                 EnemyMovement em = hit.transform.GetComponent<EnemyMovement>();
-                em.UpdateSpeed(0.5f);
-                StartCoroutine(ResetEnemySpeed(em));
+                if (em != null)
+                {
+                    em.UpdateSpeed(0.5f); // Slow enemy
+                    StartCoroutine(ResetEnemySpeed(em));
+                }
             }
         }
     }
 
+    /// <summary>
+    /// Resets the enemy's speed after the freeze duration.
+    /// </summary>
     private IEnumerator ResetEnemySpeed(EnemyMovement em)
     {
         yield return new WaitForSeconds(freezeTime);
         em.ResetSpeed();
     }
 
+    /// <summary>
+    /// Draws the targeting range in the editor for visualization.
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
 
+    /// <summary>
+    /// Opens the upgrade UI panel.
+    /// </summary>
     public void OpenUpgradeUI()
     {
         upgradeUI.SetActive(true);
     }
 
+    /// <summary>
+    /// Closes the upgrade UI panel.
+    /// </summary>
     public void CloseUpgradeUI()
     {
         upgradeUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Shows the upgrade UI when the player is close and hovers the mouse over the turret.
+    /// </summary>
     private void OnMouseEnter()
     {
         PlayerController player = FindObjectOfType<PlayerController>();
@@ -80,10 +113,17 @@ public class TurretSlowmo : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hides the upgrade UI when the mouse leaves the turret.
+    /// </summary>
     private void OnMouseExit()
     {
         CloseUpgradeUI();
     }
+
+    /// <summary>
+    /// Upgrades the turret if the player has enough currency, increasing range, attack rate, and freeze duration.
+    /// </summary>
     public void Upgrade()
     {
         if (LevelManager.main.currency >= cost)
@@ -102,6 +142,10 @@ public class TurretSlowmo : MonoBehaviour
             Debug.Log("Not enough currency to upgrade!");
         }
     }
+
+    /// <summary>
+    /// Sells the turret, refunds half the cost, and destroys the turret object.
+    /// </summary>
     private void Sell()
     {
         int refund = Mathf.RoundToInt(cost * 0.5f);
@@ -109,6 +153,10 @@ public class TurretSlowmo : MonoBehaviour
         Debug.Log($"Turret sold! Refunded {refund} currency.");
         Destroy(gameObject);
     }
+
+    /// <summary>
+    /// Allows the player to sell the turret by right-clicking if close enough.
+    /// </summary>
     private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(1)) // Right mouse button

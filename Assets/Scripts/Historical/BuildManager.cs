@@ -1,40 +1,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildManager : MonoBehaviour 
+/// <summary>
+/// Manages tower building, selection, and cost lookup for the player.
+/// Handles proximity checks for tower selection and maintains a dictionary of tower costs.
+/// </summary>
+public class BuildManager : MonoBehaviour
 {
+    // Singleton instance for global access
     public static BuildManager main;
 
     [Header("References")]
-    [SerializeField] public GameObject[] towerPrefabs;
-    [SerializeField] public static Dictionary<GameObject, int> costDictionary = new Dictionary<GameObject, int>();
-    public static int selectedTower = -1;
+    [SerializeField] public GameObject[] towerPrefabs; // Array of all available tower prefabs
+    [SerializeField] public static Dictionary<GameObject, int> costDictionary = new Dictionary<GameObject, int>(); // Maps each tower prefab to its cost
+    public static int selectedTower = -1; // Index of the currently selected tower (-1 means none selected)
+
+    /// <summary>
+    /// Sets up the singleton instance.
+    /// </summary>
     private void Awake()
     {
         main = this;
     }
+
+    /// <summary>
+    /// Initializes the cost dictionary for all tower prefabs.
+    /// Tries to get the cost from Turret, TurretSlowmo, or BananaFarm components.
+    /// </summary>
     private void Start()
     {
         for (int i = 0; i < towerPrefabs.Length; i++)
         {
-            try { 
-            costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<Turret>().cost);
-            Debug.Log(towerPrefabs[i].name + " costs: " + costDictionary[towerPrefabs[i]]);
+            try
+            {
+                // Try to get cost from Turret component
+                costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<Turret>().cost);
+                Debug.Log(towerPrefabs[i].name + " costs: " + costDictionary[towerPrefabs[i]]);
             }
-            catch(System.Exception)
+            catch (System.Exception)
             {
                 try
                 {
+                    // If not a Turret, try TurretSlowmo
                     costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<TurretSlowmo>().cost);
                     Debug.Log(towerPrefabs[i].name + " costs: " + costDictionary[towerPrefabs[i]]);
                 }
-                catch(System.Exception)
+                catch (System.Exception)
                 {
+                    // If not a TurretSlowmo, try BananaFarm
                     costDictionary.Add(towerPrefabs[i], towerPrefabs[i].GetComponent<BananaFarm>().cost);
                 }
             }
         }
     }
+
+    /// <summary>
+    /// Returns the currently selected tower prefab if the player is near the crafting table.
+    /// Performs proximity and validity checks.
+    /// </summary>
     public GameObject GetSelectedTower()
     {
         // Proximity check: player must be near the crafting table
@@ -54,6 +77,7 @@ public class BuildManager : MonoBehaviour
             return null;
         }
 
+        // Check if the selected tower index is valid
         if (selectedTower < 0 || selectedTower >= towerPrefabs.Length)
         {
             Debug.LogError("Invalid tower selection: " + selectedTower);
@@ -62,7 +86,9 @@ public class BuildManager : MonoBehaviour
         return towerPrefabs[selectedTower];
     }
 
-
+    /// <summary>
+    /// Sets the selected tower index.
+    /// </summary>
     public void SetSelectedTower(int _selectedTower)
     {
         selectedTower = _selectedTower;

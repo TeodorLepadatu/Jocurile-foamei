@@ -8,6 +8,10 @@ public class EnemySpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] public GameObject[] enemyPrefabs;
 
+    [Header("Boss Music")]
+    [SerializeField] private AudioClip bossMusicClip; 
+    private AudioSource bossMusicSource;
+
     [Header("Attributes")]
     [SerializeField] public int baseEnemies = 8;
     [SerializeField] public float enemiesPerSecond = 0.5f;
@@ -23,24 +27,30 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
     private int totalNumberOfWaves = 10; // Total number of waves to spawn
+
+    private bool bossMusicPlaying = false; // Track if boss music is playing
+
     private void Awake()
     {
         onEnemyDestroy.AddListener(EnemyDestroyed);
+        bossMusicSource = gameObject.AddComponent<AudioSource>();
+        bossMusicSource.loop = true;
+        bossMusicSource.playOnAwake = false;
+        bossMusicSource.volume = 0.25f; // Set boss music volume to 0.25
     }
 
     private void Start()
     {
         StartCoroutine(StartWave());
     }
+
     private void Update()
     {
         if (!isSpawning)
             return;
 
         timeSinceLastSpawn += Time.deltaTime;
-
-        // Gradually increase the spawn rate over time
-        enemiesPerSecond += Time.deltaTime * 0.05f; // Adjust the multiplier (0.05f) to control the rate of increase
+        enemiesPerSecond += Time.deltaTime * 0.05f;
 
         if (timeSinceLastSpawn >= 1f / enemiesPerSecond && enemiesLeftToSpawn > 0)
         {
@@ -55,14 +65,13 @@ public class EnemySpawner : MonoBehaviour
             EndWave();
         }
 
-        if (currentWave > totalNumberOfWaves) //total number of waves
+        if (currentWave > totalNumberOfWaves)
         {
             Debug.Log("Am terminat TD!");
             PlayerController.minigamesCompleted++;
             SceneManager.LoadScene("MainScene1");
         }
     }
-
 
     private void SpawnEnemy()
     {
@@ -71,12 +80,20 @@ public class EnemySpawner : MonoBehaviour
         if (currentWave % 10 == 0) // Spawn boss every 10th wave
         {
             prefabToSpawn = enemyPrefabs[3]; // Final Boss
+
+            // Start boss music if not already playing
+            if (!bossMusicPlaying && bossMusicClip != null)
+            {
+                bossMusicSource.clip = bossMusicClip;
+                bossMusicSource.Play();
+                bossMusicPlaying = true;
+            }
         }
-        else if (currentWave > 5 && Random.value < 0.2f) // 20% chance for tank after wave 5
+        else if (currentWave > 5 && Random.value < 0.2f)
         {
             prefabToSpawn = enemyPrefabs[1]; // Tank
         }
-        else if (Random.value < 0.3f) // 30% chance for fast enemy
+        else if (Random.value < 0.3f)
         {
             prefabToSpawn = enemyPrefabs[2]; // Fast Enemy
         }
@@ -87,7 +104,6 @@ public class EnemySpawner : MonoBehaviour
 
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
-
 
     private void EnemyDestroyed()
     {
@@ -103,14 +119,21 @@ public class EnemySpawner : MonoBehaviour
 
     private void EndWave()
     {
+        // Stop boss music if this was a boss wave
+        if (currentWave % 10 == 0 && bossMusicPlaying)
+        {
+            bossMusicSource.Stop();
+            bossMusicPlaying = false;
+        }
+
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;
         StartCoroutine(StartWave());
     }
+
     private int EnemiesPerWave()
     {
         return Mathf.RoundToInt(baseEnemies + Mathf.Pow(currentWave, difficultyScalingFactor));
     }
 }
-

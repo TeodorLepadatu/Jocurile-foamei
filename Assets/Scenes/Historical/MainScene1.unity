@@ -228,7 +228,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: fe4c2ef55e5cb004791fc949e20a44f8, type: 3}
   m_Resource: {fileID: 8300000, guid: fe4c2ef55e5cb004791fc949e20a44f8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -83504,6 +83504,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 41375989850254546b76c3a6813e6d19, type: 3}
   - {fileID: 21300000, guid: f0dca671fefddc54c98270536b979b8b, type: 3}
   - {fileID: 21300000, guid: 7db7af78e8f9c45418a407bdd7958560, type: 3}
+  prices: 
+  priceText: {fileID: 0}
 --- !u!114 &485363371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84219,7 +84221,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 7f8a7bd65f628e84bb717da3f0f70dc0, type: 3}
   m_Resource: {fileID: 8300000, guid: 7f8a7bd65f628e84bb717da3f0f70dc0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -85727,6 +85729,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4807dc8cba98f89409729f6aac2945a7, type: 3}
   - {fileID: 21300000, guid: f5e38fc0746afdb408f3af29c6c737cc, type: 3}
   - {fileID: 21300000, guid: b1babcb6ce4ee78478abc5076a6d1b8d, type: 3}
+  prices: 
+  priceText: {fileID: 0}
 --- !u!114 &1016433161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87063,6 +87067,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3d9056df586b6024fbc5b9fee2433eef, type: 3}
   - {fileID: 21300000, guid: fff248787aa9dc44d819b77a6686c0af, type: 3}
   - {fileID: 21300000, guid: 250530d3e9754ed418009e3d539275b3, type: 3}
+  prices: 
+  priceText: {fileID: 0}
 --- !u!114 &1512220710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87293,6 +87299,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dcb72940063c94f44abc2366768e713a, type: 3}
   - {fileID: 21300000, guid: 20eb058aea3c3a744bb5d47a1610550a, type: 3}
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  prices: 
+  priceText: {fileID: 0}
 --- !u!114 &1650326685
 MonoBehaviour:
   m_ObjectHideFlags: 0

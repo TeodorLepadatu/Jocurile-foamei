@@ -3,36 +3,42 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Controls player movement, health, interactions, shooting, and inventory in the historical game context.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 3f;
+    public float speed = 3f; // Player movement speed
 
-    private Rigidbody2D rb;
-    private Vector2 movement;
+    private Rigidbody2D rb; // Reference to Rigidbody2D for movement
+    private Vector2 movement; // Current movement vector
 
-    public int maxHealth = 10;
-    public int health { get { return currentHealth; } }
+    public int maxHealth = 10; // Maximum health
+    public int health { get { return currentHealth; } } // Public getter for current health
 
-    public int currentHealth = 1;
-    public InputAction talkAction;
-    private NonPlayerCharacter nearbyNPC; 
+    public int currentHealth = 1; // Current health value
+    public InputAction talkAction; // Input action for talking to NPCs
+    private NonPlayerCharacter nearbyNPC; // Reference to the NPC the player is near
 
-    public static bool resetGold = false;
-    private Vector2 lastMovement;
-    public GameObject projectilePrefab;
-    public GameObject pickedUpObject = null;
-    public GameObject upgradedProjectilePrefab;
-    public float pickupRadius = 1f;
-    public LayerMask pickableLayer;
+    public static bool resetGold = false; // Static flag to reset gold on scene load
+    private Vector2 lastMovement; // Last non-zero movement direction
+    public GameObject projectilePrefab; // Prefab for the player's projectile
+    public GameObject pickedUpObject = null; // Currently picked up object
+    public GameObject upgradedProjectilePrefab; // Prefab for upgraded projectile
+    public float pickupRadius = 1f; // Radius for picking up objects
+    public LayerMask pickableLayer; // Layer mask for pickable objects
 
-    public static int minigamesCompleted = 0;
-    private float launchCooldown = 0.5f;
-    private float launchTimer = 0f;
-    public static PlayerController instance;
-    public static bool hasKilledBoss = false;
-    private AudioSource audioSource;
+    public static int minigamesCompleted = 0; // Tracks completed minigames
+    private float launchCooldown = 0.5f; // Cooldown between shots
+    private float launchTimer = 0f; // Timer for launch cooldown
+    public static PlayerController instance; // Singleton instance
+    public static bool hasKilledBoss = false; // Tracks if the boss has been killed
+    private AudioSource audioSource; // Reference to the player's audio source
 
+    /// <summary>
+    /// Ensures singleton pattern and sets initial position if in MainScene1.
+    /// </summary>
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -50,16 +56,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Subscribes to scene loaded event.
+    /// </summary>
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    /// <summary>
+    /// Unsubscribes from scene loaded event.
+    /// </summary>
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    /// <summary>
+    /// Sets player position when MainScene1 is loaded.
+    /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MainScene1")
@@ -68,6 +83,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initializes audio, health, and disables collisions with towers in TowerDefence scene.
+    /// </summary>
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -76,7 +94,8 @@ public class PlayerController : MonoBehaviour
             audioSource.loop = true;
             audioSource.Play();
         }
-        if (resetGold) {
+        if (resetGold)
+        {
             CurrencyHolder.reset();
         }
         QualitySettings.vSyncCount = 0;
@@ -86,6 +105,7 @@ public class PlayerController : MonoBehaviour
         talkAction.Enable();
         resetGold = true;
 
+        // Ignore collisions with towers in TowerDefence scene
         if (SceneManager.GetActiveScene().name == "TowerDefence")
         {
             Collider2D playerCollider = GetComponent<Collider2D>();
@@ -100,33 +120,43 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Handles input, movement, shooting, interaction, pickup/drop, and win condition.
+    /// </summary>
     private void Update()
     {
         float horizontal = 0f;
         float vertical = 0f;
 
+        // Handle movement input
         if (Controls.GetKey(Controls.Action.MoveRight)) horizontal += 1f;
-        if (Controls.GetKey(Controls.Action.MoveLeft))  horizontal -= 1f;
-        if (Controls.GetKey(Controls.Action.MoveUp))    vertical += 1f;
-        if (Controls.GetKey(Controls.Action.MoveDown))  vertical -= 1f;
+        if (Controls.GetKey(Controls.Action.MoveLeft)) horizontal -= 1f;
+        if (Controls.GetKey(Controls.Action.MoveUp)) vertical += 1f;
+        if (Controls.GetKey(Controls.Action.MoveDown)) vertical -= 1f;
 
+        // Handle shooting cooldown
         if (launchTimer > 0f)
             launchTimer -= Time.deltaTime;
 
         movement = new Vector2(horizontal, vertical);
 
+        // Normalize movement if diagonal
         if (movement.magnitude > 1)
             movement = movement.normalized;
 
+        // Store last movement direction for dropping objects
         if (movement != Vector2.zero)
             lastMovement = movement;
 
+        // Handle shooting
         if (Controls.GetKey(Controls.Action.Shoot) && launchTimer <= 0f)
         {
             Launch();
             launchTimer = launchCooldown;
         }
 
+        // Handle NPC interaction
         if (Controls.GetKey(Controls.Action.InteractWithNPC))
         {
             if (nearbyNPC != null && nearbyNPC.playerNearby)
@@ -136,6 +166,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Handle pickup/drop logic
         if (Controls.GetKey(Controls.Action.Pickup))
         {
             if (pickedUpObject != null)
@@ -164,7 +195,7 @@ public class PlayerController : MonoBehaviour
                             pickedUpObject = po.gameObject;
                             GameObject dartMonkey = GameObject.Find("dart_monkey");
 
-                            if(dartMonkey!=null)
+                            if (dartMonkey != null)
                                 Destroy(dartMonkey);
                             break;
                         }
@@ -172,24 +203,39 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if (minigamesCompleted >= 2 && IsInArea(transform.position, new Vector2(14f,13f), new Vector2(19f, 10f)))
+
+        // Check for win condition (minigames completed and in area)
+        if (minigamesCompleted >= 2 && IsInArea(transform.position, new Vector2(14f, 13f), new Vector2(19f, 10f)))
         {
             Debug.Log("You have completed the game!");
             Destroy(gameObject);
             SceneManager.LoadScene("VictoryScreenScene");
         }
+
+        // Update UI
         UIHandler.instance.SetGoldValue(CurrencyHolder.getCurrency());
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
+
+    /// <summary>
+    /// Checks if the player is within a rectangular area.
+    /// </summary>
     private bool IsInArea(Vector2 pos, Vector2 min, Vector2 max)
     {
         return pos.x >= min.x && pos.x <= max.x && pos.y <= min.y && pos.y >= max.y;
     }
+
+    /// <summary>
+    /// Handles physics-based movement.
+    /// </summary>
     private void FixedUpdate()
     {
         rb.linearVelocity = movement * speed;
     }
 
+    /// <summary>
+    /// Changes the player's health and updates the UI. Triggers game over if health reaches zero.
+    /// </summary>
     public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
@@ -204,45 +250,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the player's gold and updates the UI.
+    /// </summary>
     public void ChangeGold(int amount)
     {
         CurrencyHolder.addCurrency(amount);
         UIHandler.instance.SetGoldValue(CurrencyHolder.getCurrency());
     }
 
+    /// <summary>
+    /// Detects when the player enters an NPC's trigger area and sets up dialogue.
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D other)
     {
         NonPlayerCharacter npc = other.GetComponent<NonPlayerCharacter>();
         if (npc != null)
         {
-            nearbyNPC = npc; 
+            nearbyNPC = npc;
             Debug.Log("Player entered NPC hitbox: " + npc.gameObject.name);
-
 
             npc.playerNearby = true;
             nearbyNPC.DisplayDialogue();
         }
     }
 
+    /// <summary>
+    /// Detects when the player exits an NPC's trigger area.
+    /// </summary>
     private void OnTriggerExit2D(Collider2D other)
     {
         NonPlayerCharacter npc = other.GetComponent<NonPlayerCharacter>();
         if (npc != null && npc == nearbyNPC)
         {
-            nearbyNPC = null; 
+            nearbyNPC = null;
         }
     }
 
+    /// <summary>
+    /// Instantiates and launches a projectile in the direction of movement.
+    /// Uses upgraded projectile if all magic zones are placed correctly.
+    /// </summary>
     void Launch()
     {
         Vector2 lookDirection = movement.normalized;
         if (lookDirection == Vector2.zero)
             lookDirection = Vector2.up;
-        if(MagicZoneManager.allPlacedCorrectly)
+        if (MagicZoneManager.allPlacedCorrectly)
         {
             projectilePrefab = upgradedProjectilePrefab;
         }
-        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + new Vector2(0,1) + lookDirection * 0.5f, Quaternion.identity);
+        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + new Vector2(0, 1) + lookDirection * 0.5f, Quaternion.identity);
 
         Collider2D playerCollider = GetComponent<Collider2D>();
         Collider2D projectileCollider = projectileObject.GetComponent<Collider2D>();
