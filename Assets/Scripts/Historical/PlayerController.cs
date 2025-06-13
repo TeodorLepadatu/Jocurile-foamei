@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private float launchTimer = 0f;
     public static PlayerController instance;
     public static bool hasKilledBoss = false;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -68,7 +70,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if(resetGold) {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        if (resetGold) {
             CurrencyHolder.reset();
         }
         QualitySettings.vSyncCount = 0;
@@ -188,10 +196,12 @@ public class PlayerController : MonoBehaviour
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
         if (currentHealth <= 0)
         {
+            if (audioSource != null)
+                audioSource.Stop();
+
             Debug.Log("Player is dead!");
             GameManager.GameOver();
         }
-
     }
 
     public void ChangeGold(int amount)

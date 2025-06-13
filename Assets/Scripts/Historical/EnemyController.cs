@@ -19,11 +19,19 @@ public class EnemyController : MonoBehaviour
     private float damageTimer = 0f;
     public float damageInterval = 1.0f;
     private bool broken = false;
+    private AudioSource followAudio;
 
     public GameObject goldPrefab;
     void Start()
     {
-        if(PlayerController.hasKilledBoss)
+        followAudio = GetComponent<AudioSource>();
+        if (followAudio != null)
+        {
+            followAudio.loop = true;
+            followAudio.volume = 0.1f; // Light volume
+        }
+
+        if (PlayerController.hasKilledBoss)
         {
             Destroy(gameObject);
             return;
@@ -61,10 +69,25 @@ public class EnemyController : MonoBehaviour
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             Vector2 position = rigidbody2d.position + direction * speed * Time.deltaTime;
             rigidbody2d.MovePosition(position);
+
+            // Play audio if not already playing
+            if (followAudio != null && !followAudio.isPlaying)
+            {
+                followAudio.Play();
+            }
+        }
+        else
+        {
+            // Stop audio if playing and enemy is not following
+            if (followAudio != null && followAudio.isPlaying)
+            {
+                followAudio.Stop();
+            }
         }
 
         damageTimer += Time.deltaTime;
     }
+
 
     void OnTriggerStay2D(Collider2D other)
     {
@@ -90,14 +113,21 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
+        if (followAudio != null && followAudio.isPlaying)
+        {
+            followAudio.Stop();
+        }
+
         Destroy(gameObject);
-        //PlayerController.gold += 10;
+
         for (int i = 0; i < 10; i++)
         {
             GameManager.instance.SpawnGold(goldPrefab, transform.position);
         }
+
         PlayerController.minigamesCompleted += 1;
         Debug.Log("a facut: " + PlayerController.minigamesCompleted);
         PlayerController.hasKilledBoss = true;
     }
+
 }
