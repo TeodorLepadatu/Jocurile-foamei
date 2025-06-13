@@ -29,10 +29,10 @@ public class MovePlayer : MonoBehaviour
 
 		bool running = false;
 
-		if (Input.GetKey(KeyCode.RightArrow)) { moveX = 1f; running = true; }
-		if (Input.GetKey(KeyCode.LeftArrow)) {moveX = -1f; running = true; }
-		if (Input.GetKey(KeyCode.UpArrow)) {moveY = 1f; running = true; }
-		if (Input.GetKey(KeyCode.DownArrow)) {moveY = -1f; running = true; }
+		if (Controls.GetKey(Controls.Action.MoveRight)) { moveX = 1f; running = true; }
+		if (Controls.GetKey(Controls.Action.MoveLeft)) {moveX = -1f; running = true; }
+		if (Controls.GetKey(Controls.Action.MoveUp)) {moveY = 1f; running = true; }
+		if (Controls.GetKey(Controls.Action.MoveDown)) {moveY = -1f; running = true; }
 
 		movement = new Vector2(moveX, moveY).normalized;
 
