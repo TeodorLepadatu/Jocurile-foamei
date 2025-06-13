@@ -10,7 +10,8 @@ public class MusicManager : MonoBehaviour
     {
         if (instance == null)
         {
-            audioSource.volume = PlayerPrefs.GetFloat("Volume") / 100f;
+            audioSource.volume = PlayerPrefs.GetFloat("Volume") / 1000f;
+            
             instance = this;
             audioSource.loop = true;
             audioSource.playOnAwake = false;
