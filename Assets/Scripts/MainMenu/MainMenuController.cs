@@ -6,7 +6,7 @@ public class MainMenuController : MonoBehaviour
     public void Play()
     {
         SceneManager.UnloadScene("MainMenu");
-        SceneManager.LoadScene("MainScene1");
+        SceneManager.LoadScene("WorldMap");
     }
 
     public void Start()
