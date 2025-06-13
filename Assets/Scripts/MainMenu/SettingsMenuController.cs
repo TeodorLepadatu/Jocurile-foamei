@@ -24,7 +24,7 @@ public class SettingsMenu : MonoBehaviour
 
         // Load saved settings
         appliedFPS = PlayerPrefs.GetFloat("FPS", 60f);
-        appliedVolume = PlayerPrefs.GetFloat("Volume", 1f);
+        appliedVolume = PlayerPrefs.GetFloat("Volume", 0f);
 
         fpsSlider.value = appliedFPS;
         volumeSlider.value = appliedVolume;
@@ -45,7 +45,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void UpdateVolumeValue(float value)
     {
-        volumeValueText.text = Mathf.RoundToInt(value * 100).ToString();
+        volumeValueText.text = Mathf.RoundToInt(value).ToString();
     }
 
     public void ApplySettings()
