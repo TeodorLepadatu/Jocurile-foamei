@@ -29,7 +29,6 @@ public class CM2 : MonoBehaviour
     public Text twistText;
     public GameObject losePanel;
     public Text coinText;
-    public AudioSource audioSource;
         
 
     private int currentMonster = 0;
@@ -45,21 +44,15 @@ public class CM2 : MonoBehaviour
     {
         SpawnMonster();
         coinText.text = CurrencyHolder.getCurrency().ToString();
-
-        audioSource.volume = PlayerPrefs.GetFloat("Volume") / 100f;
-        audioSource.loop = true;
-        audioSource.Play();
     }
 
     public void PlayerDied()
     {
-        audioSource.Stop();
         losePanel.SetActive(true);
         StartCoroutine(ReloadSceneAfterDelay(3f));
     }
     public void PlayerWon()
     {
-        audioSource.Stop();
         StartCoroutine(ShowWinSequence());
     }
 
