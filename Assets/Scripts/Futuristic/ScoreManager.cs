@@ -47,6 +47,7 @@ public class ScoreManager : MonoBehaviour
 		if (winningScreen != null)
 		{
 			winningScreen.SetActive(true);
+			winningScreen.GetComponent<WinningScreen>().ShowAndProceed();
 			Time.timeScale = 0f; 
 		}
 	}

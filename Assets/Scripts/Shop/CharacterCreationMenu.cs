@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class CharacterCreation : MonoBehaviour
 {
-	public GameObject characterPrefab; // Prefab of the character to be created
-	public List<OutfitChanger> outfitChangers = new List<OutfitChanger>(); // List of OutfitChanger components
+	public GameObject characterPrefab;
+	public List<OutfitChanger> outfitChangers = new List<OutfitChanger>();
 
 	public void RandomizeCharacter()
 	{
@@ -19,14 +19,38 @@ public class CharacterCreation : MonoBehaviour
 	{
 		for (int i = 0; i < outfitChangers.Count; i++)
 		{
-			PlayerPrefs.SetInt("outfit_" + i, outfitChangers[i].GetCurrentOption());
+			var changer = outfitChangers[i];
+			int currentOption = changer.GetCurrentOption();
+			int price = changer.GetCurrentOptionPrice();
+
+			if (!changer.IsCurrentOptionBought() && price > 0)
+			{
+				if (CurrencyHolder.getCurrency() >= price)
+				{
+					CurrencyHolder.addCurrency(-price);
+					changer.BuyCurrentOption();
+					PlayerPrefs.SetInt("outfit_" + i, currentOption);
+					Debug.Log($"Componenta {i} cumparata pentru {price} bani. Bani ramasi: {CurrencyHolder.getCurrency()}");
+				}
+				else
+				{
+					Debug.Log($"NU ai destui bani pentru componenta {i}. Componenta NU a fost cumparata!");
+					
+				}
+			}
+			else
+			{
+			
+				PlayerPrefs.SetInt("outfit_" + i, currentOption);
+			}
 		}
+
 		PlayerPrefs.Save();
 	}
 
 	public void Play()
 	{
 		SaveCustomization();
-		SceneManager.LoadScene("CMinigame1");
+		SceneManager.LoadScene("MainMenu");
 	}
 }

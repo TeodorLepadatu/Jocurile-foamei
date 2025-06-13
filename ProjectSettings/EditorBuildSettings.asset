@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Contemporary/CMinigame1.unity
     guid: f08a4cd6c8a9db248a74b1fc4294d04b
   - enabled: 1
+    path: Assets/Scenes/MainMenu/MainMenu.unity
+    guid: 778ac559469ec3d45adf93aaea3e3801
+  - enabled: 1
     path: Assets/Scenes/StartMenu/WorldMap.unity
     guid: 9c6b37f8f9f5e0945826e1af5ed1051a
   m_configObjects:
