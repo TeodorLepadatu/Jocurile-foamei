@@ -5,7 +5,6 @@ public class CM2_ThrownEgg : MonoBehaviour
     public float speed = 10f;
     private Vector3 targetPosition;
     private bool isThrown = false;
-    private float f = 0;
 
     public void Launch(Vector3 target)
     {
@@ -21,7 +20,6 @@ public class CM2_ThrownEgg : MonoBehaviour
 
     void Update()
     {
-        f += Time.deltaTime;
         if (isThrown)
         {
             Vector3 direction = (targetPosition - transform.position).normalized;
@@ -38,7 +36,6 @@ public class CM2_ThrownEgg : MonoBehaviour
     {
         if (other.CompareTag("Monster") && gameObject.tag == "EggProjectile")
         {
-            Debug.Log(f);
             var monster = other.GetComponent<CM2_MonsterAI>();
 
             if(monster != null) {

@@ -13,7 +13,6 @@ public class CM2_UIManager : MonoBehaviour
 
     public void UpdateHearts(int health)
     {
-        Debug.Log("Viata = " + health);
         for (int i = 0; i < hearts.Length; i++)
             hearts[i].enabled = i < health;
     }

@@ -28,8 +28,16 @@ public class CM2_PlayerController : MonoBehaviour
 
     protected void HandleMovement()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement = Vector2.zero;
+
+        if (Controls.GetKey(Controls.Action.MoveUp))
+            movement.y += 1;
+        if (Controls.GetKey(Controls.Action.MoveDown))
+            movement.y -= 1;
+        if (Controls.GetKey(Controls.Action.MoveRight))
+            movement.x += 1;
+        if (Controls.GetKey(Controls.Action.MoveLeft))
+            movement.x -= 1;
 
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
@@ -65,12 +73,6 @@ public class CM2_PlayerController : MonoBehaviour
             CM2_UIManager.Instance.UpdateHearts(currentHealth);
         }
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Collided with: " + collision.gameObject.name);
-    }
-
 
     public void PickUpEgg()
     {

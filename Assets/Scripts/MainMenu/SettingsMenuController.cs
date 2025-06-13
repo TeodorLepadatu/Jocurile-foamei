@@ -1,44 +1,56 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [Header("Sliders")]
     public Slider fpsSlider;
     public Text fpsValueText;
     public Slider volumeSlider;
     public Text volumeValueText;
+
+    [Header("Messages")]
     public Text appliedMessageText;
 
     private float appliedFPS;
     private float appliedVolume;
 
-    void Start()
-    { 
+    private void Start()
+    {
+        // Slider listeners
         fpsSlider.onValueChanged.AddListener(UpdateFPSValue);
         volumeSlider.onValueChanged.AddListener(UpdateVolumeValue);
 
-        appliedFPS = PlayerPrefs.GetInt("FPS", 60);
-        appliedVolume = PlayerPrefs.GetInt("Volume", 100);
+        // Load saved settings
+        appliedFPS = PlayerPrefs.GetFloat("FPS", 60f);
+        appliedVolume = PlayerPrefs.GetFloat("Volume", 1f);
 
-        UpdateFPSValue(fpsSlider.value);
-        UpdateVolumeValue(volumeSlider.value);
+        fpsSlider.value = appliedFPS;
+        volumeSlider.value = appliedVolume;
+
+        Application.targetFrameRate = (int)appliedFPS;
+        AudioListener.volume = appliedVolume;
+
+        UpdateFPSValue(appliedFPS);
+        UpdateVolumeValue(appliedVolume);
 
         appliedMessageText.text = "";
     }
 
     public void UpdateFPSValue(float value)
     {
-        fpsValueText.text = value.ToString();
+        fpsValueText.text = value.ToString("0");
     }
 
     public void UpdateVolumeValue(float value)
     {
-        volumeValueText.text = value.ToString();
-        AudioListener.volume = value;
+        volumeValueText.text = Mathf.RoundToInt(value * 100).ToString();
     }
 
     public void ApplySettings()
     {
+        // Save sliders
         appliedFPS = fpsSlider.value;
         appliedVolume = volumeSlider.value;
 
@@ -47,6 +59,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
 
         Application.targetFrameRate = (int)appliedFPS;
+        AudioListener.volume = appliedVolume;
 
         appliedMessageText.text = "Settings applied";
     }

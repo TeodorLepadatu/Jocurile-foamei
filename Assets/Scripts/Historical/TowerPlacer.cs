@@ -37,7 +37,7 @@ public class TowerPlacer : MonoBehaviour
                 Debug.Log(BuildManager.selectedTower);
                 towerPrefab = BuildManager.main.towerPrefabs[BuildManager.selectedTower];
 
-                if (BuildManager.costDictionary[towerPrefab] > PlayerController.gold)
+                if (BuildManager.costDictionary[towerPrefab] > CurrencyHolder.getCurrency())
                 {
                     Debug.Log("You do not have enough gold to buy this tower!");
                     return;
@@ -45,8 +45,8 @@ public class TowerPlacer : MonoBehaviour
                 else
                 {
                     Instantiate(towerPrefab, worldPos, Quaternion.identity);
-                    LevelManager.main.currency -= BuildManager.costDictionary[towerPrefab];
-
+                    //LevelManager.main.currency -= BuildManager.costDictionary[towerPrefab];
+                    CurrencyHolder.addCurrency(-BuildManager.costDictionary[towerPrefab]);
                     // Reset the selected tower after placement
                     BuildManager.main.SetSelectedTower(-1);
                 }

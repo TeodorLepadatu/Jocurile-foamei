@@ -22,12 +22,12 @@ public class TurretSlowmo : MonoBehaviour
     }
     private void Update()
     { 
-            timeUntilFire += Time.deltaTime;
-            if (timeUntilFire >= 1f / aps)
-            {
-                FreezeEnemies();
-                timeUntilFire = 0f;
-            }
+        timeUntilFire += Time.deltaTime;
+        if (timeUntilFire >= 1f / aps)
+        {
+            FreezeEnemies();
+            timeUntilFire = 0f;
+        }
     }
     
     private void FreezeEnemies()

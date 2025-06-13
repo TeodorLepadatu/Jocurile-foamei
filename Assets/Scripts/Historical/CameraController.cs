@@ -16,11 +16,15 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        // Movement using Arrow Keys or WASD
-        float moveX = Input.GetAxis("Horizontal"); // Left/Right arrow or A/D
-        float moveY = Input.GetAxis("Vertical");   // Up/Down arrow or W/S
+        float moveX = 0f;
+        float moveY = 0f;
 
-        Vector3 move = new Vector3(moveX, moveY, 0f);
+        if (Controls.GetKey(Controls.Action.MoveRight)) moveX += 1f;
+        if (Controls.GetKey(Controls.Action.MoveLeft)) moveX -= 1f;
+        if (Controls.GetKey(Controls.Action.MoveUp)) moveY += 1f;
+        if (Controls.GetKey(Controls.Action.MoveDown)) moveY -= 1f;
+
+        Vector3 move = new Vector3(moveX, moveY, 0f).normalized;
         transform.position += move * moveSpeed * Time.deltaTime;
 
         // Zoom using mouse scroll
@@ -35,10 +39,8 @@ public class CameraController : MonoBehaviour
         {
             cam.transform.position += cam.transform.forward * scroll * zoomSpeed;
             float distance = Vector3.Distance(cam.transform.position, Vector3.zero);
-            if (distance < minZoom)
-                cam.transform.position = Vector3.zero + cam.transform.forward * minZoom;
-            if (distance > maxZoom)
-                cam.transform.position = Vector3.zero + cam.transform.forward * maxZoom;
+            cam.transform.position = Vector3.zero + cam.transform.forward * Mathf.Clamp(distance, minZoom, maxZoom);
         }
-    }
+}
+
 }

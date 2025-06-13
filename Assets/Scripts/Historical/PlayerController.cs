@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     public InputAction talkAction;
     private NonPlayerCharacter nearbyNPC; 
 
-    public static int gold = 0;
     public static bool resetGold = false;
     private Vector2 lastMovement;
     public GameObject projectilePrefab;
@@ -43,11 +42,34 @@ public class PlayerController : MonoBehaviour
         instance = this;
         //Debug.Log("mg: " + minigamesCompleted);
         DontDestroyOnLoad(gameObject);
+        if (SceneManager.GetActiveScene().name == "MainScene1")
+        {
+            transform.position = new Vector3(10.22f, -3.51f, 0f);
+        }
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene1")
+        {
+            transform.position = new Vector3(10.22f, -3.51f, 0f);
+        }
+    }
+
     private void Start()
     {
         if(resetGold) {
-            gold = 0;
+            CurrencyHolder.reset();
         }
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
@@ -72,26 +94,32 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = 0f;
+        float vertical = 0f;
+
+        if (Controls.GetKey(Controls.Action.MoveRight)) horizontal += 1f;
+        if (Controls.GetKey(Controls.Action.MoveLeft))  horizontal -= 1f;
+        if (Controls.GetKey(Controls.Action.MoveUp))    vertical += 1f;
+        if (Controls.GetKey(Controls.Action.MoveDown))  vertical -= 1f;
+
         if (launchTimer > 0f)
             launchTimer -= Time.deltaTime;
+
         movement = new Vector2(horizontal, vertical);
 
         if (movement.magnitude > 1)
-        {
             movement = movement.normalized;
-        }
+
         if (movement != Vector2.zero)
             lastMovement = movement;
 
-        if (Input.GetKeyDown(KeyCode.Q) && launchTimer <= 0f)
+        if (Controls.GetKey(Controls.Action.Shoot) && launchTimer <= 0f)
         {
             Launch();
             launchTimer = launchCooldown;
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Controls.GetKey(Controls.Action.InteractWithNPC))
         {
             if (nearbyNPC != null && nearbyNPC.playerNearby)
             {
@@ -100,7 +128,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Controls.GetKey(Controls.Action.Pickup))
         {
             if (pickedUpObject != null)
             {
@@ -142,7 +170,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             SceneManager.LoadScene("VictoryScreenScene");
         }
-        UIHandler.instance.SetGoldValue(gold);
+        UIHandler.instance.SetGoldValue(CurrencyHolder.getCurrency());
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
     private bool IsInArea(Vector2 pos, Vector2 min, Vector2 max)
@@ -168,8 +196,8 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeGold(int amount)
     {
-        gold += amount;
-        UIHandler.instance.SetGoldValue(gold);
+        CurrencyHolder.addCurrency(amount);
+        UIHandler.instance.SetGoldValue(CurrencyHolder.getCurrency());
     }
 
     private void OnTriggerEnter2D(Collider2D other)

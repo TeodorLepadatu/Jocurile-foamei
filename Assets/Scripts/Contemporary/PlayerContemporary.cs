@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerContemporary : MonoBehaviour
 {
+    public static PlayerContemporary Instance { get; private set; }
     private GameObject heldObject = null;
     private GameObject nearbyObject = null;
     public GameObject serverHealthBar;
@@ -17,12 +19,14 @@ public class PlayerContemporary : MonoBehaviour
     [SerializeField] public GameObject[] hearts;
     public static int currentStep = 1;
     private bool changePosition = true;
-    private int numberOfHearts = 3;
+    private int numberOfHearts = 5;
+    private int maxHearts = 5;
     private float damageCooldown = 0f;
     private bool isInCooldown = false;
     public GameObject draganPrefab;
     public GameObject minigame1;
     public GameObject gameOverScreen;
+    public Text coinText;
 
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
@@ -31,9 +35,18 @@ public class PlayerContemporary : MonoBehaviour
     protected Vector2 movement;
 
     void Start() {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         currentStep = 1;
         SwitchController.turnedSwitches = 0;
         CoalGenerator.canGenerate = true;
+        coinText.text = CurrencyHolder.getCurrency().ToString();
     }
 
 
@@ -68,8 +81,16 @@ public class PlayerContemporary : MonoBehaviour
 
     protected void HandleMovement()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement = Vector2.zero;
+
+        if (Controls.GetKey(Controls.Action.MoveUp))
+            movement.y += 1;
+        if (Controls.GetKey(Controls.Action.MoveDown))
+            movement.y -= 1;
+        if (Controls.GetKey(Controls.Action.MoveRight))
+            movement.x += 1;
+        if (Controls.GetKey(Controls.Action.MoveLeft))
+            movement.x -= 1;
 
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
@@ -83,16 +104,14 @@ public class PlayerContemporary : MonoBehaviour
 
     private void HandlePickup()
     {
-        if (Input.GetKeyDown(KeyCode.E) && nearbyObject != null && heldObject == null)
+        if (Controls.GetKey(Controls.Action.Pickup) && nearbyObject != null && heldObject == null)
         {
             heldObject = nearbyObject;
             heldObject.GetComponent<Collider2D>().enabled = false;
             portName = heldObject.name;
-
-            Debug.Log(portName);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && heldObject != null)
+        if (Controls.GetKey(Controls.Action.Drop) && heldObject != null)
         {
             if(currentStep == 1) {
                 GameObject dropZone = GameObject.Find("PCNOCGESprite");
@@ -122,6 +141,9 @@ public class PlayerContemporary : MonoBehaviour
                     HealthBarController health = serverHealthBar.GetComponent<HealthBarController>();
                     health.TakeDamage(Random.Range(25, 36));
 
+                    CurrencyHolder.addCurrency(3);
+                    coinText.text = CurrencyHolder.getCurrency().ToString();
+
 
                     return;
                 }
@@ -148,9 +170,10 @@ public class PlayerContemporary : MonoBehaviour
         
         if (!isInCooldown && numberOfHearts > 0 && other.CompareTag("Projectile"))
         {
-            hearts[numberOfHearts - 1].SetActive(false);
             numberOfHearts--;
-
+            for (int i = 0; i < maxHearts; i++) {
+                hearts[i].SetActive(i < numberOfHearts);
+            }
             if(numberOfHearts == 0) {
                 StartCoroutine(GameOver());
             }
@@ -159,9 +182,9 @@ public class PlayerContemporary : MonoBehaviour
         }
 
         if(other.CompareTag("RegenerateHealth")) {
-            numberOfHearts = 3;
-            for(int i = 0; i < numberOfHearts; i++) {
-                hearts[i].SetActive(true);
+            numberOfHearts++;
+            for(int i = 0; i < maxHearts; i++) {
+                hearts[i].SetActive(i < numberOfHearts);
             }
 
             StartCoroutine(RespawnApple(other.gameObject, 10f));
@@ -185,18 +208,18 @@ public class PlayerContemporary : MonoBehaviour
 
     private IEnumerator GameOver()
     {
-            minigame1.SetActive(false);
-            gameOverScreen.SetActive(true);
+        minigame1.SetActive(false);
+        gameOverScreen.SetActive(true);
 
-            transform.position = new Vector3(0.31f, -1.95f, 0f);
-            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        transform.position = new Vector3(0.31f, -1.95f, 0f);
+        transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
 
-            yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f);
 
-            SceneManager.LoadScene("CMinigame2");
+        SceneManager.LoadScene("CMinigame2");
     }
 
     private IEnumerator DelayedActivate()
@@ -214,6 +237,9 @@ public class PlayerContemporary : MonoBehaviour
             StartCoroutine(GameOver());
             yield break;
         }
+
+        CurrencyHolder.addCurrency(8);
+        coinText.text = CurrencyHolder.getCurrency().ToString();
         
         foreach (GameObject obj in objectsToActivate)
         {

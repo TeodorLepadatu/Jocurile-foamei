@@ -14627,7 +14627,7 @@ MonoBehaviour:
   - {fileID: 1274256390}
   - {fileID: 1848841108}
   startPoint: {fileID: 1587603856}
-  currency: 50
+  currency: 0
 --- !u!4 &1330685217
 Transform:
   m_ObjectHideFlags: 0

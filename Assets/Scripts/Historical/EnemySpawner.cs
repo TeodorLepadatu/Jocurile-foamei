@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
-
+    private int totalNumberOfWaves = 10; // Total number of waves to spawn
     private void Awake()
     {
         onEnemyDestroy.AddListener(EnemyDestroyed);
@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             EndWave();
         }
 
-        if (currentWave > 10) //total number of waves
+        if (currentWave > totalNumberOfWaves) //total number of waves
         {
             Debug.Log("Am terminat TD!");
             PlayerController.minigamesCompleted++;
