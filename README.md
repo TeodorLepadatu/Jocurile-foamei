@@ -2,6 +2,10 @@
 
 Help Ninu get through the ages!
 
+Demo & Tutorial:
+
+https://drive.google.com/drive/folders/1MBZ3hMnux0sQAJmHhm_HNfS1uBhkzqKf?usp=drive_link
+
 For task management we're using [Jira](https://teodorlepadatu2004.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJpIjoiYzg0MjgyNjdlZWEzNDdmZmJkNjcxYWZiMDMyZDRiNTEiLCJwIjoiaiJ9)
 
 
