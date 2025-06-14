@@ -23,7 +23,7 @@ public class OpponentController : MonoBehaviour
 	private Vector2 targetPos;
 
 	void Awake()
-	{
+	{   // Initialize the opponent controller
 		rb = GetComponent<Rigidbody2D>();
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		rb.gravityScale = 0f;
@@ -32,8 +32,8 @@ public class OpponentController : MonoBehaviour
 	}
 
 	void Update()
-	{
-		if (ballTransform.position.x > netX)
+	{   // Update the target position based on the ball's position
+		if (ballTransform.position.x > netX) //if the ball is on tge opponents side
 		{
 			targetPos = new Vector2(
 				ballTransform.position.x + xOffsetFromBall,
@@ -41,14 +41,14 @@ public class OpponentController : MonoBehaviour
 			);
 		}
 		else
-		{
+		{   // If the ball is on the opponent's side, move to the home point
 			targetPos = homePoint.position;
 		}
 	}
 
 	void FixedUpdate()
 	{
-		const float stopThreshold = 0.3f;
+		const float stopThreshold = 0.3f; // distance at which the opponent stops moving
 
 		Vector2 delta = targetPos - rb.position;
 		float dist = delta.magnitude;
@@ -70,14 +70,14 @@ public class OpponentController : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (!collision.collider.CompareTag("Ball")) return;
-
+		// Handle collision with the ball
 		Rigidbody2D ballRb = collision.collider.attachedRigidbody;
 		if (ballRb == null) return;
+		
+		ContactPoint2D cp = collision.contacts[0]; // get the contact point of the collision
+		Vector2 smashDir = (cp.point - (Vector2)transform.position).normalized; // direction of the smash
 
-		ContactPoint2D cp = collision.contacts[0];
-		Vector2 smashDir = (cp.point - (Vector2)transform.position).normalized;
-
-		ballRb.linearVelocity = new Vector2(ballRb.linearVelocity.x, 0f);
-		ballRb.AddForce(smashDir * hitStrength, ForceMode2D.Impulse);
+		ballRb.linearVelocity = new Vector2(ballRb.linearVelocity.x, 0f); // reset vertical velocity to prevent upward movement
+		ballRb.AddForce(smashDir * hitStrength, ForceMode2D.Impulse); // apply the smash force in the direction of the smash
 	}
 }

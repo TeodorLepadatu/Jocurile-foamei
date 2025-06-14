@@ -10,16 +10,16 @@ public class ScoreManager : MonoBehaviour
 
 	private int score = 0;
 
-	void Start()
+	void Start() 
 	{
-		if (winningScreen != null)
+		if (winningScreen != null) 
 			winningScreen.SetActive(false);
 	}
 
 
 	void Awake()
 	{
-		if (instance == null)
+		if (instance == null) // Singleton pattern to ensure only one instance exists
 			instance = this;
 		else
 			Destroy(gameObject);
@@ -28,9 +28,9 @@ public class ScoreManager : MonoBehaviour
 	public void AddScore(int amount)
 	{
 		score += amount;
-		UpdateScoreUI();
+		UpdateScoreUI(); // Update the score display
 
-		if (score >= 20)
+		if (score >= 20) // Check if the score has reached the winning condition
 		{
 			ShowWinningScreen();
 		}

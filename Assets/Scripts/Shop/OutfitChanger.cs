@@ -15,10 +15,12 @@ public class OutfitChanger : MonoBehaviour
 	private int lastBoughtOption = -1;
 
 	public Text priceText;
+	//keep track of bought options
 	public HashSet<int> boughtOptions = new HashSet<int>();
 
 	public int GetCurrentOption() { return currentOption; }
 
+	//displayig the current option and its price
 	public void NextOption()
 	{
 		currentOption++;
@@ -44,6 +46,7 @@ public class OutfitChanger : MonoBehaviour
 		UpdatePriceDisplay();
 	}
 
+	// set the current option for the sprite renderer
 	public void SetOption(int optionIndex)
 	{
 		if (options.Count == 0)
@@ -53,6 +56,7 @@ public class OutfitChanger : MonoBehaviour
 		UpdatePriceDisplay();
 	}
 
+	//check if the current option is already bought
 	public bool IsCurrentOptionBought()
 	{
 		return boughtOptions.Contains(currentOption);
@@ -65,6 +69,7 @@ public class OutfitChanger : MonoBehaviour
 		return prices[currentOption];
 	}
 
+	//display the price of the current option
 	public void UpdatePriceDisplay()
 	{
 		int priceToShow = GetCurrentOptionPrice();
@@ -73,13 +78,13 @@ public class OutfitChanger : MonoBehaviour
 
 	public int BuyCurrentOption()
 	{
-		if (boughtOptions.Contains(currentOption))
-			return 0;
+		if (boughtOptions.Contains(currentOption)) // already bought
+			return 0; // no cost
 
 		int cost = prices[currentOption];
-		boughtOptions.Add(currentOption);
-		prices[currentOption] = 0;
-		lastBoughtOption = currentOption;
+		boughtOptions.Add(currentOption); // mark as bought
+		prices[currentOption] = 0; // set price to 0 after buying
+		lastBoughtOption = currentOption; // save the last bought option
 		return cost;
 	}
 }

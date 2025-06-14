@@ -3,21 +3,15 @@ using UnityEngine;
 public class HeartSpawner : MonoBehaviour
 {
 	public GameObject heart;
-	public Transform[] spawnPoints;
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	public Transform[] spawnPoints; // Array of spawn points for the hearts
+							
 	void Start()
     {
-		InvokeRepeating("Spawn", 2f, 20f);
+		InvokeRepeating("Spawn", 2f, 20f); // Start spawning hearts after 2 seconds, then every 20 seconds
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 	void Spawn()
-	{
+	{   // randomly select a spawn point and instantiate a heart
 		Instantiate(heart,
 			spawnPoints[Random.Range(0, spawnPoints.Length)].position,
 			Quaternion.identity);

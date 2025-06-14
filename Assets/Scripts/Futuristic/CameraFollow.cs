@@ -4,8 +4,8 @@ public class CameraFollow : MonoBehaviour
 {
     public PlayerControllerFuturistic player;
 	bool done = false;
-    // Update is called once per frame
-    void Update()
+	// update camera position based on player position
+	void Update()
     {   if(player.IsRunning())
 		{
 			transform.Translate(Vector3.right * player.speed * Time.deltaTime);

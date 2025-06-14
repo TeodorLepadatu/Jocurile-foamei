@@ -15,7 +15,7 @@ public class MovePlayer : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-		// dezactivam gravitatia
+		// deactive gravity for the player
 		rb.gravityScale = 0f;
 
 		rb.freezeRotation = true;
@@ -28,7 +28,7 @@ public class MovePlayer : MonoBehaviour
 		float moveY = 0f;
 
 		bool running = false;
-
+		// Check for movement input
 		if (Controls.GetKey(Controls.Action.MoveRight)) { moveX = 1f; running = true; }
 		if (Controls.GetKey(Controls.Action.MoveLeft)) {moveX = -1f; running = true; }
 		if (Controls.GetKey(Controls.Action.MoveUp)) {moveY = 1f; running = true; }
@@ -41,7 +41,7 @@ public class MovePlayer : MonoBehaviour
 	}
 
 	void FixedUpdate()
-	{
+	{   // Apply movement to the Rigidbody2D
 		if (movement != Vector2.zero)
 		{
 			rb.linearVelocity = movement * moveSpeed;

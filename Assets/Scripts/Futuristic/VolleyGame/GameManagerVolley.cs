@@ -35,8 +35,8 @@ public class GameManagerVolley : MonoBehaviour
 
             int m = Mathf.FloorToInt(remaining / 60f);
             int s = Mathf.FloorToInt(remaining % 60f);
-            timerText.text = $"{m:00}:{s:00}";
-            yield return null;
+            timerText.text = $"{m:00}:{s:00}"; // Format as MM:SS
+			yield return null;
             remaining -= Time.deltaTime;
         }
 

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class CharacterCreation : MonoBehaviour
 {
 	public GameObject characterPrefab;
+	// one outfit changer for each body part
 	public List<OutfitChanger> outfitChangers = new List<OutfitChanger>();
 
 	public void RandomizeCharacter()
@@ -16,7 +17,7 @@ public class CharacterCreation : MonoBehaviour
 	}
 
 	public void SaveCustomization()
-	{
+	{   // for each outfit changer, check if the current option is bought and if not, try to buy it
 		for (int i = 0; i < outfitChangers.Count; i++)
 		{
 			var changer = outfitChangers[i];

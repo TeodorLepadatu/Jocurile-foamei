@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemySpwnerFuturistic : MonoBehaviour
 {
 	public GameObject[] enemies;
-	public Transform[] spawnPoints;
+	public Transform[] spawnPoints; // Array of spawn points for enemies
 
 	private float elapsedTime = 0f;
 
@@ -19,7 +19,7 @@ public class EnemySpwnerFuturistic : MonoBehaviour
 	}
 
 	IEnumerator SpawnEnemies()
-	{
+	{   // decremental spawn rate based on elapsed time
 		while (true)
 		{
 			Spawn();
@@ -38,7 +38,7 @@ public class EnemySpwnerFuturistic : MonoBehaviour
 	}
 
 	void Spawn()
-	{
+	{   // randomly select an enemy and spawn point
 		Instantiate(
 			enemies[Random.Range(0, enemies.Length)],
 			spawnPoints[Random.Range(0, spawnPoints.Length)].position,

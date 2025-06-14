@@ -15,8 +15,8 @@ public class EnemyControllerFuturistic : MonoBehaviour
 		{
 			if (isDead) return;
 			isDead = true;
-
-			anim.SetBool("isDead", true);
+			// activate death animation
+			anim.SetBool("isDead", true); 
 
 			Destroy(gameObject, 5f);
 		}

@@ -13,7 +13,7 @@ public class WinningScreen : MonoBehaviour
 
 	private IEnumerator ShowWinningScreenAndLoadNext()
 	{
-		yield return new WaitForSeconds(3f);
-		SceneManager.LoadScene(nextSceneName);
+		yield return new WaitForSeconds(3f); // wait for 3 seconds to show the winning screen
+		SceneManager.LoadScene(nextSceneName); // load the next scene
 	}
 }

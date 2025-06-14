@@ -22,7 +22,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 	public GameObject gameOverScreen;
 	void Start()
-	{
+	{   // Initialize the player controller
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		health = hearts.Length;
@@ -44,20 +44,25 @@ public class PlayerControllerFuturistic : MonoBehaviour
 		isRunning = anim.GetBool("isRunning");
 		isDead = anim.GetBool("isDead");
 
-		if (Input.GetKeyDown(KeyCode.Return) && !isDead)
+		// Handle player input for running, attacking, and jumping
+		// Toggle running state with Return key
+		if (Input.GetKeyDown(KeyCode.Return) && !isDead) 
 		{
 			isRunning = !isRunning;
 			anim.SetBool("isRunning", isRunning);
 		}
-
+		// Handle player input for attacking
+		// Toggle attacking state with Space key
 		if (Input.GetKeyDown(KeyCode.Space) && !isDead)
 			anim.SetBool("isAttacking", true);
+		// Stop attacking when Space key is released
 		if (Input.GetKeyUp(KeyCode.Space) && !isDead)
 			anim.SetBool("isAttacking", false);
-
+		// Handle player input for jumping
+		// Check if the player is pressing W key to jump
 		if (Input.GetKeyDown(KeyCode.W) && !isJumping)
 			Jump();
-
+		//incremental speed based on elapsed time
 		if (IsRunning())
 		{
 			
@@ -74,7 +79,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 
 	public bool IsRunning()
-	{
+	{   // check if the player is running and not dead
 		isDead = anim.GetBool("isDead");
 		isRunning = anim.GetBool("isRunning");
 		return isRunning && !isDead;
@@ -89,7 +94,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 
 	void OnCollisionEnter2D(Collision2D other)
-	{
+	{   // Check if the player collides with the ground
 		if (other.gameObject.CompareTag("Ground"))
 		{
 			isJumping = false;
@@ -97,28 +102,28 @@ public class PlayerControllerFuturistic : MonoBehaviour
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Enemy"))
+	{   // Check if the player collides with a enemy or a bush
+		if (other.CompareTag("Enemy")) 
 		{
 			EnemyControllerFuturistic enemy = other.GetComponent<EnemyControllerFuturistic>();
 			if (enemy != null)
 			{
 				if (!anim.GetBool("isAttacking") && !enemy.isDead)
 				{
-					TakeDamage();
+					TakeDamage(); // Take damage if not attacking and enemy is not dead
 				}
 				else if (anim.GetBool("isAttacking") && !enemy.isDead)
 				{
 
 						enemy.Die();
-						ScoreManager.instance.AddScore(1);
+						ScoreManager.instance.AddScore(1); // Increment score by 1 when enemy is killed
 				}
 			}
 		}
 
 		else if (other.CompareTag("Bush"))
 		{
-			TakeDamage();
+			TakeDamage(); // Take damage when colliding with a bush
 		}
 
 
@@ -128,7 +133,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 	{
 		yield return new WaitForSeconds(1f);
 
-		if (gameOverScreen != null)
+		if (gameOverScreen != null) 
 		{
 			gameOverScreen.SetActive(true);
 			Time.timeScale = 0f;
@@ -141,9 +146,9 @@ public class PlayerControllerFuturistic : MonoBehaviour
 
 		health--;
 
-		hearts[health].SetActive(false);
+		hearts[health].SetActive(false); // Hide the heart icon
 
-		if (health <= 0)
+		if (health <= 0) // Player is dead
 		{
 			Debug.Log("Game Over");
 			anim.SetBool("isDead", true);
@@ -158,7 +163,7 @@ public class PlayerControllerFuturistic : MonoBehaviour
 		return anim.GetBool("isDead");
 	}
 
-	public void AddLife()
+	public void AddLife() // Method to add a life to the player
 	{
 		if (health < hearts.Length)
 		{
