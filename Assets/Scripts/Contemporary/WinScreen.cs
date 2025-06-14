@@ -20,6 +20,6 @@ public class WinScreen : MonoBehaviour
         yield return new WaitForSeconds(3f);
         SceneManager.UnloadScene("CMinigame2");
 
-        // SceneManager.LoadScene("nume_scene_Roxana");
+        SceneManager.LoadScene("NeonRunner");
     }
 }
