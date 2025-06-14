@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
 		score += amount;
 		UpdateScoreUI();
 
-		if (score >= 25)
+		if (score >= 20)
 		{
 			ShowWinningScreen();
 		}
@@ -48,7 +48,6 @@ public class ScoreManager : MonoBehaviour
 		{
 			winningScreen.SetActive(true);
 			winningScreen.GetComponent<WinningScreen>().ShowAndProceed();
-			Time.timeScale = 0f; 
 		}
 	}
 }
