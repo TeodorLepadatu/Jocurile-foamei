@@ -62,7 +62,10 @@ public static class Controls
     {
         return Input.GetKeyDown(keyBindings[action]);
     }
-
+    public static bool GetKeyUp(Action action)
+    {
+        return Input.GetKeyUp(keyBindings[action]);
+    }
     public static KeyCode GetBoundKey(Action action)
     {
         return keyBindings.TryGetValue(action, out var key) ? key : KeyCode.None;

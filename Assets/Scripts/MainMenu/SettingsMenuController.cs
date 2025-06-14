@@ -1,37 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class SettingsMenu : MonoBehaviour
 {
     [Header("Sliders")]
     public Slider fpsSlider;
     public Text fpsValueText;
-    public Slider volumeSlider;
-    public Text volumeValueText;
+    public Slider volumeSlider;       // 0–100
+    public Text volumeValueText;      // e.g. "75%"
 
     [Header("Messages")]
     public Text appliedMessageText;
 
     private float appliedFPS;
-    private float appliedVolume;
+    private float appliedVolume;      // stores 0–100
 
     private void Start()
     {
-        // Slider listeners
+        // hook up slider callbacks
         fpsSlider.onValueChanged.AddListener(UpdateFPSValue);
         volumeSlider.onValueChanged.AddListener(UpdateVolumeValue);
 
-        // Load saved settings
+        // load saved values (default to 60 FPS, 100% volume)
         appliedFPS = PlayerPrefs.GetFloat("FPS", 60f);
-        appliedVolume = PlayerPrefs.GetFloat("Volume", 0f);
+        appliedVolume = PlayerPrefs.GetFloat("Volume", 100f);
 
         fpsSlider.value = appliedFPS;
         volumeSlider.value = appliedVolume;
 
+        // apply them
         Application.targetFrameRate = (int)appliedFPS;
-        AudioListener.volume = appliedVolume;
+        AudioListener.volume = appliedVolume / 100f;
 
+        // update UI text
         UpdateFPSValue(appliedFPS);
         UpdateVolumeValue(appliedVolume);
 
@@ -45,12 +46,12 @@ public class SettingsMenu : MonoBehaviour
 
     public void UpdateVolumeValue(float value)
     {
-        volumeValueText.text = Mathf.RoundToInt(value).ToString();
+        // show as percent
+        volumeValueText.text = value.ToString("0") + "%";
     }
 
     public void ApplySettings()
     {
-        // Save sliders
         appliedFPS = fpsSlider.value;
         appliedVolume = volumeSlider.value;
 
@@ -59,7 +60,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
 
         Application.targetFrameRate = (int)appliedFPS;
-        AudioListener.volume = appliedVolume;
+        AudioListener.volume = appliedVolume / 100f;
 
         appliedMessageText.text = "Settings applied";
     }
