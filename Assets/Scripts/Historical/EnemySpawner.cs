@@ -16,9 +16,8 @@ public class EnemySpawner : MonoBehaviour
     private AudioSource bossMusicSource;
 
     [Header("Attributes")]
-    [SerializeField] public int baseEnemies = 8;
+    [SerializeField] public int baseEnemies = 5;
     [SerializeField] public float enemiesPerSecond = 0.5f;
-    [SerializeField] public float timeBetweenWaves = 5f; // (Unused, but kept for inspector compatibility)
     [SerializeField] public float difficultyScalingFactor = 0.75f;
 
     [Header("Events")]
@@ -74,7 +73,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         // After final wave completes, return to main scene
-        if (currentWave > totalNumberOfWaves && enemiesAlive <= 0 && enemiesLeftToSpawn == 0)
+        if (currentWave > totalNumberOfWaves)
         {
             Debug.Log("Am terminat TD!");
             PlayerController.minigamesCompleted++;
