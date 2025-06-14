@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
         {
             userInput = inputField.text.Trim().ToLower();
 
-            if (userInput == "no shutdown")
+            if (userInput == "no shutdown") // turn on the switch
             {   
                 successObject.SetActive(true);
 
@@ -57,7 +57,7 @@ public class InputManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
         
-        if(userInput != "no shutdown") {
+        if(userInput != "no shutdown") { // game is lost
             minigame1.SetActive(false);
             gameOverScreen.SetActive(true);
 

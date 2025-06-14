@@ -68,6 +68,7 @@ public class PlayerContemporary : MonoBehaviour
         HandleMovement();
         HandlePickup();
 
+        // If both switches were turned on, then go to the third step of the game
         if(changePosition && SwitchController.turnedSwitches == 2) {
             step2.SetActive(false);
             step3.SetActive(true);
@@ -76,6 +77,7 @@ public class PlayerContemporary : MonoBehaviour
             transform.position = new Vector3(-2.83f, 0.71f, 0);
         }
 
+        // If isInCooldown = true, then the player won't take any damage
         if (isInCooldown)
         {
             damageCooldown += Time.deltaTime;
@@ -94,6 +96,8 @@ public class PlayerContemporary : MonoBehaviour
 
     protected void HandleMovement()
     {
+        // Movement logic
+
         movement = Vector2.zero;
 
         if (Controls.GetKey(Controls.Action.MoveUp))
@@ -117,6 +121,7 @@ public class PlayerContemporary : MonoBehaviour
 
     private void HandlePickup()
     {
+        // If Pickup button is pressed and the player is near an object -> pickup the object
         if (Controls.GetKey(Controls.Action.Pickup) && nearbyObject != null && heldObject == null)
         {
             heldObject = nearbyObject;
@@ -124,8 +129,10 @@ public class PlayerContemporary : MonoBehaviour
             portName = heldObject.name;
         }
 
+        // If the player presses the drop button then drop the held object
         if (Controls.GetKey(Controls.Action.Drop) && heldObject != null)
         {
+            // if the player is at the first step then change PC sprite
             if(currentStep == 1) {
                 GameObject dropZone = GameObject.Find("PCNOCGESprite");
                 if (dropZone != null && Vector2.Distance(heldObject.transform.position, dropZone.transform.position) < 3f)
@@ -144,6 +151,7 @@ public class PlayerContemporary : MonoBehaviour
                 }
             }
             else if(currentStep == 3) {
+                // if is step 3 and the player drops an object near the furnace then the server will take damage
                 GameObject dropZone = GameObject.Find("Furnace");
                 if (dropZone != null && Vector2.Distance(heldObject.transform.position, dropZone.transform.position) < 3f)
                 {
@@ -168,6 +176,7 @@ public class PlayerContemporary : MonoBehaviour
 
         if (heldObject != null)
         {
+            // object follows the player position
             heldObject.transform.position = transform.position + new Vector3(0.5f, 0.5f, 0);
         }
     }
@@ -239,8 +248,8 @@ public class PlayerContemporary : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        if (portName == "CFESprite")
-        {
+        if (portName == "CFESprite") // wrong port
+        { // the game is ost and the lose screen will be toggled
             GameObject dragan = Instantiate(draganPrefab, new Vector3(4.65f, 4f, 0), Quaternion.identity);
 
             dragan.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -251,7 +260,7 @@ public class PlayerContemporary : MonoBehaviour
             yield break;
         }
 
-        CurrencyHolder.addCurrency(8);
+        CurrencyHolder.addCurrency(8); 
         coinText.text = CurrencyHolder.getCurrency().ToString();
         
         foreach (GameObject obj in objectsToActivate)

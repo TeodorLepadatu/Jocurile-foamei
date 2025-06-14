@@ -13,7 +13,7 @@ public class ObjectSelector : MonoBehaviour
     }
 
     void Start()
-    {
+    {// get the attached object initial color
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
     }

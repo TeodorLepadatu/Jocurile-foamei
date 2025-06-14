@@ -8,7 +8,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) // toggle pause menu
         {
             if (isPaused)
                 Resume();
@@ -38,7 +38,7 @@ public class PauseManager : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // freeze time
         isPaused = true;
     }
 

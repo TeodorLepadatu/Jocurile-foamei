@@ -38,7 +38,7 @@ public class CM2_MonsterAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player")) // if the player or the monster collides then decrease player's health
         {
             CM2_PlayerController player = collision.gameObject.GetComponent<CM2_PlayerController>();
             if (player != null)
@@ -51,7 +51,7 @@ public class CM2_MonsterAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EggProjectile"))
+        if (collision.CompareTag("EggProjectile")) // if the thrown object collides with the monster then decrease monster's health
         {
             TakeDamage();
             Destroy(collision.gameObject);
@@ -60,9 +60,9 @@ public class CM2_MonsterAI : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")) // if player collides with the monster
         {
-            if (Time.time - lastDamageTime >= damageCooldown)
+            if (Time.time - lastDamageTime >= damageCooldown) // health decrease should happen after a few seconds from the previous taken damage
             {
                 CM2_PlayerController player = collision.GetComponent<CM2_PlayerController>();
                 if (player != null)

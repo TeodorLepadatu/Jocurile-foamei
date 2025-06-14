@@ -34,7 +34,7 @@ public class CM2_ThrownEgg : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Monster") && gameObject.tag == "EggProjectile")
+        if (other.CompareTag("Monster") && gameObject.tag == "EggProjectile") // if the thrown object collides with a monster
         {
             var monster = other.GetComponent<CM2_MonsterAI>();
 

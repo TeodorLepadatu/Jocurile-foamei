@@ -23,6 +23,7 @@ public class KeyBindingButton : MonoBehaviour, IPointerClickHandler
 
     private void OnGUI()
     {
+        // set buttons action name and keybind
         if (!isListening) return;
 
         Event e = Event.current;

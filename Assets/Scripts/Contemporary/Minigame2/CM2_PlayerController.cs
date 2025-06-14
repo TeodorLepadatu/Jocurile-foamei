@@ -31,6 +31,8 @@ public class CM2_PlayerController : MonoBehaviour
 
     protected void HandleMovement()
     {
+         // movement logic
+
         movement = Vector2.zero;
 
         if (Controls.GetKey(Controls.Action.MoveUp))
@@ -93,7 +95,7 @@ public class CM2_PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Egg"))
+        if (other.CompareTag("Egg")) // throw object towards mouse position on collision
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
@@ -104,7 +106,7 @@ public class CM2_PlayerController : MonoBehaviour
                 eggScript.Launch(mousePos);
             }
         }
-        else if (other.CompareTag("GoldenApple"))
+        else if (other.CompareTag("GoldenApple")) // if the player collides with an apple then increase health
         {
             Heal();
             Destroy(other.gameObject);

@@ -82,13 +82,13 @@ public class CM2 : MonoBehaviour
         eggTimer += Time.deltaTime;
         appleTimer += Time.deltaTime;
 
-        if (eggTimer >= 4f && GameObject.FindGameObjectsWithTag("Egg").Length == 0)
+        if (eggTimer >= 4f && GameObject.FindGameObjectsWithTag("Egg").Length == 0) // every 4 seconds a new object will be spawned
         {
             SpawnEgg();
             eggTimer = 0;
         }
 
-        if (appleTimer >= 8f && GameObject.FindGameObjectsWithTag("GoldenApple").Length == 0)
+        if (appleTimer >= 8f && GameObject.FindGameObjectsWithTag("GoldenApple").Length == 0) // every 8 seconds a new object will be spawned
         {
             SpawnGoldenApple();
             appleTimer = 0;

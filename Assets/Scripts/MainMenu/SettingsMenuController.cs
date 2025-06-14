@@ -6,14 +6,14 @@ public class SettingsMenu : MonoBehaviour
     [Header("Sliders")]
     public Slider fpsSlider;
     public Text fpsValueText;
-    public Slider volumeSlider;       // 0–100
+    public Slider volumeSlider;       // 0-100
     public Text volumeValueText;      // e.g. "75%"
 
     [Header("Messages")]
     public Text appliedMessageText;
 
     private float appliedFPS;
-    private float appliedVolume;      // stores 0–100
+    private float appliedVolume;      // stores 0-100
 
     private void Start()
     {

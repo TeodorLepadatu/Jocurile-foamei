@@ -38,6 +38,7 @@ public class HealthBarController : MonoBehaviour
 
     private IEnumerator FallServer()
     {
+        // when the server's HP is 0 there will be an animation that rotates the object by 90 degrees
         Quaternion start = serverObject.transform.rotation;
         Quaternion end = Quaternion.Euler(0, 0, 90);
         float t = 0;
